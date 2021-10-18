@@ -1,0 +1,1 @@
+[embed]public/images/mockup-smilestones-wireframe-MVP.pdf[/embed]
