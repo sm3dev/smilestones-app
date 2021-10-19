@@ -9,4 +9,4 @@ A parent creates and manages child's account. A parent can create and modify mil
 ![Mockup Page 2 - Smilestone App](./public/images/mockup-wireframe-smilestones-nss_Page_2.png)
 
 ## Smilestone Entity Relationship Diagram (ERD)
-![ERD -Smilestone App](./public/images/mockup-wireframe-smilestones-nss_Page_2.png)
+![ERD -Smilestone App](./public/images/ERD-smilestones-app-nss.png)
