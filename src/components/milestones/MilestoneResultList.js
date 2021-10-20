@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const MilestoneCard = () => {
+export const MilestoneResultList = () => {
     return (
         <div>
             

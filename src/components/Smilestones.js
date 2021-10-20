@@ -1,11 +1,11 @@
 import React from 'react';
+import { ApplicationViews } from './ApplicationViews';
+import { NavBar } from './nav/NavBar';
 import "./Smilestones.css";
 
-export const Smilestones = () => {
-    return (
+export const Smilestones = () => (
         <>
-          <h2>Smilestones App</h2>
-          <small>Make milestone achieving fun for kids!</small>  
+          <NavBar />
+          <ApplicationViews /> 
         </>
-    )
-}
+)
