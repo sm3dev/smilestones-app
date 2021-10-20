@@ -18,7 +18,7 @@ export const MilestoneList = () => {
   return (
       <>
       <div>
-          {milestones.map(milestone => <MilestoneCard key={milestone.id} milestone={milestone} />) }
+          {milestones.map(milestone => <MilestoneCard key={milestone.id} milestone={milestone} milestoneType={milestone.milestoneType} />) }
       </div>
       </>
   );
