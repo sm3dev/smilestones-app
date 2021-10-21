@@ -51,6 +51,13 @@ export const deleteUser = (id) => {
 
 // ******* USER MILESTONES aka Milestone Results ******************************************
 
+// Get All User Milestones;
+export const getAllUserMilestones = () => {
+
+    // User Milestones and expand Milestone and User
+    return fetch(`${remoteURL}/userMilestones?_expand=milestone&_expand=user`).then(results => results.json())
+}
+
 // Get All of a User's Milestones by user ID;
 export const getAllUserMilestonesByUserID = (id) => {
 
