@@ -3,6 +3,7 @@ import { Route } from 'react-router';
 import { Home } from './Home';
 import { MilestoneList } from './milestones/MilestoneList';
 import { MilestoneResultList } from './milestones/MilestoneResultList';
+import { UserList } from './users/UserList';
 
 export const ApplicationViews = () => {
     return (
@@ -15,6 +16,9 @@ export const ApplicationViews = () => {
             </Route>
             <Route exact path="/milestone-achievements">
                 <MilestoneResultList />
+            </Route>
+            <Route exact path="/users">
+                <UserList />
             </Route>
             
         </>
