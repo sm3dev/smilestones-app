@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router'
 
-export const UserCard = ({ user, totalMilestoneResults }) => {
+export const UserCard = ({ user, totalMilestoneResults, handleDeleteUser }) => {
 
     const history = useHistory();
     // I want to be able to show the total number of Milestone Achievements on the same line that links to the User's Milestone Achievements view
@@ -14,7 +14,7 @@ export const UserCard = ({ user, totalMilestoneResults }) => {
         <button className="userMilestone__link" onClick={() => history.push(`/milestone-achievements/user/${user.id}`)}> <strong>{totalMilestoneResults}</strong> {user.firstName}'s Milestone Achievements 
         </button>
         <button>Manage</button>
-        <button>Delete</button>
+        <button onClick={() => handleDeleteUser(user.id)}>Delete</button>
         <hr/>
             
         </>
