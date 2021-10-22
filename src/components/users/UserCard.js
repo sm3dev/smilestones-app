@@ -10,6 +10,7 @@ export const UserCard = ({ user, totalMilestoneResults }) => {
         <>
         <h3>{user.firstName}</h3>
         <div>Age: {user.DOB}</div>
+        {/* Add conditional statement that shows a link to All Milestones view when a user has no userMilestones (milestone results) */}
         <button className="userMilestone__link" onClick={() => history.push(`/milestone-achievements/user/${user.id}`)}> <strong>{totalMilestoneResults}</strong> {user.firstName}'s Milestone Achievements 
         </button>
         <button>Manage</button>

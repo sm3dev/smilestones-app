@@ -18,7 +18,17 @@ export const getUserByID = (id) => {
 export const getAllChildrenByParentID = (id) => {
     
     // All Users Children by Parent ID expand User (children)
-    return fetch(`${remoteURL}usersChildren?parentId=${id}&_expand=user`).then(results => results.json())
+    return fetch(`${remoteURL}/usersChildren?parentId=${id}&_expand=user`).then(results => results.json())
+}
+
+export const addUserChild = (newUserChild) => {
+    return fetch(`${remoteURL}/usersChildren `, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUserChild)
+    }).then(results => results.json());
 }
 
 // Add New User

@@ -25,7 +25,7 @@ export const ApplicationViews = () => {
             <Route exact path="/users">
                 <UserList />
             </Route>
-            <Route exact path="/users/new-account">
+            <Route exact path="/users/create">
                 <UserForm />
             </Route>
         </>
