@@ -2,9 +2,10 @@ const remoteURL = "http://localhost:7777";
 
 // ******* USERS ******************************************
 
-// get All Users
+// get All Users 
 export const getAllUsers = () => {
-    return fetch(`${remoteURL}/users`).then(results => results.json())
+    // embed userMilestones to access each user's milestone results 
+    return fetch(`${remoteURL}/users?_embed=userMilestones`).then(results => results.json())
 }
 
 // get UserByID
