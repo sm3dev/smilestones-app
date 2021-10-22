@@ -24,7 +24,7 @@ export const UserList = () => {
             <button>Add Child</button>
             </div>
             <div>
-                {users.map(user => <UserCard key={user.id} user={user} userMilestones={user.userMilestones} /> )}
+                {users.map(user => <UserCard key={user.id} user={user} userMilestones={user.userMilestones} totalMilestoneResults={user.userMilestones.length} /> )}
             </div>
         </>
         
