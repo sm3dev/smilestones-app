@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getAllUsers } from '../../modules/APIManager';
 import { UserCard } from './UserCard';
 
+// show all user accounts in the database
 export const UserList = () => {
     const [users, setUsers] = useState([]);
 
