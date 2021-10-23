@@ -29,13 +29,16 @@ export const getAllParents = () => {
 }
 
 // Add New User-Child relationship (also Parent to Child relationship)
-export const addUserChild = (newUserChildObj) => {
+export const addUserChild = (newUserID, selectedParentID) => {
     return fetch(`${remoteURL}/usersChildren`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(newUserChildObj)
+        body: JSON.stringify({
+            "userId": newUserID,
+            "parentId": selectedParentID
+          })
     }).then(results => results.json());
 }
 

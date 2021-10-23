@@ -76,11 +76,15 @@ const handleClickSaveUser = (event) => {
     event.preventDefault();
 
     const newParentChild = {
-        userID: user.id,
+        userId: userParentChild.userId,
         parentId: userParentChild.parentId
     }
 
-    addUser(user).then(() => addUserChild(newParentChild)).then(() => history.push("/users"))
+    addUser(user).then(user => {
+
+        addUserChild(user.id, newParentChild.parentId);
+    }).then(() => history.push("/users"))
+    
 }
 
     return (
@@ -101,12 +105,13 @@ const handleClickSaveUser = (event) => {
                 <select value={userParentChild.parentId} name="parentId" id="parentId" onChange={handleControlledInputChangeParent} >
                     <option value="0">Select a Parent</option>
                     {parents.map(parent => (
-                        <option key={parent.id} value={parent.id}>{parent.firstName} {parent.lastName}</option>
+                        <option key={parent.id} value={parent.id} user={userId}>{parent.firstName} {parent.lastName}</option>
                     ))
 
                     }
                 </select>
                 {/* <input id="parent" type="text" required placeholder="Parent name" value={user.lastName} /> */}
+                <input type="hidden" value={userParentChild.userId}  name="userId" id="userId" onChange={handleControlledInputChangeParent} />
             </div>
             <div className="form-group">
                 <label htmlFor="DOB">Date of Birth:</label>
