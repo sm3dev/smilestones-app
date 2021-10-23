@@ -3,6 +3,8 @@ import { Route } from 'react-router';
 import { Home } from './Home';
 import { MilestoneList } from './milestones/MilestoneList';
 import { MilestoneResultList } from './milestones/MilestoneResultList';
+import { MilestoneResultListbyUser } from './milestones/MilestoneResultListbyUser';
+import { UserForm } from './users/UserForm';
 import { UserList } from './users/UserList';
 
 export const ApplicationViews = () => {
@@ -17,10 +19,15 @@ export const ApplicationViews = () => {
             <Route exact path="/milestone-achievements">
                 <MilestoneResultList />
             </Route>
+            <Route exact path="/milestone-achievements/user/:userId(\d+)">
+                <MilestoneResultListbyUser />                
+            </Route>
             <Route exact path="/users">
                 <UserList />
             </Route>
-            
+            <Route exact path="/users/create">
+                <UserForm />
+            </Route>
         </>
     )
 }

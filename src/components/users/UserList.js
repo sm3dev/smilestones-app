@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { getAllUsers } from '../../modules/APIManager';
+import { useHistory } from 'react-router';
+import { deleteUser, getAllUsers } from '../../modules/APIManager';
 import { UserCard } from './UserCard';
 
 // show all user accounts in the database
 export const UserList = () => {
     const [users, setUsers] = useState([]);
+    const history = useHistory();
 
     const getUsers = () => {
         return getAllUsers().then(usersFromAPI => {
             setUsers(usersFromAPI);
         })
+    }
+
+    const handleDeleteUser = (id) => {
+        deleteUser(id).then(() => getAllUsers().then(setUsers))
     }
 
     useEffect(() => {
@@ -20,11 +26,11 @@ export const UserList = () => {
         <>
         <h2>User Accounts</h2>
             <div>
-            <button>Add User</button>
-            <button>Add Child</button>
+            <button onClick={() => history.push("/users/create")}>Add User</button>
+            <button onClick={() => history.push("/users/create")}>Add Child</button>
             </div>
             <div>
-                {users.map(user => <UserCard key={user.id} user={user} userMilestones={user.userMilestones} /> )}
+                {users.map(user => <UserCard key={user.id} user={user} userMilestones={user.userMilestones} totalMilestoneResults={user.userMilestones.length} handleDeleteUser={handleDeleteUser} /> )}
             </div>
         </>
         

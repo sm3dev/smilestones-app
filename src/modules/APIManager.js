@@ -15,10 +15,31 @@ export const getUserByID = (id) => {
 }
 
 // Get All of Child Users of a Parent by Parent ID; Pass-in parentID
-export const getAllChildrenByParentID = (id) => {
+export const getAllChildrenByParentID = (parentId) => {
     
     // All Users Children by Parent ID expand User (children)
-    return fetch(`${remoteURL}usersChildren?parentId=${id}&_expand=user`).then(results => results.json())
+    return fetch(`${remoteURL}/usersChildren?parentId=${parentId}&_expand=user`).then(results => results.json())
+}
+
+// Get all Parents (User Accounts with admin: true)
+// Note: Eventually, this will look for a parent-type user account
+export const getAllParents = () => {
+    // embed userMilestones to access each user's milestone results 
+    return fetch(`${remoteURL}/users?admin=true`).then(results => results.json())
+}
+
+// Add New User-Child relationship (also Parent to Child relationship)
+export const addUserChild = (newUserID, selectedParentID) => {
+    return fetch(`${remoteURL}/usersChildren`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            "userId": newUserID,
+            "parentId": selectedParentID
+          })
+    }).then(results => results.json());
 }
 
 // Add New User

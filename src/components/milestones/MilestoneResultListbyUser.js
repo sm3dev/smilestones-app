@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { getAllUserMilestones } from '../../modules/APIManager';
+import { useParams } from 'react-router';
+import { getAllUserMilestonesByUserID } from '../../modules/APIManager';
 import { MilestoneResultCard } from './MilestoneResultCard';
 
-export const MilestoneResultList = () => {
+// Shows Milestone Results List by a User
+export const MilestoneResultListbyUser = () => {
     // the initial state is an empty array
     const [milestoneResults, setMilestoneResults] = useState([]);
+    const {userId} = useParams();
 
-    const getMilestonResults = () => {
-        return getAllUserMilestones().then(userMilestonesFromAPI => {
-            setMilestoneResults(userMilestonesFromAPI)
+    const getMilestonResults = (userId) => {
+        return getAllUserMilestonesByUserID(userId).then(userMilestonesFromAPI => {
+            setMilestoneResults(userMilestonesFromAPI);
         })
     }
 
     useEffect(() => {
-        getMilestonResults();
+        getMilestonResults(userId);
         
-    }, [])
+    }, [userId])
 
     return (
         <>
