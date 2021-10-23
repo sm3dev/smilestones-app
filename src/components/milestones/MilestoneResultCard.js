@@ -12,9 +12,9 @@ export const MilestoneResultCard = ({ milestoneResult, milestone, user }) => {
           <div>Result: {milestoneResult.timeToComplete}</div>
           <div>Achieved on {milestoneResult.date}</div>
         </>
-      ) : milestoneResult.length ? (
+      ) : milestoneResult.distance ? (
         <>
-          <div>Result: {milestoneResult.length}</div>
+          <div>Result: {milestoneResult.distance}</div>
           <div>Achieved on {milestoneResult.date}</div>
         </>
       ) : milestoneResult.quantity ? (
