@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom';
-import { addUser } from '../../modules/APIManager';
+import React, { useEffect, useState } from 'react'
+import { Link, useHistory, useParams } from 'react-router-dom';
+import { addUser, addUserChild, getAllParents } from '../../modules/APIManager';
 
 // Add New User Account to database
 export const UserForm = () => {
@@ -14,9 +14,23 @@ const [user, setUser] = useState({
       admin: false
 });
 
-const history = useHistory();
+// A new parent-child relationship (usersChildren object) needs to take in either a parentId or a userId the assign the other. It makes sense to pass-in the new user and assign that to userID, then assign parentId based on what is selected in the Parent Select input field
+const [userParentChild, setUserParentChild] = useState({
+    userId: 0,
+    parentId: 0
+})
 
-// I need a fetch that gets all parent users
+const [parents, setParents] = useState([])
+const history = useHistory();
+const { userId } = useParams();
+
+// I need a fetch that gets all parent users (for now get all Admins)
+const getParents = () => {
+    // after the parent data comes back from the API, update the state with setParents
+    getAllParents().then(parentsFromAPI => {
+        setParents(parentsFromAPI)
+    })
+}
 
 // With fetch parent users, I will add each to a dropdown select, so a new user can add their parent when creating the new account
 
@@ -36,15 +50,38 @@ const handleControlledInputChange = (event) => {
     // update state
     setUser(newUser);
 };
+const handleControlledInputChangeParent = (event) => {
+    // When changing a state object or array, always create a copy, make changes, and then set state.
+    const newuserParentChild = { ...userParentChild }
+    let selectedVal = event.target.value;
+
+    // forms always provide values as strings, but we want to save the ids as numbers
+    if (event.target.id.includes("Id")) {
+        selectedVal = parseInt(selectedVal);
+    }
+
+    // set the property to the new value
+    newuserParentChild[event.target.id] = selectedVal;
+
+    // update state
+    setUserParentChild(newuserParentChild);
+};
+
+useEffect(() => {
+    getParents()
+}, [])
 
 // Run the addUserChild POST fetch call
 const handleClickSaveUser = (event) => {
     event.preventDefault();
 
-    addUser(user).then(() => history.push("/users"))
+    const newParentChild = {
+        userID: user.id,
+        parentId: userParentChild.parentId
+    }
 
+    addUser(user).then(() => addUserChild(newParentChild)).then(() => history.push("/users"))
 }
-
 
     return (
         <>
@@ -61,7 +98,14 @@ const handleClickSaveUser = (event) => {
             </div>
             <div className="form-group">
                 <label htmlFor="parent">Select Your Parent's Name:</label>
-                <select></select>
+                <select value={userParentChild.parentId} name="parentId" id="parentId" onChange={handleControlledInputChangeParent} >
+                    <option value="0">Select a Parent</option>
+                    {parents.map(parent => (
+                        <option key={parent.id} value={parent.id}>{parent.firstName} {parent.lastName}</option>
+                    ))
+
+                    }
+                </select>
                 {/* <input id="parent" type="text" required placeholder="Parent name" value={user.lastName} /> */}
             </div>
             <div className="form-group">
