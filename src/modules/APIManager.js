@@ -131,3 +131,8 @@ export const getAllMilestones = () => {
     // All Milestones expanded Milestone Type embed userMilestones
     return fetch(`${remoteURL}/milestones/?_expand=milestoneType&_embed=userMilestones`).then(results => results.json())
 }
+
+// Get Milestone by ID
+export const getMilestoneByID = (milestone) => {
+    return fetch(`${remoteURL}/milestones/${milestone.id}?_expand=milestoneType&_embed=userMilestones`).then(results => results.json())
+} 

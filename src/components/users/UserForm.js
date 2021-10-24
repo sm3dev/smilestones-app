@@ -50,6 +50,7 @@ const handleControlledInputChange = (event) => {
     // update state
     setUser(newUser);
 };
+
 const handleControlledInputChangeParent = (event) => {
     // When changing a state object or array, always create a copy, make changes, and then set state.
     const newuserParentChild = { ...userParentChild }

@@ -20,7 +20,7 @@ export const MilestoneList = () => {
       <h2>All Milestones</h2>
       <div>
           {/* The Add Milestone button should only be visible if the logged-in user is an Admin */}
-          <button>Add Milestone</button></div>
+          <button>Add Milestone <em>coming soon</em></button></div>
       <div>
           {milestones.map(milestone => <MilestoneCard key={milestone.id} milestone={milestone} milestoneType={milestone.milestoneType} />) }
       </div>
