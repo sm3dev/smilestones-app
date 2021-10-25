@@ -55,7 +55,7 @@ export const addUser = (newUser) => {
 
 // Update a User
 export const updateUser = (editedUser) => {
-    return fetch(`${remoteURL}/users`, {
+    return fetch(`${remoteURL}/users/${editedUser.id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
