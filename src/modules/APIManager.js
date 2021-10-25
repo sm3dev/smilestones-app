@@ -107,7 +107,7 @@ export const getUserMilestoneByID = (id) => {
 
 // Update User Milestone by ID
 export const updateUserMilestone = (editedUserMilestone) => {
-    return fetch(`${remoteURL}/userMilestones`, {
+    return fetch(`${remoteURL}/userMilestones/${editedUserMilestone.id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -131,3 +131,8 @@ export const getAllMilestones = () => {
     // All Milestones expanded Milestone Type embed userMilestones
     return fetch(`${remoteURL}/milestones/?_expand=milestoneType&_embed=userMilestones`).then(results => results.json())
 }
+
+// Get Milestone by ID
+export const getMilestoneByID = (milestoneId) => {
+    return fetch(`${remoteURL}/milestones/${milestoneId}?_expand=milestoneType`).then(results => results.json())
+} 

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getAllMilestones } from "../../modules/APIManager";
 import { MilestoneCard } from "./MilestoneCard";
+// import { MilestoneResultForm } from "./MilestoneResultForm";
 
 export const MilestoneList = () => {
   const [milestones, setMilestones] = useState([]);
+  // const [currentMilestones, setCurrentMilestones] = useState([]);
 
   const getMilestones = () => {
     return getAllMilestones().then((milestonesFromAPI) => {
@@ -15,15 +17,29 @@ export const MilestoneList = () => {
       getMilestones();
   }, [])
 
+  // const getCurrentMilestones = () => {
+  //   return getAllMilestones().then((milestonesFromAPI) => {
+  //     setCurrentMilestones(milestonesFromAPI);
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   getCurrentMilestones();
+  // }, [])
+
   return (
       <>
       <h2>All Milestones</h2>
       <div>
           {/* The Add Milestone button should only be visible if the logged-in user is an Admin */}
-          <button>Add Milestone</button></div>
+          <button disabled>Add Milestone <em>coming soon</em></button></div>
       <div>
-          {milestones.map(milestone => <MilestoneCard key={milestone.id} milestone={milestone} milestoneType={milestone.milestoneType} />) }
+          {milestones.map(milestone => <MilestoneCard key={milestone.id} milestone={milestone} milestoneType={milestone.milestoneType} /> )}
       </div>
+      {/* <div>
+          {currentMilestones.map(currentMilestone => <MilestoneResultForm key={currentMilestone.id} currentMilestone={currentMilestone} currentMilestoneMilestoneType={currentMilestone.milestoneType} /> )}
+      </div> */}
+      
       </>
   );
 };
