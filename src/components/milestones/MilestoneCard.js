@@ -1,6 +1,5 @@
 import React from 'react'
 import { useHistory } from 'react-router'
-import { Link } from 'react-router-dom';
 
 export const MilestoneCard = ({ milestone, milestoneType }) => {
     const history = useHistory();

@@ -35,6 +35,7 @@ export const MilestoneResultCard = ({ milestoneResult, milestone, user }) => {
       ) : (
         <div>Validation Needed </div>
       )}
+      <hr />
     </>
   );
 };

@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import { useHistory } from 'react-router';
+import React, { useEffect, useState } from 'react'
+import { useHistory, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import { addNewUserMilestone } from '../../modules/APIManager';
+import { addNewUserMilestone, getMilestoneByID } from '../../modules/APIManager';
 
 export const MilestoneResultForm = () => {
     const [milestoneResult, setMilestoneResult] = useState({
-    milestoneId: 0,
+    milestoneId: useParams().milestoneId,
     userId: 0,
-    date: String(Date.now()),
+    date: "",
     validated: false,
     timeToComplete: 0,
     distance: 0,
@@ -15,22 +15,16 @@ export const MilestoneResultForm = () => {
     remarks: ""
     });
 
-    // const [thisMilestone, setThisMilestone] = useState({
-    //     milestoneTypeId: 0,
-    //     description: "",
-    //     name: "",
-    //     repeater: false,
-    // })
+    const [isLoading, setIsLoading] = useState(false);
 
-    // I need to have the fetch call that gets the milestone by ID -- getMilestoneByID
-    // const getMilestone = () => {
-    //     return getMilestoneByID(milestone).then(milestoneFromAPI => {
-    //         setMilestone(milestoneFromAPI);
-    //     });
-    //   };
+    const [thisMilestone, setThisMilestone] = useState({
+        milestoneTypeId: 0,
+        description: "",
+        name: "",
+        repeater: false,
+    })
 
     const history = useHistory();
-    // const { milestoneId } = useParams();
 
     const handleControlledInputChange = (event) => {
         const newMilestoneResult = { ...milestoneResult };
@@ -44,29 +38,24 @@ export const MilestoneResultForm = () => {
         // set the property to the new value
         newMilestoneResult[event.target.id] = selectedVal;
 
-        // update statea
+        // update states
         setMilestoneResult(newMilestoneResult);
     }
-    
-    // useEffect(() => {
-    //     getMilestoneByID("milestone.id").then(thisMilestone => {
-    //         setThisMilestone(thisMilestone);
-    //     })
-    // }, [])
+
+    const getMilestoneData = () => {
+        getMilestoneByID(milestoneResult.milestoneId).then(milestoneFromAPI => {
+            setThisMilestone(milestoneFromAPI);
+        })
+    }
+
+    useEffect(() => {
+        getMilestoneData();
+        setIsLoading(false)
+    }, [])
 
     const handleClickSaveTask = (event) => {
         event.preventDefault();
-
-        // const newAchievement = {
-        //     milestoneId: milestoneId,
-        //     userId: milestoneResult.userId,
-        //     date: milestoneResult.date,
-        //     validated: milestoneResult.validated,
-        //     timeToComplete: milestoneResult.timeToComplete,
-        //     distance: milestoneResult.distance,
-        //     quantity: milestoneResult.quantity,
-        //     remarks: milestoneResult.remarks
-        // }
+        setIsLoading(true);
 
         addNewUserMilestone(milestoneResult).then(() => history.push(`/achievements`))
     }
@@ -87,7 +76,7 @@ export const MilestoneResultForm = () => {
     return (
         <>
             <h1>New Milestone Result</h1>
-            <h3>Milestone Title {milestoneResult.milestoneId}</h3>
+            <h3>Milestone Title: {thisMilestone.name}</h3>
             <form action="">
                 <div className="form-group">
                     <label htmlFor="timeToComplete">Time to Complete:</label>
@@ -104,7 +93,7 @@ export const MilestoneResultForm = () => {
                 <div className="form-group">
                     {/* STRETCH: Do not allow a future date to be input */}
                     <label htmlFor="date">Achievement Date:</label>
-                    <input id="date" name="date" type="date" onChange={handleControlledInputChange} value={milestoneResult.date} />
+                    <input required id="date" name="date" type="date" onChange={handleControlledInputChange} value={milestoneResult.date} />
                 </div>
                 <div className="form-group">
                     <label htmlFor=""></label>
@@ -118,7 +107,7 @@ export const MilestoneResultForm = () => {
                 <div className="form-group">
                     <label htmlFor=""></label>
                 </div>
-                <button onClick={handleClickSaveTask} className="milestoneResult save__button">Save Achievement</button>
+                <button onClick={handleClickSaveTask} disabled={isLoading} className="milestoneResult save__button">Save Achievement</button>
                 <Link to="/milestones"><button>Cancel</button></Link>
             </form>
         </>
