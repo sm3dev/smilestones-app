@@ -44,12 +44,44 @@ export const MilestoneResultEditForm = () => {
   }
 
   useEffect(() => {
-      getUserMilestoneByID
+      getUserMilestoneByID().then(milestoneResult => {
+          setMilestoneResult(milestoneResult);
+          setIsLoading(false);
+      })
   }, [])
 
   return (
   <>
-  
+    <h1>Update an Achievement</h1>
+    <form action="">
+        <div className="form-group">
+            <label htmlFor="timeToComplete">Time to Complete:</label>
+            <input value={milestoneResult.timeToComplete} id="timeToComplete" type="text" onChange={handleFieldChange} />
+        </div>
+        <div className="form-group">
+            <label htmlFor="distance">Distance:</label>
+            <input type="text" value={milestoneResult.distance} onChange={handleFieldChange} />
+            </div>
+        <div className="form-group">
+            <label htmlFor="quantity">Quantity:</label>
+            <input type="text" value={milestoneResult.quantity} onChange={handleFieldChange} />
+            </div>
+        <div className="form-group">
+            <label htmlFor=""></label>
+            </div>
+        <div className="form-group">
+            <label htmlFor=""></label>
+            </div>
+        <div className="form-group">
+            <label htmlFor=""></label>
+            </div>
+        <div className="form-group">
+            <label htmlFor=""></label>
+            </div>
+        <div className="form-group">
+            <label htmlFor=""></label>
+        </div>
+    </form>
   </>
   );
 };
