@@ -123,7 +123,7 @@ const handleClickSaveUser = (event) => {
                 <input onChange={handleControlledInputChange} id="email" type="email" required placeholder="Email Address" value={user.email} />
             </div>
             <input id="email" type="hidden" value={user.admin} />
-            <button onClick={handleClickSaveUser} className="save__button">Save User</button>
+            <button onClick={handleClickSaveUser} className="save__button">Create Account</button>
             <Link to="/users"><button>Cancel</button></Link>
         </form>
             

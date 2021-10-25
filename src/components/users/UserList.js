@@ -24,10 +24,15 @@ export const UserList = () => {
 
     return (
         <>
-        <h2>User Accounts</h2>
+            <h2>User Accounts</h2>
             <div>
-            <button onClick={() => history.push("/users/create")}>Add User</button>
-            <button onClick={() => history.push("/users/create")}>Add Child</button>
+                {/* This button with use the current logged-in user's user.id inside of the history.push to go that specific user's profile URL  */}
+                <button className="my-profile__button" onClick={() => history.push("/users/1")}>My Account <small><em>coming soon</em></small></button>
+                
+            </div>
+            <div>
+            <button onClick={() => history.push("/users/create")}>Add User <small><em>coming soon</em></small></button>
+            <button onClick={() => history.push("/users/create")}>Add Child <small><em>coming soon</em></small></button>
             </div>
             <div>
                 {users.map(user => <UserCard key={user.id} user={user} userMilestones={user.userMilestones} totalMilestoneResults={user.userMilestones.length} handleDeleteUser={handleDeleteUser} /> )}
