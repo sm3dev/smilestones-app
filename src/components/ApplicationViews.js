@@ -6,6 +6,7 @@ import { MilestoneList } from './milestones/MilestoneList';
 import { MilestoneResultForm } from './milestones/MilestoneResultForm';
 import { MilestoneResultList } from './milestones/MilestoneResultList';
 import { MilestoneResultListbyUser } from './milestones/MilestoneResultListbyUser';
+import { UserEditForm } from './users/UserEditForm';
 import { UserForm } from './users/UserForm';
 import { UserList } from './users/UserList';
 
@@ -30,8 +31,11 @@ export const ApplicationViews = () => {
             <Route exact path="/achievements/user/:userId(\d+)">
                 <MilestoneResultListbyUser />                
             </Route>
-            <Route exact path="/users">
+            <Route exact path="/users/">
                 <UserList />
+            </Route>
+            <Route exact path="/users/:userId(\d+)/edit">
+                <UserEditForm />
             </Route>
             <Route exact path="/users/create">
                 <UserForm />
