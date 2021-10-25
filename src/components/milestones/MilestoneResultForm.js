@@ -7,7 +7,7 @@ export const MilestoneResultForm = () => {
     const [milestoneResult, setMilestoneResult] = useState({
     milestoneId: 0,
     userId: 0,
-    date: "",
+    date: String(Date.now()),
     validated: false,
     timeToComplete: 0,
     distance: 0,
@@ -102,8 +102,10 @@ export const MilestoneResultForm = () => {
                     <input type="text" value={milestoneResult.quantity} onChange={handleControlledInputChange} />
                     </div>
                 <div className="form-group">
-                    <label htmlFor=""></label>
-                    </div>
+                    {/* STRETCH: Do not allow a future date to be input */}
+                    <label htmlFor="date">Achievement Date:</label>
+                    <input id="date" name="date" type="date" onChange={handleControlledInputChange} value={milestoneResult.date} />
+                </div>
                 <div className="form-group">
                     <label htmlFor=""></label>
                     </div>

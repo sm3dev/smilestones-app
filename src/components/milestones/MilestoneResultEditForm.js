@@ -53,7 +53,17 @@ export const MilestoneResultEditForm = () => {
   return (
   <>
     <h1>Update an Achievement</h1>
-    <form action="">
+    <form>
+        <div className="form-group">
+            <h2>{milestoneResult.milestoneId}</h2>
+            <label htmlFor="milestone">Milestone:</label>
+            <input value={milestoneResult.milestoneId} id="milestone" type="text" onChange={handleFieldChange} />
+        </div>
+        <div>Milestone Type</div>
+        <div className="form-group">
+            <label htmlFor="user">User: {milestoneResult.userId}</label>
+            <input value={milestoneResult.userId} id="user" type="hidden" onChange={handleFieldChange} />
+        </div>
         <div className="form-group">
             <label htmlFor="timeToComplete">Time to Complete:</label>
             <input value={milestoneResult.timeToComplete} id="timeToComplete" type="text" onChange={handleFieldChange} />
@@ -67,7 +77,8 @@ export const MilestoneResultEditForm = () => {
             <input type="text" value={milestoneResult.quantity} onChange={handleFieldChange} />
             </div>
         <div className="form-group">
-            <label htmlFor=""></label>
+            <label htmlFor="date">Achievement Date:</label>
+            <input id="date" name="date" type="date" value={milestoneResult.date} onChange={handleFieldChange} />
             </div>
         <div className="form-group">
             <label htmlFor=""></label>
