@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const MilestoneResultCard = ({ milestoneResult, milestone, user }) => {
   return (
@@ -23,17 +24,18 @@ export const MilestoneResultCard = ({ milestoneResult, milestone, user }) => {
           <div>Achieved on {milestoneResult.date}</div>
         </>
       ) : (
-        <div>Result Date: {milestoneResult.date}</div>
+        <div>Date Achieved: {milestoneResult.date}</div>
       )}
 
       <button>Details/More</button>
-      <button>Edit</button>
+      <Link to={`/achievements/${milestoneResult.id}/edit`}><button>Edit</button></Link>
       <p>Remarks: {milestoneResult.remarks}</p>
       {milestoneResult.validated ? (
         <div>Validated: Yes</div>
       ) : (
         <div>Validation Needed </div>
       )}
+      <hr />
     </>
   );
 };

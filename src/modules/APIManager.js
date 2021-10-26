@@ -81,10 +81,10 @@ export const getAllUserMilestones = () => {
 }
 
 // Get All of a User's Milestones by user ID;
-export const getAllUserMilestonesByUserID = (id) => {
+export const getAllUserMilestonesByUserID = (userId) => {
 
     // User Milestones by userID expand Milestone and User
-    return fetch(`${remoteURL}/userMilestones/?userId=${id}&_expand=milestone&_expand=user`).then(results => results.json())
+    return fetch(`${remoteURL}/userMilestones/?userId=${userId}&_expand=milestone&_expand=user`).then(results => results.json())
 }
 
 // Add New User Milestone
@@ -99,10 +99,10 @@ export const addNewUserMilestone = (newUserMilestone) => {
 }
 
 // Get User Milestone by ID
-export const getUserMilestoneByID = (id) => {
+export const getUserMilestoneByID = (milestoneResultId) => {
 
     // User Milestones by userID expand Milestone and User
-    return fetch(`${remoteURL}/userMilestones/${id}?_expand=user&_expand=milestone`).then(results => results.json())
+    return fetch(`${remoteURL}/userMilestones/${milestoneResultId}?_expand=user&_expand=milestone`).then(results => results.json())
 }
 
 // Update User Milestone by ID
@@ -134,5 +134,5 @@ export const getAllMilestones = () => {
 
 // Get Milestone by ID
 export const getMilestoneByID = (milestoneId) => {
-    return fetch(`${remoteURL}/milestones/${milestoneId}?_expand=milestoneType`).then(results => results.json())
+    return fetch(`${remoteURL}/milestones/${milestoneId}?_expand=milestoneType&_embed=userMilestones`).then(results => results.json())
 } 

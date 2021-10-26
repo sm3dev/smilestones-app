@@ -3,6 +3,7 @@ import { Route } from 'react-router';
 import { Home } from './Home';
 import { MilestoneCard } from './milestones/MilestoneCard';
 import { MilestoneList } from './milestones/MilestoneList';
+import { MilestoneResultEditForm } from './milestones/MilestoneResultEditForm';
 import { MilestoneResultForm } from './milestones/MilestoneResultForm';
 import { MilestoneResultList } from './milestones/MilestoneResultList';
 import { MilestoneResultListbyUser } from './milestones/MilestoneResultListbyUser';
@@ -24,6 +25,9 @@ export const ApplicationViews = () => {
             </Route>
             <Route exact path="/achievements">
                 <MilestoneResultList />
+            </Route>
+            <Route exact path="/achievements/:userMilestoneId(\d+)/edit">
+                <MilestoneResultEditForm />
             </Route>
             <Route exact path="/milestones/:milestoneId(\d+)/achievements/create">
                 <MilestoneResultForm />
