@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
+import { Link } from 'react-router-dom';
 import "./Login.css"
 
 const remoteURL = "http://localhost:7777";
@@ -75,7 +76,7 @@ export const Register = () => {
 
         <form className="form--login" onSubmit={handleRegister}>
             <h1 className="h3 mb-3 font-weight-normal">
-                "Please Register for Application Name"
+                Register to Use Smilestones
             </h1>
             <fieldset>
                 <label htmlFor="firstName">First Name:</label>
@@ -130,9 +131,13 @@ export const Register = () => {
                 />
             </fieldset>
             <input id="admin" type="hidden" value={registerUser.admin} />
-            <fieldset>
+            <div>
                 <button type="submit"> Register and Sign-in </button>
-            </fieldset>
+                
+                <Link to="/login">
+                    <button>Cancel</button>
+                </Link>
+            </div>
         </form>
     </main>
     )
