@@ -48,8 +48,8 @@ export const Login = () => {
             </dialog>
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>{"Smilestones"}</h1>
-                    <h2>{"Please sign-in to get started"}</h2>
+                    <h1>Smilestones</h1>
+                    <h2>Please sign-in to get started</h2>
                     <fieldset>
                         <label htmlFor="inputEmail"> Email address </label>
                         <input

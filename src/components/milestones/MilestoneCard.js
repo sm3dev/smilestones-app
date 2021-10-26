@@ -19,7 +19,7 @@ export const MilestoneCard = ({ milestone, milestoneType }) => {
              {/* The Edit button should only be visible (OR DISABLED) if the logged-in user is an Admin */}
             <button>Edit <small><em>coming soon</em></small></button>
             </div>
-            
+            <hr />
         </>
     )
 }
