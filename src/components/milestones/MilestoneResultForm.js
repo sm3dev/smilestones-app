@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 import { addNewUserMilestone, getMilestoneByID } from '../../modules/APIManager';
 
 export const MilestoneResultForm = () => {
+    const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
+    
     const [milestoneResult, setMilestoneResult] = useState({
     milestoneId: useParams().milestoneId,
-    userId: 0,
+    userId: currentUserId,
     date: "",
     validated: false,
     timeToComplete: 0,
@@ -79,6 +81,14 @@ export const MilestoneResultForm = () => {
             <h3>Milestone Title: {thisMilestone.name}</h3>
             <div>Milestone Type: {thisMilestone.milestoneType?.name}</div>
             <form>
+                <div className="form-group">
+                    <input
+                        value={milestoneResult.userId}
+                        id="user"
+                        type="hidden"
+                        onChange={handleControlledInputChange}
+                    />
+                </div>
                 
                 {thisMilestone.milestoneType?.id === 1 ? (
                     <>
