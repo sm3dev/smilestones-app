@@ -173,10 +173,30 @@ export const MilestoneResultEditForm = () => {
             <div className="form-group">
                 <p>Description:<br />{thisMilestone.description}</p>
             </div>
-            <div className="form-group">
-                <label htmlFor="validated">Validated: </label>
-                <input onChange={handleFieldChange} id="validated" type="checkbox" checked={milestoneResult.validated ? true : false} value={milestoneResult.validated} />
-            </div>
+            <fieldset className="form-group">
+                <legend>Validated:</legend>
+                {milestoneResult.validated === true ? (
+                    <>
+
+                        <label htmlFor="validated">Yes</label>
+                        <p>Validated</p>
+                        {/* <input onChange={handleFieldChange} checked id="yesValidated" name="validated" type="radio" value={milestoneResult.validated = true} />
+                        <label htmlFor="validated">No: </label>
+                        <input onChange={handleFieldChange} id="noValidated" name="validated" type="radio" value={milestoneResult.validated = false} /> */}
+                    </>
+
+                ) : (
+                    <>
+                        <label htmlFor="validated">Yes: </label>
+                        <input onChange={handleFieldChange} id="yesValidated" name="validated" type="radio" value={() => milestoneResult.validated = true} />
+                        <label htmlFor="validated">No: </label>
+                        <input onChange={handleFieldChange} checked id="noValidated" name="validated" type="radio" value={milestoneResult.validated} />
+                    </>
+
+                )
+                }
+                
+            </fieldset>
         </div>
         
       </form>

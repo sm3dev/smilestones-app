@@ -162,7 +162,7 @@ export const MilestoneResultForm = () => {
                     </div>
                     <div className="form-group">
                         <label htmlFor="validated">Validated: </label>
-                        <input onChange={handleControlledInputChange} id="validated" type="checkbox" checked={milestoneResult.validated ? true : false} value={milestoneResult.validated} />
+                        <input onChange={handleControlledInputChange} id="validated" type="checkbox" value={milestoneResult.validated} />
                     </div>
                 </div>
                 
