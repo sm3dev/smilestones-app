@@ -34,7 +34,7 @@ export const MilestoneResultEditForm = () => {
     const stateToChange = { ...milestoneResult };
     stateToChange[evt.target.id] = evt.target.value;
     setMilestoneResult(stateToChange);
-  };
+  }; 
 
   const getMilestoneData = () => {
     getUserMilestoneByID(userMilestoneId).then((userMilestoneData) => {
@@ -43,6 +43,18 @@ export const MilestoneResultEditForm = () => {
         setThisMilestone(milestoneFromAPI);
       });
     });
+  };
+
+   // this function keeps milestoneResult.validated as a boolean value
+   // without it, milestoneResult.validated becomes a string with "true" or "false" as the value
+   const handleValidatedTrueFalse = () => {
+    let result;
+    if (milestoneResult.validated == "true") {
+      result = true;
+    } else {
+      result = false;
+    }
+    return result
   };
 
   const updateExistingMilestoneResult = (evt) => {
@@ -54,7 +66,7 @@ export const MilestoneResultEditForm = () => {
       milestoneId: milestoneResult.milestoneId,
       userId: milestoneResult.userId,
       date: milestoneResult.date,
-      validated: milestoneResult.validated,
+      validated: handleValidatedTrueFalse(),
       timeToComplete: milestoneResult.timeToComplete,
       distance: milestoneResult.distance,
       quantity: milestoneResult.quantity,
@@ -174,23 +186,20 @@ export const MilestoneResultEditForm = () => {
                 <p>Description:<br />{thisMilestone.description}</p>
             </div>
             <fieldset className="form-group">
-                <legend>Validated:</legend>
+              <legend>Validated:</legend>
                 {milestoneResult.validated === true ? (
                     <>
-
-                        <label htmlFor="validated">Yes</label>
-                        <p>Validated</p>
-                        {/* <input onChange={handleFieldChange} checked id="yesValidated" name="validated" type="radio" value={milestoneResult.validated = true} />
+                    <label htmlFor="validated">Yes: </label>
+                        <input onClick={handleFieldChange} id="validated" name="validated" type="radio" value="true" checked />
                         <label htmlFor="validated">No: </label>
-                        <input onChange={handleFieldChange} id="noValidated" name="validated" type="radio" value={milestoneResult.validated = false} /> */}
+                        <input onClick={handleFieldChange} id="validated" name="validated" type="radio" value="false" />
                     </>
-
                 ) : (
                     <>
                         <label htmlFor="validated">Yes: </label>
-                        <input onChange={handleFieldChange} id="yesValidated" name="validated" type="radio" value={() => milestoneResult.validated = true} />
+                        <input onClick={handleFieldChange} id="validated" name="validated" type="radio" value="true" />
                         <label htmlFor="validated">No: </label>
-                        <input onChange={handleFieldChange} checked id="noValidated" name="validated" type="radio" value={milestoneResult.validated} />
+                        <input onClick={handleFieldChange} id="validated" name="validated" type="radio" value="false" checked/>
                     </>
 
                 )
