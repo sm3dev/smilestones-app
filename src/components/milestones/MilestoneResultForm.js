@@ -77,38 +77,89 @@ export const MilestoneResultForm = () => {
         <>
             <h1>New Milestone Result</h1>
             <h3>Milestone Title: {thisMilestone.name}</h3>
-            <form action="">
-                <div className="form-group">
-                    <label htmlFor="timeToComplete">Time to Complete:</label>
+            <div>Milestone Type: {thisMilestone.milestoneType?.name}</div>
+            <form>
+                
+                {thisMilestone.milestoneType?.id === 1 ? (
+                    <>
+                    <div className="form-group">
+                    <label htmlFor="timeToComplete">Your Time:</label>
                     <input value={milestoneResult.timeToComplete} id="timeToComplete" type="text" onChange={handleControlledInputChange} />
+                    </div>
+                    <div className="form-group">
+                    {/* STRETCH: Do not allow a future date to be input */}
+                    <label htmlFor="date">Date Milestone Achieved:</label>
+                    <input required id="date" name="date" type="date" onChange={handleControlledInputChange} value={milestoneResult.date} />
+                    </div>
+                    </>
+                ) : thisMilestone.milestoneType?.id === 2 ? (
+                <>
+                <div className="form-group">
+                    <label htmlFor="distance">Distance/Length:</label>
+                    <input id="distance" type="text" value={milestoneResult.distance} onChange={handleControlledInputChange} />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="distance">Distance:</label>
-                    <input type="text" value={milestoneResult.distance} onChange={handleControlledInputChange} />
+                    {/* STRETCH: Do not allow a future date to be input */}
+                    <label htmlFor="date">Date Milestone Achieved:</label>
+                    <input required id="date" name="date" type="date" onChange={handleControlledInputChange} value={milestoneResult.date} />
                     </div>
-                <div className="form-group">
-                    <label htmlFor="quantity">Quantity</label>
-                    <input type="text" value={milestoneResult.quantity} onChange={handleControlledInputChange} />
+                </>
+                ) : thisMilestone.milestoneType?.id === 3 ? (
+                    <>
+                    <div className="form-group">
+                    <label htmlFor="height">Height:</label>
+                    <input id="height" type="text" value={milestoneResult.distance} onChange={handleControlledInputChange} />
                     </div>
-                <div className="form-group">
+                    <div className="form-group">
+                    {/* STRETCH: Do not allow a future date to be input */}
+                    <label htmlFor="date">Date Milestone Achieved:</label>
+                    <input required id="date" name="date" type="date" onChange={handleControlledInputChange} value={milestoneResult.date} />
+                    </div>
+                    
+                    </>
+                ) : thisMilestone.milestoneType?.id === 4 ? (
+                    <>
+                    <div className="form-group">
+                    <label htmlFor="quantity">Quantity:</label>
+                    <input id="quantity" type="text" value={milestoneResult.quantity} onChange={handleControlledInputChange} />
+                    </div>
+                    <div className="form-group">
+                    {/* STRETCH: Do not allow a future date to be input */}
+                    <label htmlFor="date">Date Milestone Achieved:</label>
+                    <input required id="date" name="date" type="date" onChange={handleControlledInputChange} value={milestoneResult.date} />
+                    </div>
+                    </>
+                ) : (
+                    <>
+                    <div className="form-group">
                     {/* STRETCH: Do not allow a future date to be input */}
                     <label htmlFor="date">Achievement Date:</label>
                     <input required id="date" name="date" type="date" onChange={handleControlledInputChange} value={milestoneResult.date} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor=""></label>
                     </div>
+                    </>
+                )
+                }
                 <div className="form-group">
-                    <label htmlFor=""></label>
-                    </div>
-                <div className="form-group">
-                    <label htmlFor=""></label>
-                    </div>
-                <div className="form-group">
-                    <label htmlFor=""></label>
+                    <label htmlFor="remarks">Remarks:</label>
+                    <textarea onChange={handleControlledInputChange} name="remarks" id="remarks" cols="30" rows="10"></textarea>
                 </div>
                 <button onClick={handleClickSaveTask} disabled={isLoading} className="milestoneResult save__button">Save Achievement</button>
                 <Link to="/milestones"><button>Cancel</button></Link>
+                <div>
+                    <h4>More About This Milestone</h4>
+                    <div className="form-group">
+                        <p>{thisMilestone.description}</p>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="validated">Validated: </label>
+                        <input onChange={handleControlledInputChange} id="validated" type="checkbox" checked={milestoneResult.validated ? true : false} value={milestoneResult.validated} />
+                    </div>
+                </div>
+                
+                <div className="form-group">
+                    <label htmlFor=""></label>
+                </div>
+                
             </form>
         </>
     )

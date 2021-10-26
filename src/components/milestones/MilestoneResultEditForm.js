@@ -81,12 +81,12 @@ export const MilestoneResultEditForm = () => {
   return (
     <>
       <h1>Update an Achievement</h1>
-      <form>
-        <div className="form-group">
+      <div className="form-group">
           <h2>Milestone: {thisMilestone.name}</h2>
         </div>
         <div>Milestone Type: {thisMilestone.milestoneType?.name}</div>
-        
+      <form>
+          
         <div className="form-group">
           <input
             value={milestoneResult.userId}
@@ -95,53 +95,72 @@ export const MilestoneResultEditForm = () => {
             onChange={handleFieldChange}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="timeToComplete">Time to Complete:</label>
-          <input
-            value={milestoneResult.timeToComplete}
-            id="timeToComplete"
-            type="text"
-            onChange={handleFieldChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="distance">Distance:</label>
-          <input id="distance"
-            type="text"
-            value={milestoneResult.distance}
-            onChange={handleFieldChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="quantity">Quantity:</label>
-          <input id="quantity"
-            type="text"
-            value={milestoneResult.quantity}
-            onChange={handleFieldChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="date">Achievement Date:</label>
-          <input
-            id="date"
-            name="date"
-            type="date"
-            value={milestoneResult.date}
-            onChange={handleFieldChange}
-          />
-        </div>
+
+
+        {thisMilestone.milestoneType?.id === 1 ? (
+                    <>
+                    <div className="form-group">
+                    <label htmlFor="timeToComplete">Your Time:</label>
+                    <input value={milestoneResult.timeToComplete} id="timeToComplete" type="text" onChange={handleFieldChange} />
+                    </div>
+                    <div className="form-group">
+                    {/* STRETCH: Do not allow a future date to be input */}
+                    <label htmlFor="date">Date Milestone Achieved:</label>
+                    <input required id="date" name="date" type="date" onChange={handleFieldChange} value={milestoneResult.date} />
+                    </div>
+                    </>
+                ) : thisMilestone.milestoneType?.id === 2 ? (
+                <>
+                <div className="form-group">
+                    <label htmlFor="distance">Distance/Length:</label>
+                    <input id="distance" type="text" value={milestoneResult.distance} onChange={handleFieldChange} />
+                </div>
+                <div className="form-group">
+                    {/* STRETCH: Do not allow a future date to be input */}
+                    <label htmlFor="date">Date Milestone Achieved:</label>
+                    <input required id="date" name="date" type="date" onChange={handleFieldChange} value={milestoneResult.date} />
+                    </div>
+                </>
+                ) : thisMilestone.milestoneType?.id === 3 ? (
+                    <>
+                    <div className="form-group">
+                    <label htmlFor="height">Height:</label>
+                    <input id="height" type="text" value={milestoneResult.distance} onChange={handleFieldChange} />
+                    </div>
+                    <div className="form-group">
+                    {/* STRETCH: Do not allow a future date to be input */}
+                    <label htmlFor="date">Date Milestone Achieved:</label>
+                    <input required id="date" name="date" type="date" onChange={handleFieldChange} value={milestoneResult.date} />
+                    </div>
+                    
+                    </>
+                ) : thisMilestone.milestoneType?.id === 4 ? (
+                    <>
+                    <div className="form-group">
+                    <label htmlFor="quantity">Quantity:</label>
+                    <input id="quantity" type="text" value={milestoneResult.quantity} onChange={handleFieldChange} />
+                    </div>
+                    <div className="form-group">
+                    {/* STRETCH: Do not allow a future date to be input */}
+                    <label htmlFor="date">Date Milestone Achieved:</label>
+                    <input required id="date" name="date" type="date" onChange={handleFieldChange} value={milestoneResult.date} />
+                    </div>
+                    </>
+                ) : (
+                    <>
+                    <div className="form-group">
+                    {/* STRETCH: Do not allow a future date to be input */}
+                    <label htmlFor="date">Achievement Date:</label>
+                    <input required id="date" name="date" type="date" onChange={handleFieldChange} value={milestoneResult.date} />
+                    </div>
+                    </>
+                )
+                }
+
+
         <div className="form-group">
           <label htmlFor="remarks">Remarks:</label>
           <textarea onChange={handleFieldChange} name="remarks" id="remarks" cols="30" rows="10" value={milestoneResult.remarks}>{milestoneResult.remarks}</textarea>
-        </div>
-        <div className="form-group">
-          <label htmlFor=""></label>
-        </div>
-        <div className="form-group">
-          <label htmlFor=""></label>
-        </div>
-        <div className="form-group">
-          <label htmlFor=""></label>
         </div>
         <button onClick={updateExistingMilestoneResult} disabled={isLoading}>
           Save Changes
@@ -149,6 +168,17 @@ export const MilestoneResultEditForm = () => {
         <Link to="/achievements">
           <button>Cancel</button>
         </Link>
+        <div>
+            <h4>More About This Milestone</h4>
+            <div className="form-group">
+                <p>Description:<br />{thisMilestone.description}</p>
+            </div>
+            <div className="form-group">
+                <label htmlFor="validated">Validated: </label>
+                <input onChange={handleFieldChange} id="validated" type="checkbox" checked={milestoneResult.validated ? true : false} value={milestoneResult.validated} />
+            </div>
+        </div>
+        
       </form>
     </>
   );

@@ -24,7 +24,7 @@ export const MilestoneResultCard = ({ milestoneResult, milestone, user }) => {
           <div>Achieved on {milestoneResult.date}</div>
         </>
       ) : (
-        <div>Result Date: {milestoneResult.date}</div>
+        <div>Date Achieved: {milestoneResult.date}</div>
       )}
 
       <button>Details/More</button>
