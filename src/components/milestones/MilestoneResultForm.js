@@ -78,9 +78,9 @@ export const MilestoneResultForm = () => {
 
     return (
         <>
-            <h1>New Milestone Result</h1>
-            <h3>Milestone Title: {thisMilestone.name}</h3>
-            <div>Milestone Type: {thisMilestone.milestoneType?.name}</div>
+            <h1>New Milestone Achievement</h1>
+            <h2>Milestone: {thisMilestone.name}</h2>
+            <h4>Type: {thisMilestone.milestoneType?.name}</h4>
             <form>
                 <div className="form-group">
                     <input
@@ -131,8 +131,8 @@ export const MilestoneResultForm = () => {
                 ) : thisMilestone.milestoneType?.id === 4 ? (
                     <>
                     <div className="form-group">
-                    <label htmlFor="quantity">Quantity:</label>
-                    <input id="quantity" type="text" value={milestoneResult.quantity} onChange={handleControlledInputChange} />
+                    <label htmlFor="quantity">How Many:</label>
+                    <input id="quantity" type="number" value={milestoneResult.quantity} onChange={handleControlledInputChange} />
                     </div>
                     <div className="form-group">
                     {/* STRETCH: Do not allow a future date to be input */}

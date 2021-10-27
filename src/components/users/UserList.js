@@ -31,7 +31,7 @@ export const UserList = () => {
                 
             </div>
             <div>
-            <button onClick={() => history.push("/users/create")}>Add User <small><em>coming soon</em></small></button>
+            <button onClick={() => history.push("/users/create")}>Add User</button>
             <button onClick={() => history.push("/users/create")}>Add Child <small><em>coming soon</em></small></button>
             </div>
             <div>
