@@ -10,7 +10,7 @@ export const MilestoneResultForm = () => {
     milestoneId: useParams().milestoneId,
     userId: currentUserId,
     date: "",
-    validated: true,
+    validated: false,
     timeToComplete: 0,
     distance: 0,
     quantity: 0,
@@ -28,14 +28,15 @@ export const MilestoneResultForm = () => {
 
     const history = useHistory();
 
-    // const handleValidatedTrueFalse = (result) => {
-    //     if (milestoneResult.validated == "true") {
-    //       result = true;
-    //     } else {
-    //       result = false;
-    //     }
-    //     return result
-    //   };
+    const handleValidatedTrueFalse = (stringAnswer) => {
+        let result;
+        if (stringAnswer == "true") {
+          result = true;
+        } else {
+          result = false;
+        }
+        return result
+      };
 
     const handleControlledInputChange = (event) => {
         const newMilestoneResult = { ...milestoneResult };
@@ -44,6 +45,10 @@ export const MilestoneResultForm = () => {
         // forms always provide values as strings. But we want to save the ids as numbers.
         if (event.target.id.includes("Id")) {
             selectedVal = parseInt(selectedVal);
+        }
+
+        if (event.target.id.includes("alidated")) {
+            selectedVal = handleValidatedTrueFalse(event.target.value);
         }
 
         // set the property to the new value
@@ -158,8 +163,28 @@ export const MilestoneResultForm = () => {
                     </div>
                     <fieldset className="form-group">
                         <legend>Validated:</legend>
-                        <label htmlFor="validated"><em>coming soon</em></label>
-                        <input onChange={handleControlledInputChange} id="validated" name="validated" type="hidden" value={milestoneResult.validated} />
+                        <label htmlFor="validated">
+                            {/* <em>coming soon</em> */}
+                            </label>
+                        {milestoneResult.validated === true ? (
+                    <>
+                        <label htmlFor="validated">Yes: </label>
+                        <input onChange={handleControlledInputChange} id="yesValidated" name="validated" type="radio" value="true" checked />
+                        
+                        <label htmlFor="validated">No: </label>
+                        <input onChange={handleControlledInputChange} id="noValidated" name="validated" type="radio" value="false" />
+                    </>
+                ) : (
+                    <>
+                        <label htmlFor="validated">Yes: </label>
+                        <input onChange={handleControlledInputChange} id="validated" name="validated" type="radio" value="true" />
+                        
+                        <label htmlFor="validated">No: </label>
+                        <input onChange={handleControlledInputChange} id="validated" name="validated" type="radio" value="false" checked/>
+                    </>
+
+                )
+                }
                     </fieldset>
                 </div>
                 
