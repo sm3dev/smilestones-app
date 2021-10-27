@@ -38,6 +38,14 @@ export const MilestoneResultForm = () => {
         return result
       };
 
+      // If Date is empty string, do not submit the form
+    //   const validateFormDate = (str) => {
+    //       if (str == "") {
+    //           alert("Date must be filled to continue");
+    //           return false;
+    //       }
+    //   }
+
     const handleControlledInputChange = (event) => {
         const newMilestoneResult = { ...milestoneResult };
         let selectedVal = event.target.value;
@@ -47,7 +55,7 @@ export const MilestoneResultForm = () => {
             selectedVal = parseInt(selectedVal);
         }
 
-        if (event.target.id.includes("alidated")) {
+        if (event.target.id === "validated") {
             selectedVal = handleValidatedTrueFalse(event.target.value);
         }
 
@@ -99,7 +107,7 @@ export const MilestoneResultForm = () => {
                     </div>
                     <div className="form-group">
                     {/* STRETCH: Do not allow a future date to be input */}
-                    <label htmlFor="date">Date Milestone Achieved:</label>
+                    <label htmlFor="date">Achievement Date:</label>
                     <input required id="date" name="date" type="date" onChange={handleControlledInputChange} value={milestoneResult.date} />
                     </div>
                     </>
@@ -111,7 +119,7 @@ export const MilestoneResultForm = () => {
                 </div>
                 <div className="form-group">
                     {/* STRETCH: Do not allow a future date to be input */}
-                    <label htmlFor="date">Date Milestone Achieved:</label>
+                    <label htmlFor="date">Achievement Date:</label>
                     <input required id="date" name="date" type="date" onChange={handleControlledInputChange} value={milestoneResult.date} />
                     </div>
                 </>
@@ -123,7 +131,7 @@ export const MilestoneResultForm = () => {
                     </div>
                     <div className="form-group">
                     {/* STRETCH: Do not allow a future date to be input */}
-                    <label htmlFor="date">Date Milestone Achieved:</label>
+                    <label htmlFor="date">Achievement Date:</label>
                     <input required id="date" name="date" type="date" onChange={handleControlledInputChange} value={milestoneResult.date} />
                     </div>
                     
@@ -136,7 +144,7 @@ export const MilestoneResultForm = () => {
                     </div>
                     <div className="form-group">
                     {/* STRETCH: Do not allow a future date to be input */}
-                    <label htmlFor="date">Date Milestone Achieved:</label>
+                    <label htmlFor="date">Achievement Date:</label>
                     <input required id="date" name="date" type="date" onChange={handleControlledInputChange} value={milestoneResult.date} />
                     </div>
                     </>
@@ -163,16 +171,14 @@ export const MilestoneResultForm = () => {
                     </div>
                     <fieldset className="form-group">
                         <legend>Validated:</legend>
-                        <label htmlFor="validated">
-                            {/* <em>coming soon</em> */}
-                            </label>
+
                         {milestoneResult.validated === true ? (
                     <>
                         <label htmlFor="validated">Yes: </label>
-                        <input onChange={handleControlledInputChange} id="yesValidated" name="validated" type="radio" value="true" checked />
+                        <input onChange={handleControlledInputChange} id="validated" name="validated" type="radio" value="true" checked />
                         
                         <label htmlFor="validated">No: </label>
-                        <input onChange={handleControlledInputChange} id="noValidated" name="validated" type="radio" value="false" />
+                        <input onChange={handleControlledInputChange} id="validated" name="validated" type="radio" value="false" />
                     </>
                 ) : (
                     <>

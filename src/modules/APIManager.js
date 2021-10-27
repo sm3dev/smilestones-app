@@ -136,3 +136,5 @@ export const getAllMilestones = () => {
 export const getMilestoneByID = (milestoneId) => {
     return fetch(`${remoteURL}/milestones/${milestoneId}?_expand=milestoneType&_embed=userMilestones`).then(results => results.json())
 } 
+
+// ******* MILESTONE TYPES ******************************************
