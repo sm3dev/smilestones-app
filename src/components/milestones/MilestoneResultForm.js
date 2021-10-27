@@ -10,7 +10,7 @@ export const MilestoneResultForm = () => {
     milestoneId: useParams().milestoneId,
     userId: currentUserId,
     date: "",
-    validated: false,
+    validated: true,
     timeToComplete: 0,
     distance: 0,
     quantity: 0,
@@ -27,6 +27,15 @@ export const MilestoneResultForm = () => {
     })
 
     const history = useHistory();
+
+    // const handleValidatedTrueFalse = (result) => {
+    //     if (milestoneResult.validated == "true") {
+    //       result = true;
+    //     } else {
+    //       result = false;
+    //     }
+    //     return result
+    //   };
 
     const handleControlledInputChange = (event) => {
         const newMilestoneResult = { ...milestoneResult };
@@ -62,19 +71,6 @@ export const MilestoneResultForm = () => {
         addNewUserMilestone(milestoneResult).then(() => history.push(`/achievements`))
     }
 
-    // ROADBLOCK: I need to get the Milestone data, so I can show it in this Milestone Result Form: milestones.id, milestones.name, and milestones.milestoneTypeId.
-    // I can't figure out how to use the getMilestoneByID fetch inside of this JS.
-    // I know that I can get the Milestone ID from the Milestone Card in the list, because in the MilestoneCard, I was able to use the Milestone ID in a Link to open a custom Route for the view of this form.
-    // In order to write the condition statements that control with measurement input field is displayed, I need to use the MilestoneType that comes from the getMilestoneByID fetch. I have to use getMilestoneByID here. 
-
-    // milestoneId: 0,
-    // userId: 0,
-    // date: "",
-    // validated: false,
-    // timeToComplete: 0,
-    // distance: 0,
-    // quantity: 0,
-    // remarks: ""
     return (
         <>
             <h1>New Milestone Result</h1>
@@ -160,10 +156,11 @@ export const MilestoneResultForm = () => {
                     <div className="form-group">
                         <p>{thisMilestone.description}</p>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="validated">Validated: </label>
-                        <input onChange={handleControlledInputChange} id="validated" type="checkbox" checked={milestoneResult.validated ? true : false} value={milestoneResult.validated} />
-                    </div>
+                    <fieldset className="form-group">
+                        <legend>Validated:</legend>
+                        <label htmlFor="validated"><em>coming soon</em></label>
+                        <input onChange={handleControlledInputChange} id="validated" name="validated" type="hidden" value={milestoneResult.validated} />
+                    </fieldset>
                 </div>
                 
                 <div className="form-group">

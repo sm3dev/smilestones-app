@@ -30,10 +30,10 @@ export const MilestoneResultCard = ({ milestoneResult, milestone, user }) => {
       <button>Details/More</button>
       <Link to={`/achievements/${milestoneResult.id}/edit`}><button>Edit</button></Link>
       <p>Remarks: {milestoneResult.remarks}</p>
-      {milestoneResult.validated ? (
+      {(milestoneResult.validated === true) ? (
         <div>Validated: Yes</div>
       ) : (
-        <div>Validation Needed </div>
+        <div>Validation Needed -- Click Edit Button to Validate</div>
       )}
       <hr />
     </>
