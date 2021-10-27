@@ -30,7 +30,7 @@ export const MilestoneResultForm = () => {
 
     const handleValidatedTrueFalse = (stringAnswer) => {
         let result;
-        if (stringAnswer == "true") {
+        if (stringAnswer === "true") {
           result = true;
         } else {
           result = false;

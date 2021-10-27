@@ -111,7 +111,6 @@ const handleClickSaveUser = (event) => {
 
                     }
                 </select>
-                {/* <input id="parent" type="text" required placeholder="Parent name" value={user.lastName} /> */}
                 <input type="hidden" value={userParentChild.userId}  name="userId" id="userId" onChange={handleControlledInputChangeParent} />
             </div>
             <div className="form-group">

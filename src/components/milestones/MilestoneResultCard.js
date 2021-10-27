@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const remoteURL = "http://localhost:7777";
+// const remoteURL = "http://localhost:7777";
 export const MilestoneResultCard = ({
   milestoneResult,
   milestone,
@@ -40,6 +39,11 @@ export const MilestoneResultCard = ({
       ) : (
         <div>Date Achieved: {milestoneResult.date}</div>
       )}
+      {milestoneResult.validated === true ? (
+        <div>Validated: Yes</div>
+      ) : (
+        <div>Validation Needed -- Click <strong>Edit</strong> Button to Validate</div>
+      )}
       <div>
         <Link to={`/achievements/${milestoneResult.id}/edit`}>
           <button>Edit</button>
@@ -48,13 +52,8 @@ export const MilestoneResultCard = ({
           Delete
         </button>
       </div>
-      <button>Milestone Details</button>
+      <button>Milestone Details <small>placeholder for expanding card</small></button>
       <p>Remarks: {milestoneResult.remarks}</p>
-      {milestoneResult.validated === true ? (
-        <div>Validated: Yes</div>
-      ) : (
-        <div>Validation Needed -- Click Edit Button to Validate</div>
-      )}
       <hr />
     </>
   );

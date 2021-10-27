@@ -9,7 +9,7 @@ import {
 
 export const MilestoneResultEditForm = () => {
   const [milestoneResult, setMilestoneResult] = useState({
-    milestoneId: useParams().milestoneId,
+    milestoneId: parseInt(useParams().milestoneId),
     userId: 0,
     date: "",
     validated: false,
@@ -49,7 +49,7 @@ export const MilestoneResultEditForm = () => {
    // without it, milestoneResult.validated becomes a string with "true" or "false" as the value
    const handleValidatedTrueFalse = () => {
     let result;
-    if (milestoneResult.validated == "true") {
+    if (milestoneResult.validated === "true") {
       result = true;
     } else {
       result = false;
@@ -63,7 +63,7 @@ export const MilestoneResultEditForm = () => {
 
     const editedMilestoneResult = {
       id: userMilestoneId,
-      milestoneId: milestoneResult.milestoneId,
+      milestoneId: parseInt(milestoneResult.milestoneId),
       userId: milestoneResult.userId,
       date: milestoneResult.date,
       validated: handleValidatedTrueFalse(),
