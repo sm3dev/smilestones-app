@@ -190,16 +190,16 @@ export const MilestoneResultEditForm = () => {
                 {milestoneResult.validated === true ? (
                     <>
                     <label htmlFor="validated">Yes: </label>
-                        <input onClick={handleFieldChange} id="validated" name="validated" type="radio" value="true" checked />
+                        <input onChange={handleFieldChange} id="validated" name="validated" type="radio" value="true" checked />
                         <label htmlFor="validated">No: </label>
-                        <input onClick={handleFieldChange} id="validated" name="validated" type="radio" value="false" />
+                        <input onChange={handleFieldChange} id="validated" name="validated" type="radio" value="false" />
                     </>
                 ) : (
                     <>
                         <label htmlFor="validated">Yes: </label>
-                        <input onClick={handleFieldChange} id="validated" name="validated" type="radio" value="true" />
+                        <input onChange={handleFieldChange} id="validated" name="validated" type="radio" value="true" />
                         <label htmlFor="validated">No: </label>
-                        <input onClick={handleFieldChange} id="validated" name="validated" type="radio" value="false" checked/>
+                        <input onChange={handleFieldChange} id="validated" name="validated" type="radio" value="false" checked/>
                     </>
 
                 )
