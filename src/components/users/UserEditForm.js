@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { getUserByID, updateUser } from "../../modules/APIManager";
+import { deleteUser, getUserByID, updateUser } from "../../modules/APIManager";
 
 // Edit a User account
 export const UserEditForm = () => {
@@ -40,6 +40,7 @@ export const UserEditForm = () => {
     updateUser(editedUser).then(() => history.push("/users"));
   };
 
+
   useEffect(() => {
       getUserByID(userId).then(user => {
           setUser(user);
@@ -73,6 +74,8 @@ export const UserEditForm = () => {
             </div>
             <div>
                 <button disabled={isLoading} onClick={updateExistingUser}>Save Changes</button>
+                {/* To make delete work here, I think I have to create a User Detail View that will have this Edit form inside it. Maybe I can re-use the UserCard and show it on the same view as this edit form -- like a side-by-side, so you can easily see what the User's info is currently   */}
+                {/* <button onClick={() => handleDeleteUser(userId)}>Delete</button> */}
                 <Link to="/users"><button>Cancel</button></Link>
             </div>
 
