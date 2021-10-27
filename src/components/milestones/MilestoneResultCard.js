@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const MilestoneResultCard = ({ milestoneResult, milestone, user }) => {
+export const MilestoneResultCard = ({ milestoneResult, milestone, user, handleDeleteMilestoneResult }) => {
   return (
     <>
       <h3>{user.firstName}'s Milestone</h3>
@@ -26,9 +26,11 @@ export const MilestoneResultCard = ({ milestoneResult, milestone, user }) => {
       ) : (
         <div>Date Achieved: {milestoneResult.date}</div>
       )}
-
-      <button>Details/More</button>
-      <Link to={`/achievements/${milestoneResult.id}/edit`}><button>Edit</button></Link>
+      <div>
+        <Link to={`/achievements/${milestoneResult.id}/edit`}><button>Edit</button></Link>
+        <button onClick={() => handleDeleteMilestoneResult(milestoneResult.id)}>Delete</button>
+      </div>
+      <button>Milestone Details</button>
       <p>Remarks: {milestoneResult.remarks}</p>
       {(milestoneResult.validated === true) ? (
         <div>Validated: Yes</div>
