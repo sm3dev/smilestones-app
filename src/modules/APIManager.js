@@ -40,7 +40,7 @@ export const getUserChildByParentAndUser = (aUserId, aParentId) => {
 // Get All User-Parent relationships by userID. Returns an ARRAY
 export const getAllUserChildByUserID = (userId) => {
     // this returns an ARRAY
-    return fetch(`${remoteURL}/usersChildren?userId=${userId}`).then(results => results.json())
+    return fetch(`${remoteURL}/usersChildren/?userId=${userId}`).then(results => results.json())
 }
 
 export const addUserChild = (newUserID, selectedParentID) => {

@@ -34,9 +34,21 @@ const getParents = () => {
   });
 };
 
+// Get the parent-user (userChildren) object that has this User ID and a given parent ID
 const getChildParentRelationships = () => {
+  let oneChildParentObj = [];
   getAllUserChildByUserID(userId).then(arrayOfRelationships => {
-    let arrayOfRelationships.map
+    oneChildParentObj = arrayOfRelationships;
+    console.log(oneChildParentObj);
+    oneChildParentObj.forEach(element => {
+      if (element.parentId === userParentChild.parentId) {
+        console.log("You can edit this parent-child relationship:", element.id);
+        return element.id
+      } else {
+        console.log("this Parent is already assigned");
+      }
+    });
+
   })
 }
 
@@ -45,6 +57,14 @@ const getChildParentRelationships = () => {
     stateToChange[evt.target.id] = evt.target.value;
     setUser(stateToChange);
   };
+
+  const getTheIdOfUserChildObj = () => {
+    getAllUserChildByUserID(userId).then(userChildArray => {
+      let firstUserChildObj = userChildArray[0];
+      setUserParentChild(firstUserChildObj);
+
+    });
+  }
 
   const handleControlledInputChangeParent = (event) => {
     // When changing a state object or array, always create a copy, make changes, and then set state.
@@ -58,6 +78,8 @@ const getChildParentRelationships = () => {
 
     // set the property to the new value
     newuserParentChild[event.target.id] = selectedVal;
+
+    getChildParentRelationships();
 
     // update state
     setUserParentChild(newuserParentChild);
@@ -73,6 +95,10 @@ const getChildParentRelationships = () => {
   useEffect(() => {
     getParents();
   }, []);
+
+  useEffect(() => {
+    getTheIdOfUserChildObj();
+  }, [])
 
   const updateExistingUser = (evt) => {
     evt.preventDefault();
@@ -131,6 +157,7 @@ const getChildParentRelationships = () => {
             onChange={handleFieldChange}/>
         </div>
         <div className="form-group">
+        <p>Your Account Manager(s): </p>
           <label htmlFor="parent">Select Your Parent's Name:</label>
           <select
             value={userParentChild.parentId}
