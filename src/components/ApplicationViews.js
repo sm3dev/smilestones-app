@@ -12,6 +12,7 @@ import { UserForm } from './users/UserForm';
 import { UserList } from './users/UserList';
 
 export const ApplicationViews = () => {
+
     return (
         <>
             <Route exact path="/">
@@ -44,6 +45,7 @@ export const ApplicationViews = () => {
             <Route exact path="/users/create">
                 <UserForm />
             </Route>
+            
         </>
     )
 }

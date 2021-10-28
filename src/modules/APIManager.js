@@ -5,13 +5,13 @@ const remoteURL = "http://localhost:7777";
 // get All Users 
 export const getAllUsers = () => {
     // embed userMilestones to access each user's milestone results 
-    return fetch(`${remoteURL}/users?_embed=userMilestones`).then(results => results.json())
+    return fetch(`${remoteURL}/users?_embed=userParentConnection&_embed=userMilestones`).then(results => results.json())
 }
 
 // get UserByID
 export const getUserByID = (id) => {
     // expand userMilestones to fetch each of the user's milestones
-    return fetch(`${remoteURL}/users/${id}?_embed=userMilestones`).then(results => results.json())
+    return fetch(`${remoteURL}/users/${id}?_embed=userParentConnection&_embed=userMilestones`).then(results => results.json())
 }
 
 // Get all Parents/Admin User (User Accounts with admin: true)
@@ -56,24 +56,24 @@ export const deleteUser = (id) => {
 export const getAllChildrenByParentID = (parentId) => {
     
     // All Users Children by Parent ID expand User (children)
-    return fetch(`${remoteURL}/usersChildren?parentId=${parentId}&_expand=user`).then(results => results.json())
+    return fetch(`${remoteURL}/userParentConnection?parentId=${parentId}&_expand=user`).then(results => results.json())
 }
 
 // Get a User-Child relationship should be a fetch that looks for a given userId and a given parentId. Then, that ARRAY object result should be parsed and mapped to grab the id of the first result
 export const getUserChildByParentAndUser = (aUserId, aParentId) => {
     // This returns an ARRAY
-    return fetch(`${remoteURL}/usersChildren/?userId=${aUserId}&parentId=${aParentId}`).then(results => results.json())
+    return fetch(`${remoteURL}/userParentConnection/?userId=${aUserId}&parentId=${aParentId}`).then(results => results.json())
 }
 
 // Get All User-Parent relationships by userID. Returns an ARRAY
 export const getAllUserChildByUserID = (userId) => {
     // this returns an ARRAY
-    return fetch(`${remoteURL}/usersChildren/?userId=${userId}`).then(results => results.json())
+    return fetch(`${remoteURL}/userParentConnection/?userId=${userId}`).then(results => results.json())
 }
 
 // Add new User-Parent relationship
 export const addUserChild = (newUserID, selectedParentID) => {
-    return fetch(`${remoteURL}/usersChildren`, {
+    return fetch(`${remoteURL}/userParentConnection`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -87,7 +87,7 @@ export const addUserChild = (newUserID, selectedParentID) => {
 
 // Get a User-Child relationship 
 export const getUserChild = (userIdToEdit, parentIdToEdit) => {
-    return fetch(`${remoteURL}/usersChildren`, {
+    return fetch(`${remoteURL}/userParentConnection`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -101,7 +101,7 @@ export const getUserChild = (userIdToEdit, parentIdToEdit) => {
 
 // Update a User-Child relationship 
 export const updateUserChild = (userParentObj, userToEdit, parentToEdit) => {
-    return fetch(`${remoteURL}/usersChildren/${userParentObj.id}`, {
+    return fetch(`${remoteURL}/userParentConnection/${userParentObj.id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
