@@ -6,8 +6,8 @@ export const MilestoneCard = ({ milestone, milestoneType }) => {
     return (
         <>
             <h3>{milestone.name}</h3>
+            <h5>{milestoneType.name}</h5>
             <p>{milestone.description}</p>
-            <h4>{milestoneType.name}</h4>
             <div>
                 {/* Can I get the milestone card to show how many Milestone Achievements this milestone has? */}
 

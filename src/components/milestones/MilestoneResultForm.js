@@ -7,7 +7,7 @@ export const MilestoneResultForm = () => {
     const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
     
     const [milestoneResult, setMilestoneResult] = useState({
-    milestoneId: useParams().milestoneId,
+    milestoneId: parseInt(useParams().milestoneId),
     userId: currentUserId,
     date: "",
     validated: false,
@@ -30,7 +30,7 @@ export const MilestoneResultForm = () => {
 
     const handleValidatedTrueFalse = (stringAnswer) => {
         let result;
-        if (stringAnswer == "true") {
+        if (stringAnswer === "true") {
           result = true;
         } else {
           result = false;
@@ -47,7 +47,7 @@ export const MilestoneResultForm = () => {
             selectedVal = parseInt(selectedVal);
         }
 
-        if (event.target.id.includes("alidated")) {
+        if (event.target.id === "validated") {
             selectedVal = handleValidatedTrueFalse(event.target.value);
         }
 
@@ -78,9 +78,9 @@ export const MilestoneResultForm = () => {
 
     return (
         <>
-            <h1>New Milestone Result</h1>
-            <h3>Milestone Title: {thisMilestone.name}</h3>
-            <div>Milestone Type: {thisMilestone.milestoneType?.name}</div>
+            <h1>New Milestone Achievement</h1>
+            <h2>Milestone: {thisMilestone.name}</h2>
+            <h4>Type: {thisMilestone.milestoneType?.name}</h4>
             <form>
                 <div className="form-group">
                     <input
@@ -99,7 +99,7 @@ export const MilestoneResultForm = () => {
                     </div>
                     <div className="form-group">
                     {/* STRETCH: Do not allow a future date to be input */}
-                    <label htmlFor="date">Date Milestone Achieved:</label>
+                    <label htmlFor="date">Achievement Date:</label>
                     <input required id="date" name="date" type="date" onChange={handleControlledInputChange} value={milestoneResult.date} />
                     </div>
                     </>
@@ -111,7 +111,7 @@ export const MilestoneResultForm = () => {
                 </div>
                 <div className="form-group">
                     {/* STRETCH: Do not allow a future date to be input */}
-                    <label htmlFor="date">Date Milestone Achieved:</label>
+                    <label htmlFor="date">Achievement Date:</label>
                     <input required id="date" name="date" type="date" onChange={handleControlledInputChange} value={milestoneResult.date} />
                     </div>
                 </>
@@ -123,7 +123,7 @@ export const MilestoneResultForm = () => {
                     </div>
                     <div className="form-group">
                     {/* STRETCH: Do not allow a future date to be input */}
-                    <label htmlFor="date">Date Milestone Achieved:</label>
+                    <label htmlFor="date">Achievement Date:</label>
                     <input required id="date" name="date" type="date" onChange={handleControlledInputChange} value={milestoneResult.date} />
                     </div>
                     
@@ -131,12 +131,12 @@ export const MilestoneResultForm = () => {
                 ) : thisMilestone.milestoneType?.id === 4 ? (
                     <>
                     <div className="form-group">
-                    <label htmlFor="quantity">Quantity:</label>
-                    <input id="quantity" type="text" value={milestoneResult.quantity} onChange={handleControlledInputChange} />
+                    <label htmlFor="quantity">How Many:</label>
+                    <input id="quantity" type="number" value={milestoneResult.quantity} onChange={handleControlledInputChange} />
                     </div>
                     <div className="form-group">
                     {/* STRETCH: Do not allow a future date to be input */}
-                    <label htmlFor="date">Date Milestone Achieved:</label>
+                    <label htmlFor="date">Achievement Date:</label>
                     <input required id="date" name="date" type="date" onChange={handleControlledInputChange} value={milestoneResult.date} />
                     </div>
                     </>
@@ -163,28 +163,15 @@ export const MilestoneResultForm = () => {
                     </div>
                     <fieldset className="form-group">
                         <legend>Validated:</legend>
-                        <label htmlFor="validated">
-                            {/* <em>coming soon</em> */}
-                            </label>
-                        {milestoneResult.validated === true ? (
-                    <>
-                        <label htmlFor="validated">Yes: </label>
-                        <input onChange={handleControlledInputChange} id="yesValidated" name="validated" type="radio" value="true" checked />
-                        
-                        <label htmlFor="validated">No: </label>
-                        <input onChange={handleControlledInputChange} id="noValidated" name="validated" type="radio" value="false" />
-                    </>
-                ) : (
-                    <>
-                        <label htmlFor="validated">Yes: </label>
-                        <input onChange={handleControlledInputChange} id="validated" name="validated" type="radio" value="true" />
-                        
-                        <label htmlFor="validated">No: </label>
-                        <input onChange={handleControlledInputChange} id="validated" name="validated" type="radio" value="false" checked/>
-                    </>
 
-                )
-                }
+                        {/* Does true-false need to have it's own onChange? */}
+         
+                        <label htmlFor="validated">Yes: </label>
+                        <input onChange={handleControlledInputChange} id="validated" name="validated" type="radio" value={milestoneResult.validated} />
+                        
+                        <label htmlFor="validated">No: </label>
+                        <input onChange={handleControlledInputChange} id="validated" name="validated" type="radio" value={milestoneResult.validated} />
+
                     </fieldset>
                 </div>
                 
