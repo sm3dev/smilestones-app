@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { getAllParents, getAllUserChildByUserID, getUserByID, updateUser } from "../../modules/APIManager";
+import { getUserByID, updateUser } from "../../modules/APIManager";
 
 // Edit a User account
 export const UserEditForm = () => {
+  const { userId } = useParams();
+  const history = useHistory();
+
   const [user, setUser] = useState({
     DOB: "",
     firstName: "",
@@ -13,77 +16,46 @@ export const UserEditForm = () => {
     admin: false,
   });
 
-  const [parents, setParents] = useState([]);
+  // const [parent, setParent] = useState({
+  //   DOB: "",
+  //   firstName: "",
+  //   lastName: "",
+  //   email: "",
+  //   admin: false,
+  // });
+
+  // const [parentChildRelationship, setParentChildRelationship] = useState[{
+  //   userId: useParams().userId,
+  //   parentId: 0
+  // }]
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { userId } = useParams();
-  const history = useHistory();
+// // For ONE PARENT
+// const getParentData = () => {
+//   let firstChildParentObj = {};
+//   // First, get the parent-child relationship using the userId (child) and the parentID.
+//   // It comes back as an array (boooo!) 
+//   getUserChildByParentAndUser(userId, parentChildRelationship.parentId).then(userChildArrayFromAPI => {
+//     const getOnlyIdProperty = (obj) => {
+//       return obj.id === parentChildRelationship.id;
+//     }
 
-  // A updated parent-child relationship (usersChildren object) needs to take in either a parentId or a userId the assign the other. It makes sense to pass-in the new user and assign that to userID, then assign parentId based on what is selected in the Parent Select input field
-  const [userParentChild, setUserParentChild] = useState({
-    userId: useParams().userId,
-    parentId: 0,
-  });
+//     console.log(userChildArrayFromAPI.find(getOnlyIdProperty));
+//     firstChildParentObj = userChildArrayFromAPI.find(getOnlyIdProperty);
+//     setParentChildRelationship(firstChildParentObj);
+//   })
 
-  //  I need a fetch that gets all parent users (for now get all Admins)
-const getParents = () => {
-  // after the parent data comes back from the API, update the state with setParents
-  getAllParents().then((parentsFromAPI) => {
-    setParents(parentsFromAPI);
-  });
-};
-
-// Get the parent-user (userChildren) object that has this User ID and a given parent ID
-const getChildParentRelationships = () => {
-  let oneChildParentObj = [];
-  getAllUserChildByUserID(userId).then(arrayOfRelationships => {
-    oneChildParentObj = arrayOfRelationships;
-    console.log(oneChildParentObj);
-    oneChildParentObj.forEach(element => {
-      if (element.parentId === userParentChild.parentId) {
-        console.log("You can edit this parent-child relationship:", element.id);
-        return element.id
-      } else {
-        console.log("this Parent is already assigned");
-      }
-    });
-
-  })
-}
+//   getUserByID(parentChildRelationship.parentId).then(parentFromAPI => {
+//     setParent(parentFromAPI);
+//   })
+// }
 
   const handleFieldChange = (evt) => {
     const stateToChange = { ...user };
     stateToChange[evt.target.id] = evt.target.value;
     setUser(stateToChange);
   };
-
-  const getTheIdOfUserChildObj = () => {
-    getAllUserChildByUserID(userId).then(userChildArray => {
-      let firstUserChildObj = userChildArray[0];
-      setUserParentChild(firstUserChildObj);
-
-    });
-  }
-
-  const handleControlledInputChangeParent = (event) => {
-    // When changing a state object or array, always create a copy, make changes, and then set state.
-    const newuserParentChild = { ...userParentChild }
-    let selectedVal = event.target.value;
-
-    // forms always provide values as strings, but we want to save the ids as numbers
-    if (event.target.id.includes("Id")) {
-        selectedVal = parseInt(selectedVal);
-    }
-
-    // set the property to the new value
-    newuserParentChild[event.target.id] = selectedVal;
-
-    getChildParentRelationships();
-
-    // update state
-    setUserParentChild(newuserParentChild);
-};
 
   useEffect(() => {
       getUserByID(userId).then(user => {
@@ -92,13 +64,9 @@ const getChildParentRelationships = () => {
       })
   }, [])
 
-  useEffect(() => {
-    getParents();
-  }, []);
-
-  useEffect(() => {
-    getTheIdOfUserChildObj();
-  }, [])
+  // useEffect(() => {
+  //   getParentData();
+  // }, [])
 
   const updateExistingUser = (evt) => {
     evt.preventDefault();
@@ -157,20 +125,9 @@ const getChildParentRelationships = () => {
             onChange={handleFieldChange}/>
         </div>
         <div className="form-group">
-        <p>Your Account Manager(s): </p>
-          <label htmlFor="parent">Select Your Parent's Name:</label>
-          <select
-            value={userParentChild.parentId}
-            name="parentId"
-            id="parentId"
-            onChange={handleControlledInputChangeParent}>
-            <option value="0">Select a Parent</option>
-            {parents.map((parent) => (
-              <option key={parent.id} value={parent.id} user={userId}>
-                {parent.firstName} {parent.lastName}
-              </option>
-            ))}
-          </select>
+        <p>Your Parent/Account Manager(s): <small><em>coming soon</em></small>
+          {/* {parent.firstName} {parent.lastName}  */}
+        </p>
           {/* <input id="parent" type="text" required placeholder="Parent name" value={user.lastName} /> */}
         </div>
         <div>
