@@ -7,7 +7,7 @@ export const MilestoneResultForm = () => {
     const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
     
     const [milestoneResult, setMilestoneResult] = useState({
-    milestoneId: useParams().milestoneId,
+    milestoneId: parseInt(useParams().milestoneId),
     userId: currentUserId,
     date: "",
     validated: false,
@@ -37,14 +37,6 @@ export const MilestoneResultForm = () => {
         }
         return result
       };
-
-      // If Date is empty string, do not submit the form
-    //   const validateFormDate = (str) => {
-    //       if (str == "") {
-    //           alert("Date must be filled to continue");
-    //           return false;
-    //       }
-    //   }
 
     const handleControlledInputChange = (event) => {
         const newMilestoneResult = { ...milestoneResult };
@@ -172,25 +164,14 @@ export const MilestoneResultForm = () => {
                     <fieldset className="form-group">
                         <legend>Validated:</legend>
 
-                        {milestoneResult.validated === true ? (
-                    <>
+                        {/* Does true-false need to have it's own onChange? */}
+         
                         <label htmlFor="validated">Yes: </label>
-                        <input onChange={handleControlledInputChange} id="validated" name="validated" type="radio" value="true" checked />
+                        <input onChange={handleControlledInputChange} id="validated" name="validated" type="radio" value={milestoneResult.validated} />
                         
                         <label htmlFor="validated">No: </label>
-                        <input onChange={handleControlledInputChange} id="validated" name="validated" type="radio" value="false" />
-                    </>
-                ) : (
-                    <>
-                        <label htmlFor="validated">Yes: </label>
-                        <input onChange={handleControlledInputChange} id="validated" name="validated" type="radio" value="true" />
-                        
-                        <label htmlFor="validated">No: </label>
-                        <input onChange={handleControlledInputChange} id="validated" name="validated" type="radio" value="false" checked/>
-                    </>
+                        <input onChange={handleControlledInputChange} id="validated" name="validated" type="radio" value={milestoneResult.validated} />
 
-                )
-                }
                     </fieldset>
                 </div>
                 

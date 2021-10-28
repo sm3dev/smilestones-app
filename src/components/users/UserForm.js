@@ -93,16 +93,8 @@ const handleClickSaveUser = (event) => {
         <h1>Add New Account</h1>
         {/* I want to have this form show a Switch or Radio to choose between Child Account or Parent Account */}
         <form action="">
-            <div className="form-group">
-                <label htmlFor="firstName">First Name:</label>
-                <input onChange={handleControlledInputChange} id="firstName" type="text" required placeholder="First Name" value={user.firstName} />
-            </div>
-            <div className="form-group">
-                <label htmlFor="lastName">Last Name:</label>
-                <input onChange={handleControlledInputChange} id="lastName" type="text" required placeholder="Last Name" value={user.lastName} />
-            </div>
-            <div className="form-group">
-                <label htmlFor="parent">Select Your Parent's Name:</label>
+            <fieldset>
+                    <label htmlFor="parent">Select Your Parent's Name:</label>
                 <select value={userParentChild.parentId} name="parentId" id="parentId" onChange={handleControlledInputChangeParent} >
                     <option value="0">Select a Parent</option>
                     {parents.map(parent => (
@@ -112,15 +104,32 @@ const handleClickSaveUser = (event) => {
                     }
                 </select>
                 <input type="hidden" value={userParentChild.userId}  name="userId" id="userId" onChange={handleControlledInputChangeParent} />
-            </div>
-            <div className="form-group">
+            </fieldset>
+                   
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="firstName">First Name:</label>
+                    <input onChange={handleControlledInputChange} id="firstName" type="text" required placeholder="First Name" value={user.firstName} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="lastName">Last Name:</label>
+                    <input onChange={handleControlledInputChange} id="lastName" type="text" required placeholder="Last Name" value={user.lastName} />
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
                 <label htmlFor="DOB">Date of Birth:</label>
                 <input onChange={handleControlledInputChange} id="DOB" type="date" required value={user.DOB} />
             </div>
-            <div className="form-group">
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
                 <label htmlFor="email">Email:</label>
-                <input onChange={handleControlledInputChange} id="email" type="email" required placeholder="Email Address" value={user.email} />
+                <input onChange={handleControlledInputChange} id="email" type="email" placeholder="Email Address" value={user.email} />
             </div>
+            </fieldset>
+            
+            
             <input id="email" type="hidden" value={user.admin} />
             <button onClick={handleClickSaveUser} className="save__button">Create Account</button>
             <Link to="/users"><button>Cancel</button></Link>

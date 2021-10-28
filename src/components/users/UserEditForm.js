@@ -62,7 +62,7 @@ export const UserEditForm = () => {
           setUser(user);
           setIsLoading(false);
       })
-  }, [])
+  }, [userId])
 
   // useEffect(() => {
   //   getParentData();
@@ -125,21 +125,32 @@ export const UserEditForm = () => {
             onChange={handleFieldChange}/>
         </div>
         <div className="form-group">
-        <p>Your Parent/Account Manager(s): <small><em>coming soon</em></small>
-          {/* {parent.firstName} {parent.lastName}  */}
-        </p>
-          {/* <input id="parent" type="text" required placeholder="Parent name" value={user.lastName} /> */}
-        </div>
-        <div>
-          <label htmlFor="adminStatus">Administrator:</label>
-          {/* This input needs to be a switch or radio button */}
-          <input
-            id="adminStatus"
-            name="adminStatus"
-            type="checkbox"
-            checked={user.admin ? true : false}
-            value={user.admin}
-            onChange={handleFieldChange}/>
+          {user.admin === true ? (
+            <>
+                <label htmlFor="admin">Administrator:</label>
+              {/* This input needs to be a switch or radio button */}
+              <input
+              id="admin"
+              name="admin"
+              type="checkbox"
+              checked
+              value={user.admin}
+              onChange={handleFieldChange}/>
+             <p>Your Parent/Account Manager(s): <small><em>coming soon</em></small>
+                {/* {parent.firstName} {parent.lastName}  */}
+              </p>
+              {/* <input id="parent" type="text" required placeholder="Parent name" value={user.lastName} /> */}
+             </>
+          
+          ) : (
+            <>
+              <p>Your Parent/Account Manager(s): <small><em>coming soon</em></small>
+                {/* {parent.firstName} {parent.lastName}  */}
+              </p>
+              {/* <input id="parent" type="text" required placeholder="Parent name" value={user.lastName} /> */}
+            </>
+          )}
+
         </div>
         <div>
           <button disabled={isLoading} onClick={updateExistingUser}>

@@ -79,29 +79,43 @@ export const Register = () => {
                 Register to Use Smilestones
             </h1>
             <fieldset>
-                <label htmlFor="firstName">First Name:</label>
-                <input
-                    type="text"
-                    name="firstName"
-                    id="firstName"
-                    className="form-control"
-                    placeholder="First name"
-                    required
-                    autoFocus
-                    value={registerUser.firstName}
-                    onChange={handleInputChange}
-                />
+                <div>
+                    <label htmlFor="firstName">First Name:</label>
+                        <input
+                            type="text"
+                            name="firstName"
+                            id="firstName"
+                            className="form-control"
+                            placeholder="First name"
+                            required
+                            autoFocus
+                            value={registerUser.firstName}
+                            onChange={handleInputChange}
+                        />
+                </div>
+                <div>
+                    <label htmlFor="lastName">Last Name:</label>
+                    <input
+                        type="text"
+                        name="lastName"
+                        id="lastName"
+                        className="form-control"
+                        placeholder="Last name"
+                        required
+                        value={registerUser.lastName}
+                        onChange={handleInputChange}
+                    />
+                </div>
             </fieldset>
             <fieldset>
-                <label htmlFor="lastName">Last Name:</label>
+                <label htmlFor="DOB">Date of Birth:</label>
                 <input
-                    type="text"
-                    name="lastName"
-                    id="lastName"
+                    type="date"
+                    name="DOB"
+                    id="DOB"
                     className="form-control"
-                    placeholder="Last name"
                     required
-                    value={registerUser.lastName}
+                    value={registerUser.DOB}
                     onChange={handleInputChange}
                 />
             </fieldset>
@@ -118,18 +132,7 @@ export const Register = () => {
                     onChange={handleInputChange}
                 />
             </fieldset>
-            <fieldset>
-                <label htmlFor="DOB">Email address:</label>
-                <input
-                    type="date"
-                    name="DOB"
-                    id="DOB"
-                    className="form-control"
-                    required
-                    value={registerUser.DOB}
-                    onChange={handleInputChange}
-                />
-            </fieldset>
+
             <input id="admin" type="hidden" value={registerUser.admin} />
             <div>
                 <button type="submit"> Register and Sign-in </button>
