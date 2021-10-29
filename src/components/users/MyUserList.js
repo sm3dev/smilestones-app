@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router';
-import { deleteUser, getAllUsers } from '../../modules/APIManager';
+import { deleteUser, getAllChildrenByParentID, getAllUsers } from '../../modules/APIManager';
 import { UserCard } from './UserCard';
 
 // show all user accounts in the database
-export const UserList = () => {
+export const MyUserList = () => {
     const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
 
     const [users, setUsers] = useState([]);
     const history = useHistory();
 
+    const getMyChildren = () => {
+        // First, look up userParentConnections that have logged-in user's userId as the parentId
+        getAllChildrenByParentID(currentUserId).then(usersByParentFromAPI => {
+            console.log(usersByParentFromAPI)
+            console.log(usersByParentFromAPI.userId)
+
+        })
+        // Next, use this result ARRAY to grab the expanded users and set the state of users (setUsers) 
+
+        // Last, pass the user's into the UserCard 
+
+    }
     const getUsers = () => {
         return getAllUsers().then(usersFromAPI => {
             setUsers(usersFromAPI);
