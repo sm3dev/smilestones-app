@@ -52,7 +52,7 @@ export const deleteUser = (id) => {
 
 // ******* USER-CHILD RELATIONSHIP ******************************************
 
-// Get All Child Users of a Parent by Parent ID; Pass-in parentID
+// Get All Child Users of a Parent by Parent ID; Pass-in parentID; expand user
 export const getAllChildrenConnectionsByParentID = (parentId) => {
     
     // All Users Children by Parent ID expand User (children)
