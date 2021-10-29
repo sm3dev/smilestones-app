@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router';
-import { deleteUser, getAllChildrenByParentID, getAllUsers } from '../../modules/APIManager';
+import { deleteUser, getAllChildrenConnectionsByParentID, getAllUsers, getUserByID } from '../../modules/APIManager';
 import { UserCard } from './UserCard';
 
 // show all user accounts in the database
@@ -11,29 +11,40 @@ export const MyUserList = () => {
     const history = useHistory();
 
     const getMyChildren = () => {
-        // First, look up userParentConnections that have logged-in user's userId as the parentId
-        getAllChildrenByParentID(currentUserId).then(usersByParentFromAPI => {
-            console.log(usersByParentFromAPI)
-            console.log(usersByParentFromAPI.userId)
-
+        let newConnectionsArray = [];
+        // First, look up userParentConnections that have logged-in user's userId as the parentId 
+        getAllChildrenConnectionsByParentID(currentUserId).then(usersParentByParentFromAPI => {
+           
+            console.log(usersParentByParentFromAPI)
+            newConnectionsArray = usersParentByParentFromAPI.map((userParentConnection) => {
+                console.log("the userId's of the logged-in parent's kids:", userParentConnection.userId)
+                const theUserID = userParentConnection.userId
+                return theUserID;
+            })
+            
+        }).then(() => {
+            newConnectionsArray.forEach(userID => {
+                return getUserByID(userID);
+            });
         })
+        setUsers(newConnectionsArray);
         // Next, use this result ARRAY to grab the expanded users and set the state of users (setUsers) 
 
         // Last, pass the user's into the UserCard 
+    }
 
-    }
-    const getUsers = () => {
-        return getAllUsers().then(usersFromAPI => {
-            setUsers(usersFromAPI);
-        })
-    }
+    // const getUsers = () => {
+    //     return getAllUsers().then(usersFromAPI => {
+    //         setUsers(usersFromAPI);
+    //     })
+    // }
 
     const handleDeleteUser = (id) => {
         deleteUser(id).then(() => getAllUsers().then(setUsers))
     }
 
     useEffect(() => {
-        getUsers(); 
+        getMyChildren(); 
     }, [])
 
     return (

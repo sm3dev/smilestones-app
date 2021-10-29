@@ -53,7 +53,7 @@ export const deleteUser = (id) => {
 // ******* USER-CHILD RELATIONSHIP ******************************************
 
 // Get All Child Users of a Parent by Parent ID; Pass-in parentID
-export const getAllChildrenByParentID = (parentId) => {
+export const getAllChildrenConnectionsByParentID = (parentId) => {
     
     // All Users Children by Parent ID expand User (children)
     return fetch(`${remoteURL}/userParentConnection?parentId=${parentId}&_expand=user`).then(results => results.json())
