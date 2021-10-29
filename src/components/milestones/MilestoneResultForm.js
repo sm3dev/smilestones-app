@@ -10,7 +10,7 @@ export const MilestoneResultForm = () => {
     milestoneId: parseInt(useParams().milestoneId),
     userId: currentUserId,
     date: "",
-    validated: false,
+    validated: true,
     timeToComplete: 0,
     distance: 0,
     quantity: 0,

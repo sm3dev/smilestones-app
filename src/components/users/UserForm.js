@@ -14,7 +14,7 @@ const [user, setUser] = useState({
       admin: false
 });
 
-// A new parent-child relationship (usersChildren object) needs to take in either a parentId or a userId the assign the other. It makes sense to pass-in the new user and assign that to userID, then assign parentId based on what is selected in the Parent Select input field
+// A new parent-child relationship (userParentConnection object) needs to take in either a parentId or a userId the assign the other. It makes sense to pass-in the new user and assign that to userID, then assign parentId based on what is selected in the Parent Select input field
 const [userParentChild, setUserParentChild] = useState({
     userId: 0,
     parentId: 0

@@ -6,6 +6,7 @@ import { useHistory } from "react-router";
 
 export const NavBar = () => {
     const history = useHistory()
+    const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
     return (
         <>
             <ul className="navbar">
@@ -20,6 +21,9 @@ export const NavBar = () => {
                 </li>
                 <li className="navbar__item">
                     <Link className="navbar__link" to="/users">Users</Link>
+                </li>
+                <li className="navbar__item">
+                    <Link className="navbar__link" to={{pathname: `/users/${currentUserId}/yourKids`}}>My Kids</Link>
                 </li>
                 <li className="navbar__item">
                     <Button onClick={ () => {sessionStorage.clear(); history.push(`/login`)}}>Log out</Button>

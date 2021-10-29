@@ -7,11 +7,13 @@ import { MilestoneResultEditForm } from './milestones/MilestoneResultEditForm';
 import { MilestoneResultForm } from './milestones/MilestoneResultForm';
 import { MilestoneResultList } from './milestones/MilestoneResultList';
 import { MilestoneResultListbyUser } from './milestones/MilestoneResultListbyUser';
+import { MyUserList } from './users/MyUserList';
 import { UserEditForm } from './users/UserEditForm';
 import { UserForm } from './users/UserForm';
 import { UserList } from './users/UserList';
 
 export const ApplicationViews = () => {
+
     return (
         <>
             <Route exact path="/">
@@ -43,6 +45,9 @@ export const ApplicationViews = () => {
             </Route>
             <Route exact path="/users/create">
                 <UserForm />
+            </Route>
+            <Route exact path="/users/:userId(\d+)/yourKids">
+                <MyUserList />
             </Route>
         </>
     )
