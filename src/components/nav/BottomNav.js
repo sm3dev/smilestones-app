@@ -1,9 +1,9 @@
 import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useEffect, useState } from 'react'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+// import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import "./NavBar.css"
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { getUserByID } from '../../modules/APIManager';
 
 export const BottomNav = () => {
