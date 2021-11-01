@@ -14,6 +14,7 @@ import { UserList } from './users/UserList';
 import { UserProfile } from './users/UserProfile';
 
 export const ApplicationViews = () => {
+    const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
 
     return (
         <>
