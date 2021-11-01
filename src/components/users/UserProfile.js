@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import {
   deleteUser,
+  getAllChildrenConnectionsByParentID,
   getAllUserMilestonesByUserID,
   getUserByID,
 } from "../../modules/APIManager";
@@ -18,23 +19,52 @@ export const UserProfile = () => {
     email: "michael@nss.pizza",
     admin: true,
   });
+
   const [milestoneResults, setMilestoneResults] = useState([]);
+  const [childConnections, setChildConnections] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
   const { userId } = useParams();
   const history = useHistory();
 
-  const handleDeleteUser = (id) => {
-      // if the logged-in user tries to delete their own account, alert them and clear the sessionStorage -- which "should" take them to login screen maybe.
-    if (currentUserId === id) {
-        alert("You are attempting to delete your account!");
-        deleteUser(id);
-        sessionStorage.clear();
-        history.push("/login");
-      } else {
-        deleteUser(id).then(() => history.push(`/users/${userId}/myKids`))
-      }
+  // check for child connections and return TRUE or FALSE; returns a boolean
+  const checkForUserChildrenConnections = () => {
+    // Fetch call that uses logged-in User Id to get all userParentConnections where logged-in User Id is the parentId value
+    getAllChildrenConnectionsByParentID(currentUserId).then((connections) => {
+      const thisUsersConnections = connections.filter(
+        (connection) => connection.parentId === currentUserId
+      );
+      console.log(thisUsersConnections);
+      setChildConnections(connections);
+    });
+  };
 
+  // If any of the connections has a parentId of currentUserId AND a userId of user.id, then return TRUE
+  // If not FALSE
+  const handleButtonAccess = () => {
+
+    // I need to map through the childConnections
+
+    if (
+      connection.parentId === currentUserId &&
+      connection.userId === userId
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const handleDeleteUser = (id) => {
+    // if the logged-in user tries to delete their own account, alert them and clear the sessionStorage -- which "should" take them to login screen maybe.
+    if (currentUserId === id) {
+      alert("You are attempting to delete your account!");
+      deleteUser(id);
+      sessionStorage.clear();
+      history.push("/login");
+    } else {
+      deleteUser(id).then(() => history.push(`/users/${userId}/myKids`));
+    }
   };
 
   const handleBack = () => {
@@ -55,6 +85,10 @@ export const UserProfile = () => {
     });
   }, [userId]);
 
+  useEffect(() => {
+    checkForUserChildrenConnections();
+  }, [userId]);
+
   return (
     <>
       <h3>
@@ -69,11 +103,16 @@ export const UserProfile = () => {
         <strong>{milestoneResults.length}</strong> {user.firstName}'s Milestone
         Achievements
       </button>
-      <button disabled={isLoading} onClick={() => history.push(`/users/${user.id}/edit`)}>
+      <button
+        disabled={isLoading}
+        onClick={() => history.push(`/users/${user.id}/edit`)}
+      >
         Manage
       </button>
       <button onClick={() => handleBack()}>Back</button>
-      <button disabled={isLoading} onClick={() => handleDeleteUser(user.id)}>Delete</button>
+      <button disabled={isLoading} onClick={() => handleDeleteUser(user.id)}>
+        Delete
+      </button>
     </>
   );
 };
