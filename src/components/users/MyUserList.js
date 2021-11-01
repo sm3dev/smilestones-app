@@ -19,11 +19,7 @@ export const MyUserList = () => {
         // Fetch call that uses logged-in User Id to get all userParentConnections where logged-in User Id is the parentId value
         getAllChildrenConnectionsByParentID(currentUserId).then(connections => {
             console.log(connections);
-            const myConnections = connections.filter(connection => {
-                if (connection.parentId === currentUserId ) {
-                    return true;
-                };
-            });
+            const myConnections = connections.filter(connection => (connection.parentId === currentUserId ));
             console.log(myConnections);
             setChildConnections(myConnections);
         })
@@ -52,7 +48,7 @@ export const MyUserList = () => {
             </div>
             <hr />
             <div>
-                {childConnections.map(childConnection => <MyUserCard key={childConnection.id} userId={childConnection.userId} user={childConnection.user} handleDeleteUser={handleDeleteUser} />)
+                {childConnections.map(childConnection => <MyUserCard key={childConnection.id} user={childConnection.user} handleDeleteUser={handleDeleteUser} />)
 
                 }
                 {/* {childConnections.map(childConnection => <div userId={childConnection.user.id} key={childConnection.id} handleDeleteUser={handleDeleteUser}>{childConnection.user.firstName} childConnection</div>)

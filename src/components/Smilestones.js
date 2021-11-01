@@ -3,6 +3,7 @@ import { Redirect, Route } from "react-router";
 import { ApplicationViews } from "./ApplicationViews";
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
+import { BottomNav } from "./nav/BottomNav";
 import { NavBar } from "./nav/NavBar";
 import "./Smilestones.css";
 
@@ -15,6 +16,7 @@ export const Smilestones = () => (
             <>
               <NavBar />
               <ApplicationViews />
+              <BottomNav />
             </>
           );
         } else {
