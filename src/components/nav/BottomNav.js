@@ -1,9 +1,7 @@
-import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material'
+import { BottomNavigation, Paper } from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useEffect, useState } from 'react'
-// import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import "./NavBar.css"
-// import { Link } from 'react-router-dom';
 import { getUserByID } from '../../modules/APIManager';
 
 export const BottomNav = () => {
@@ -22,12 +20,12 @@ export const BottomNav = () => {
         getUserByID(currentUserId).then(user => {
             setLoggedInUser(user);
         })
-    }, [])
+    }, [currentUserId])
 
     return (
         <Box sx={{ width: 500 }}>
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-                <BottomNavigation showLabels value={activeNavItem} onChange={(event, newActiveNavItem) => {
+                <BottomNavigation showlabels="false" value={activeNavItem} onChange={(event, newActiveNavItem) => {
                     setActiveNavItem(newActiveNavItem);
                 }}>
                     <p>Hi, {loggedInUser.firstName}!</p>
