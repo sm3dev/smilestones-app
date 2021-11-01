@@ -13,45 +13,47 @@ export const UserProfile = () => {
 
   const [user, setUser] = useState({
     id: 0,
-    firstName: "Michael",
-    lastName: "Wright",
-    DOB: "1980-12-11",
-    email: "michael@nss.pizza",
+    firstName: "",
+    lastName: "",
+    DOB: "",
+    email: "",
     admin: true,
   });
 
   const [milestoneResults, setMilestoneResults] = useState([]);
   const [childConnections, setChildConnections] = useState([]);
+  const [buttonAccess, setButtonAccess] = useState({ value: "" });
 
   const [isLoading, setIsLoading] = useState(true);
   const { userId } = useParams();
+
   const history = useHistory();
 
   // check for child connections and return TRUE or FALSE; returns a boolean
-  const checkForUserChildrenConnections = () => {
+  const getUserChildrenConnections = () => {
     // Fetch call that uses logged-in User Id to get all userParentConnections where logged-in User Id is the parentId value
     getAllChildrenConnectionsByParentID(currentUserId).then((connections) => {
       const thisUsersConnections = connections.filter(
         (connection) => connection.parentId === currentUserId
       );
       console.log(thisUsersConnections);
-      setChildConnections(connections);
+      setChildConnections(thisUsersConnections);
     });
   };
 
-  // If any of the connections has a parentId of currentUserId AND a userId of user.id, then return TRUE
+  // If any of the results from getUserChildrenConbnections has a parentId of currentUserId AND a userId of user.id, then return TRUE
   // If not FALSE
-  const handleButtonAccess = () => {
-
-    // I need to map through the childConnections
-
-    if (
-      connection.parentId === currentUserId &&
-      connection.userId === userId
-    ) {
-      return true;
+  const handleButtonDisabled = () => {
+    // I need to map through the childConnections?
+    const theConnection = childConnections.find(
+      (childConnection) => childConnection.userId === parseInt(userId));
+      console.log(theConnection);
+    if (theConnection) {
+      console.log("Buttons should not be disabled");
+      setButtonAccess(false);
     } else {
-      return false;
+      console.log("Buttons should be disabled");
+      setButtonAccess(true);
     }
   };
 
@@ -83,10 +85,11 @@ export const UserProfile = () => {
       setMilestoneResults(results);
       setIsLoading(false);
     });
-  }, [userId]);
+    handleButtonDisabled();
+  }, [userId, childConnections]);
 
   useEffect(() => {
-    checkForUserChildrenConnections();
+    getUserChildrenConnections();
   }, [userId]);
 
   return (
@@ -104,13 +107,18 @@ export const UserProfile = () => {
         Achievements
       </button>
       <button
-        disabled={isLoading}
+        id={`user__edit-${user.id}`}
+        disabled={buttonAccess}
         onClick={() => history.push(`/users/${user.id}/edit`)}
       >
         Manage
       </button>
       <button onClick={() => handleBack()}>Back</button>
-      <button disabled={isLoading} onClick={() => handleDeleteUser(user.id)}>
+      <button
+        id={`user__delete-${user.id}`}
+        disabled={buttonAccess}
+        onClick={() => handleDeleteUser(user.id)}
+      >
         Delete
       </button>
     </>

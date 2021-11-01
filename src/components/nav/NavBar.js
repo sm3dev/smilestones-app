@@ -26,6 +26,9 @@ export const NavBar = () => {
                     <Link className="navbar__link" to={{pathname: `/users/${currentUserId}/myKids`}}>My Kids</Link>
                 </li>
                 <li className="navbar__item">
+                    <Link className="navbar__link" to={{pathname: `/users/${currentUserId}`}}>My Profile</Link>
+                </li>
+                <li className="navbar__item">
                     <Button onClick={ () => {sessionStorage.clear(); history.push(`/login`)}}>Log out</Button>
                 </li>
             </ul>
