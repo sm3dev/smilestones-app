@@ -11,6 +11,7 @@ import { MyUserList } from './users/MyUserList';
 import { UserEditForm } from './users/UserEditForm';
 import { UserForm } from './users/UserForm';
 import { UserList } from './users/UserList';
+import { UserProfile } from './users/UserProfile';
 
 export const ApplicationViews = () => {
 
@@ -46,8 +47,11 @@ export const ApplicationViews = () => {
             <Route exact path="/users/create">
                 <UserForm />
             </Route>
-            <Route exact path="/users/:userId(\d+)/yourKids">
+            <Route exact path="/users/:userId(\d+)/myKids">
                 <MyUserList />
+            </Route>
+            <Route exact path="/users/:userId(\d+)">
+                <UserProfile />
             </Route>
         </>
     )
