@@ -12,7 +12,7 @@ export const MilestoneResultEditForm = () => {
     milestoneId: parseInt(useParams().milestoneId),
     userId: 0,
     date: "",
-    validated: false,
+    validated: true,
     timeToComplete: 0,
     distance: 0,
     quantity: 0,
@@ -83,12 +83,12 @@ export const MilestoneResultEditForm = () => {
       setMilestoneResult(milestoneResult);
       setIsLoading(false);
     });
-  }, [userMilestoneId]);
+  }, [userMilestoneId, thisMilestone]);
 
   useEffect(() => {
     getMilestoneData();
     setIsLoading(false);
-  }, []);
+  }, [handleFieldChange]);
 
   return (
     <>
@@ -107,7 +107,6 @@ export const MilestoneResultEditForm = () => {
             onChange={handleFieldChange}
           />
         </div>
-
 
         {thisMilestone.milestoneType?.id === 1 ? (
                     <>
@@ -177,9 +176,7 @@ export const MilestoneResultEditForm = () => {
         <button onClick={updateExistingMilestoneResult} disabled={isLoading}>
           Save Changes
         </button>
-        <Link to="/achievements">
-          <button>Cancel</button>
-        </Link>
+        <Link to="/achievements"><button>Cancel</button></Link>
         <div>
             <h4>More About This Milestone</h4>
             <div className="form-group">
@@ -187,24 +184,8 @@ export const MilestoneResultEditForm = () => {
             </div>
             <fieldset className="form-group">
               <legend>Validated:</legend>
-                {milestoneResult.validated === true ? (
-                    <>
-                    <label htmlFor="validated">Yes: </label>
-                        <input onChange={handleFieldChange} id="validated" name="validated" type="radio" value="true" checked />
-                        <label htmlFor="validated">No: </label>
-                        <input onChange={handleFieldChange} id="validated" name="validated" type="radio" value="false" />
-                    </>
-                ) : (
-                    <>
-                        <label htmlFor="validated">Yes: </label>
-                        <input onChange={handleFieldChange} id="validated" name="validated" type="radio" value="true" />
-                        <label htmlFor="validated">No: </label>
-                        <input onChange={handleFieldChange} id="validated" name="validated" type="radio" value="false" checked/>
-                    </>
-
-                )
-                }
-                
+                  <label htmlFor="validated">Yes: </label>
+                  <input onChange={handleFieldChange} id="validated" name="validated" type="checkbox" checked={milestoneResult.validated} value={milestoneResult.validated} />
             </fieldset>
         </div>
         
