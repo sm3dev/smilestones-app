@@ -33,7 +33,6 @@ export const MilestoneResultDetail = () => {
       const thisUsersConnections = connections.filter(
         (connection) => connection.parentId === currentUserId
       );
-      console.log(thisUsersConnections);
       setChildConnections(thisUsersConnections);
     });
   };
@@ -89,6 +88,7 @@ export const MilestoneResultDetail = () => {
       <h1>{milestoneResult.user?.firstName}'s Milestone Achievement</h1>
       <h3>{milestoneResult.milestone?.name}</h3>
       <p>{milestoneResult.milestone?.description}</p>
+      {milestoneResult.milestone?.repeater }
       {milestoneResult.timeToComplete ? (
         <>
           <div>Result: {milestoneResult.timeToComplete}</div>

@@ -245,7 +245,7 @@ export const MilestoneResultEditForm = () => {
               id="validated"
               name="validated"
               type="checkbox"
-              checked={milestoneResult.validated}
+              checked
               value={milestoneResult.validated}
             />
           </fieldset>
