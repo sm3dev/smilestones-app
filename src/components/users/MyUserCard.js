@@ -7,7 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { GetAge } from "../helpers/GetAge";
-// import {Button } from '@mui/material';
+import { Link } from "react-router-dom";
 
 export const MyUserCard = ({ user, handleDeleteUser }) => {
   const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
@@ -21,39 +21,17 @@ export const MyUserCard = ({ user, handleDeleteUser }) => {
     setOpen(false);
   };
 
-  // const deleteWarning = () => {
-  //   return (
-  //       <>
-  //             <Alert severity="error">This is an error alert — check it out!</Alert>
-  //       <Alert
-  //         variant="outlined"
-  //         severity="warning"
-  //         action={
-  //           <>
-  //             <Button onClick={() => handleDeleteUser(user.id)}>
-  //               Delete
-  //             </Button>
-  //             <Button>
-  //               <Link to="/users">Cancel</Link>
-  //             </Button>
-  //           </>
-  //         }
-  //       >
-  //         <AlertTitle>Delete is forever</AlertTitle>
-  //         Are you sure you want to delete this?
-  //       </Alert>
-  //       </>
-  //   );
-  // };
-
   const history = useHistory();
   // I want to be able to show the total number of Milestone Achievements on the same line that links to the User's Milestone Achievements view
 
   return (
     <>
-      <h3>
-        {user.firstName} {user.lastName}
-      </h3>
+      <Link to={`/users/${user.id}`}>
+        <h3>
+          {user.firstName} {user.lastName}
+        </h3>
+      </Link>
+
       <div>Age: {GetAge(user.DOB)} </div>
       {/* Add conditional statement that shows a link to All Milestones view when a user has no userMilestones (milestone results) */}
 
