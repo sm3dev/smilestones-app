@@ -12,7 +12,7 @@ export const UserProfile = () => {
   const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
 
   const [user, setUser] = useState({
-    id: 0,
+    id: useParams().userId,
     firstName: "",
     lastName: "",
     DOB: "",
@@ -46,10 +46,10 @@ export const UserProfile = () => {
   const handleButtonDisabled = () => {
     // I need to map through the childConnections?
     const theConnection = childConnections.find(
-      (childConnection) => childConnection.userId === parseInt(userId));
+      (childConnection) => childConnection.userId === parseInt(userId) && childConnection.parentId === currentUserId);
       console.log(theConnection);
     if (theConnection) {
-      console.log("Buttons should not be disabled");
+      console.log("Buttons should NOT be disabled");
       setButtonAccess(false);
     } else {
       console.log("Buttons should be disabled");
@@ -106,7 +106,19 @@ export const UserProfile = () => {
         <strong>{milestoneResults.length}</strong> {user.firstName}'s Milestone
         Achievements
       </button>
-      <button
+
+      {user.id === currentUserId ? (
+          <>
+          <button
+        id={`user__edit-${user.id}`}
+        onClick={() => history.push(`/users/${user.id}/edit`)}
+      >
+        Update My Profile
+      </button>
+          </>
+      ) : (
+        <>
+          <button
         id={`user__edit-${user.id}`}
         disabled={buttonAccess}
         onClick={() => history.push(`/users/${user.id}/edit`)}
@@ -121,6 +133,11 @@ export const UserProfile = () => {
       >
         Delete
       </button>
+        </>
+      )
+      
+      }
+      
     </>
   );
 };
