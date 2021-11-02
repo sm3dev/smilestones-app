@@ -3,6 +3,7 @@ import { Route } from 'react-router';
 import { Home } from './Home';
 import { MilestoneCard } from './milestones/MilestoneCard';
 import { MilestoneList } from './milestones/MilestoneList';
+import { MilestoneResultDetail } from './milestones/MilestoneResultDetail';
 import { MilestoneResultEditForm } from './milestones/MilestoneResultEditForm';
 import { MilestoneResultForm } from './milestones/MilestoneResultForm';
 import { MilestoneResultList } from './milestones/MilestoneResultList';
@@ -14,7 +15,6 @@ import { UserList } from './users/UserList';
 import { UserProfile } from './users/UserProfile';
 
 export const ApplicationViews = () => {
-    const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
 
     return (
         <>
@@ -53,6 +53,9 @@ export const ApplicationViews = () => {
             </Route>
             <Route exact path="/users/:userId(\d+)">
                 <UserProfile />
+            </Route>
+            <Route exact path="/achievements/:userMilestoneId(\d+)">
+                <MilestoneResultDetail />
             </Route>
         </>
     )

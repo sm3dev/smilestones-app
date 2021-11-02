@@ -46,8 +46,11 @@ export const UserProfile = () => {
   const handleButtonDisabled = () => {
     // I need to map through the childConnections?
     const theConnection = childConnections.find(
-      (childConnection) => childConnection.userId === parseInt(userId) && childConnection.parentId === currentUserId);
-      console.log(theConnection);
+      (childConnection) =>
+        childConnection.userId === parseInt(userId) &&
+        childConnection.parentId === currentUserId
+    );
+    console.log(theConnection);
     if (theConnection) {
       console.log("Buttons should NOT be disabled");
       setButtonAccess(false);
@@ -70,7 +73,7 @@ export const UserProfile = () => {
   };
 
   const handleBack = () => {
-    history.push(`/users/${userId}/myKids`);
+    history.goBack();
   };
 
   useEffect(() => {
@@ -103,41 +106,47 @@ export const UserProfile = () => {
         className="userMilestone__link"
         onClick={() => history.push(`/achievements/user/${user.id}`)}
       >
-        <strong>{milestoneResults.length}</strong> {user.firstName}'s Milestone
+        <strong>{milestoneResults.length}</strong> {user.firstName}'s
         Achievements
       </button>
 
       {user.id === currentUserId ? (
-          <>
-          <button
-        id={`user__edit-${user.id}`}
-        onClick={() => history.push(`/users/${user.id}/edit`)}
-      >
-        Update My Profile
-      </button>
-          </>
+        <>
+          <div>
+            <button
+              id={`user__edit-${user.id}`}
+              onClick={() => history.push(`/users/${user.id}/edit`)}
+            >
+              Update My Profile
+            </button>
+          </div>
+          <div>
+            <button onClick={() => handleBack()}>Back</button>
+          </div>
+        </>
       ) : (
         <>
-          <button
-        id={`user__edit-${user.id}`}
-        disabled={buttonAccess}
-        onClick={() => history.push(`/users/${user.id}/edit`)}
-      >
-        Manage
-      </button>
-      <button onClick={() => handleBack()}>Back</button>
-      <button
-        id={`user__delete-${user.id}`}
-        disabled={buttonAccess}
-        onClick={() => handleDeleteUser(user.id)}
-      >
-        Delete
-      </button>
+          <div>
+            <button
+              id={`user__edit-${user.id}`}
+              disabled={buttonAccess}
+              onClick={() => history.push(`/users/${user.id}/edit`)}
+            >
+              Manage
+            </button>
+            <button
+              id={`user__delete-${user.id}`}
+              disabled={buttonAccess}
+              onClick={() => handleDeleteUser(user.id)}
+            >
+              Delete
+            </button>
+          </div>
+          <div>
+            <button onClick={() => handleBack()}>Back</button>
+          </div>
         </>
-      )
-      
-      }
-      
+      )}
     </>
   );
 };
