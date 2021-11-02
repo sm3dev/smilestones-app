@@ -67,7 +67,7 @@ export const MilestoneResultForm = () => {
     useEffect(() => {
         getMilestoneData();
         setIsLoading(false)
-    }, [])
+    }, [milestoneResult])
 
     const handleClickSaveTask = (event) => {
         event.preventDefault();
@@ -152,8 +152,21 @@ export const MilestoneResultForm = () => {
                 }
                 <div className="form-group">
                     <label htmlFor="remarks">Remarks:</label>
-                    <textarea onChange={handleControlledInputChange} name="remarks" id="remarks" cols="30" rows="10"></textarea>
+                    <textarea onChange={handleControlledInputChange} name="remarks" id="remarks" cols="30" rows="5"></textarea>
                 </div>
+                <fieldset className="form-group">
+                        <legend>Validated:</legend>
+
+                        {/* Does true-false need to have it's own onChange? */}
+         
+                        <label htmlFor="validated">Yes: </label>
+                        <input onChange={handleControlledInputChange} id="validated" name="validated" type="checkbox" checked value="true" />
+                        {/* <input onChange={handleControlledInputChange} id="validated" name="validated" type="radio" value={milestoneResult.validated} />
+                        
+                        <label htmlFor="validated">No: </label>
+                        <input onChange={handleControlledInputChange} id="validated" name="validated" type="radio" value={milestoneResult.validated} /> */}
+
+                    </fieldset>
                 <button onClick={handleClickSaveTask} disabled={isLoading} className="milestoneResult save__button">Save Achievement</button>
                 <Link to="/milestones"><button>Cancel</button></Link>
                 <div>
@@ -161,22 +174,7 @@ export const MilestoneResultForm = () => {
                     <div className="form-group">
                         <p>{thisMilestone.description}</p>
                     </div>
-                    <fieldset className="form-group">
-                        <legend>Validated:</legend>
-
-                        {/* Does true-false need to have it's own onChange? */}
-         
-                        <label htmlFor="validated">Yes: </label>
-                        <input onChange={handleControlledInputChange} id="validated" name="validated" type="radio" value={milestoneResult.validated} />
-                        
-                        <label htmlFor="validated">No: </label>
-                        <input onChange={handleControlledInputChange} id="validated" name="validated" type="radio" value={milestoneResult.validated} />
-
-                    </fieldset>
-                </div>
-                
-                <div className="form-group">
-                    <label htmlFor=""></label>
+                    
                 </div>
                 
             </form>

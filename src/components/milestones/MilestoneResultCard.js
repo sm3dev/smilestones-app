@@ -18,7 +18,9 @@ export const MilestoneResultCard = ({
 
   return (
     <>
-      <h2>{user.firstName}'s Milestone</h2>
+      <Link to={`/achievements/${milestoneResult.id}`}>
+        <h2>{user.firstName}'s Milestone Achievement</h2>
+      </Link>
       {/* <h4>Milestone Type {() => {getMilestoneTypeData(milestone.milestoneTypeId)}}</h4> */}
       <h3>{milestone.name}</h3>
       <p>{milestone.description}</p>
@@ -43,17 +45,21 @@ export const MilestoneResultCard = ({
       {milestoneResult.validated === true ? (
         <div>Validated: Yes</div>
       ) : (
-        <div>Validation Needed -- Click <strong>Edit</strong> Button to Validate</div>
+        <div>
+          Validation Needed -- Click <strong>Edit</strong> Button to Validate
+        </div>
       )}
       <div>
-        <Link to={`/achievements/${milestoneResult.id}/edit`}>
-          <button>Edit</button>
-        </Link>
-        <button onClick={() => handleDeleteMilestoneResult(milestoneResult.id)}>
-          Delete
+        <button>
+          More <small>placeholder for expanding card</small>
         </button>
       </div>
-      <button>Milestone Details <small>placeholder for expanding card</small></button>
+      <div>
+        <Link to={`/achievements/${milestoneResult.id}`}>
+          <button>Achievement Details</button>
+        </Link>
+      </div>
+
       <p>Remarks: {milestoneResult.remarks}</p>
       <hr />
     </>
