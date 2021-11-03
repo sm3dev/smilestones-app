@@ -27,8 +27,10 @@ export const Login = () => {
 
       existingUserCheck().then((exists) => {
         if (exists) {
+          console.log(exists)
           // The user if saved under key smilestones_user in Session Storage.
           sessionStorage.setItem("smilestones_user", exists.id);
+          sessionStorage.setItem("smilestones_admin", exists.admin);
           history.push("/");
         } else {
           setExistDialog(true);

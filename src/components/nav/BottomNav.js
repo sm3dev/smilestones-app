@@ -29,6 +29,7 @@ export const BottomNav = () => {
         sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
         elevation={3}
       >
+          <p>Hi, {loggedInUser.firstName}!</p>
         <BottomNavigation
           showLabels
           value={activeNavItem}
@@ -36,8 +37,7 @@ export const BottomNav = () => {
             setActiveNavItem(newActiveNavItem);
           }}
         >
-          {" "}
-          <p>Hi, {loggedInUser.firstName}!</p>
+          
           <BottomNavigationAction label="Log Out" icon={<Logout />} />
         </BottomNavigation>
       </Paper>
