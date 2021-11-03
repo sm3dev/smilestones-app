@@ -24,7 +24,6 @@ export const MilestoneResultDetail = () => {
   });
 
   const [buttonAccess, setButtonAccess] = useState({ value: "" });
-  const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
 
   // check for child connections and return TRUE or FALSE; returns a boolean
@@ -75,7 +74,6 @@ export const MilestoneResultDetail = () => {
   useEffect(() => {
     getUserMilestoneByID(userMilestoneId).then((result) => {
       setMilestoneResult(result);
-      setIsLoading(false);
     });
     handleButtonDisabled();
   }, [childConnections]);

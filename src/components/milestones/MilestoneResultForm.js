@@ -138,7 +138,7 @@ export const MilestoneResultForm = () => {
         {thisMilestone.milestoneType?.id === 3 && (
           <>
             <div className="form-group">
-              <label htmlFor="height">Height &#40;inch&#41;:</label>
+              <label htmlFor="height">Height &#40;inches&#41;:</label>
               <input
                 id="height"
                 type="number"

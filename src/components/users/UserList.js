@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import {
   deleteUser,
-  getAllChildrenConnectionsByParentID,
   getAllUsers,
 } from "../../modules/APIManager";
 import { UserCard } from "./UserCard";
@@ -12,7 +11,6 @@ export const UserList = () => {
   const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
 
   const [users, setUsers] = useState([]);
-  const [childConnections, setChildConnections] = useState([]);
   const history = useHistory();
 
   const getUsers = () => {

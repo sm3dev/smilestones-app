@@ -28,13 +28,13 @@ export const MilestoneResultCard = ({ milestoneResult, milestone, user }) => {
 
       {milestoneResult.distance !== 0 && (
         <>
-          <div>Distance: {milestoneResult.distance}</div>
+          <div>Distance &#40;feet&#41;: {milestoneResult.distance}</div>
         </>
       )}
 
       {milestoneResult.height !== 0 && (
         <>
-          <div>Height: {milestoneResult.height}</div>
+          <div>Height &#40;inches&#41;: {milestoneResult.height}</div>
         </>
       )}
 
