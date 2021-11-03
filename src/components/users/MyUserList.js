@@ -8,8 +8,7 @@ export const MyUserList = () => {
     const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
 
     const [users, setUsers] = useState([]);
-    const [childConnections, setChildConnections] = useState([]);
-    
+    const [childConnections, setChildConnections] = useState([]);    
     const history = useHistory();
 
     // I need to get userParentConnections with parentId values that match my User ID

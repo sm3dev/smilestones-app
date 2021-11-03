@@ -96,7 +96,7 @@ export const MilestoneResultDetail = () => {
 
       {milestoneResult.timeToComplete !== 0 && (
         <>
-          <div>Time: {milestoneResult.timeToComplete}</div>
+          <div>Time &#40;seconds&#41;: {milestoneResult.timeToComplete}</div>
         </>
       )}
 

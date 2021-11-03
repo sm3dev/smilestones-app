@@ -101,7 +101,9 @@ export const MilestoneResultEditForm = () => {
         {thisMilestone.milestoneType?.id === 1 && (
           <>
             <div className="form-group">
-              <label htmlFor="timeToComplete">Your Time:</label>
+              <label htmlFor="timeToComplete">
+                Your Time &#40;seconds&#41;:
+              </label>
               <input
                 value={milestoneResult.timeToComplete}
                 id="timeToComplete"
@@ -115,7 +117,7 @@ export const MilestoneResultEditForm = () => {
         {thisMilestone.milestoneType?.id === 2 && (
           <>
             <div className="form-group">
-              <label htmlFor="distance">Distance/Length:</label>
+              <label htmlFor="distance">Distance/Length &#40;feet&#41;:</label>
               <input
                 id="distance"
                 type="number"
@@ -125,11 +127,11 @@ export const MilestoneResultEditForm = () => {
             </div>
           </>
         )}
-        
+
         {thisMilestone.milestoneType?.id === 3 && (
           <>
             <div className="form-group">
-              <label htmlFor="height">Height:</label>
+              <label htmlFor="height">Height &#40;inch&#41;:</label>
               <input
                 id="height"
                 type="number"
@@ -143,7 +145,7 @@ export const MilestoneResultEditForm = () => {
         {thisMilestone.milestoneType?.id === 4 && (
           <>
             <div className="form-group">
-              <label htmlFor="quantity">Quantity:</label>
+              <label htmlFor="quantity">Amount:</label>
               <input
                 id="quantity"
                 type="number"
@@ -152,20 +154,20 @@ export const MilestoneResultEditForm = () => {
               />
             </div>
           </>
-        )} 
-        
-            <div className="form-group">
-              {/* STRETCH: Do not allow a future date to be input */}
-              <label htmlFor="date">Achievement Date:</label>
-              <input
-                required
-                id="date"
-                name="date"
-                type="date"
-                onChange={handleFieldChange}
-                value={milestoneResult.date}
-              />
-            </div>
+        )}
+
+        <div className="form-group">
+          {/* STRETCH: Do not allow a future date to be input */}
+          <label htmlFor="date">Achievement Date:</label>
+          <input
+            required
+            id="date"
+            name="date"
+            type="date"
+            onChange={handleFieldChange}
+            value={milestoneResult.date}
+          />
+        </div>
 
         <div className="form-group">
           <label htmlFor="remarks">Remarks:</label>
@@ -199,15 +201,15 @@ export const MilestoneResultEditForm = () => {
             <legend>Validated:</legend>
             {milestoneResult.validated === true && (
               <>
-              <label htmlFor="validated">Yes: </label>
-              <input
-                onChange={handleFieldChange}
-                id="validated"
-                name="validated"
-                type="checkbox"
-                checked
-                value={milestoneResult.validated}
-              />
+                <label htmlFor="validated">Yes: </label>
+                <input
+                  onChange={handleFieldChange}
+                  id="validated"
+                  name="validated"
+                  type="checkbox"
+                  checked
+                  value={milestoneResult.validated}
+                />
               </>
             )}
           </fieldset>
