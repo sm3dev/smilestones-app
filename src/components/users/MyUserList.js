@@ -8,8 +8,7 @@ export const MyUserList = () => {
     const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
 
     const [users, setUsers] = useState([]);
-    const [childConnections, setChildConnections] = useState([]);
-    
+    const [childConnections, setChildConnections] = useState([]);    
     const history = useHistory();
 
     // I need to get userParentConnections with parentId values that match my User ID
@@ -38,16 +37,16 @@ export const MyUserList = () => {
         <>
             <h2>My Managed Accounts</h2>
             <div>
-                {/* This button with use the current logged-in user's user.id inside of the history.push to go that specific user's profile URL  */}
-                <button className="my-profile__button" onClick={() => history.push(`/users/${currentUserId}`)}>My Account <small><em>coming soon</em></small></button>
-                
+                {/* This button will use the current logged-in user's user.id inside of the history.push to go that specific user's profile URL  */}
+                <button className="my-profile__button" onClick={() => history.push(`/users/${currentUserId}`)}>Manage My Account</button>
             </div>
             <div>
-            <button onClick={() => history.push("/users/create")}>Add User</button>
+            <button onClick={() => history.push("/users/create")}>Add New User</button>
             <button onClick={() => history.push("/users/create")}>Add Child <small><em>coming soon</em></small></button>
             </div>
             <hr />
             <div>
+                <h2>Your Kiddos</h2>
                 {childConnections.map(childConnection => <MyUserCard key={childConnection.id} user={childConnection.user} handleDeleteUser={handleDeleteUser} />)
 
                 }

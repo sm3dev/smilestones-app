@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom';
 import { GetAge } from '../helpers/GetAge';
 
-export const UserCard = ({ user, totalMilestoneResults, handleDeleteUser }) => {
+export const UserCard = ({ user, totalMilestoneResults }) => {
     const history = useHistory();
     // I want to be able to show the total number of Milestone Achievements on the same line that links to the User's Milestone Achievements view
 

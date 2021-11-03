@@ -10,7 +10,6 @@ import { GetAge } from "../helpers/GetAge";
 import { Link } from "react-router-dom";
 
 export const MyUserCard = ({ user, handleDeleteUser }) => {
-  const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {

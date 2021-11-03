@@ -116,6 +116,7 @@ export const UserProfile = () => {
             <button
               id={`user__edit-${user.id}`}
               onClick={() => history.push(`/users/${user.id}/edit`)}
+              disabled={isLoading}
             >
               Update My Profile
             </button>
