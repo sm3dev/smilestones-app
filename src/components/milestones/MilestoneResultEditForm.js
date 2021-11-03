@@ -15,6 +15,7 @@ export const MilestoneResultEditForm = () => {
     validated: true,
     timeToComplete: 0,
     distance: 0,
+    height: 0,
     quantity: 0,
     remarks: "",
   });
@@ -58,6 +59,7 @@ export const MilestoneResultEditForm = () => {
       validated: milestoneResult.validated,
       timeToComplete: milestoneResult.timeToComplete,
       distance: milestoneResult.distance,
+      height: milestoneResult.height,
       quantity: milestoneResult.quantity,
       remarks: milestoneResult.remarks,
     };
@@ -126,7 +128,7 @@ export const MilestoneResultEditForm = () => {
               <label htmlFor="distance">Distance/Length:</label>
               <input
                 id="distance"
-                type="text"
+                type="number"
                 value={milestoneResult.distance}
                 onChange={handleFieldChange}
               />
@@ -150,8 +152,8 @@ export const MilestoneResultEditForm = () => {
               <label htmlFor="height">Height:</label>
               <input
                 id="height"
-                type="text"
-                value={milestoneResult.distance}
+                type="number"
+                value={milestoneResult.height}
                 onChange={handleFieldChange}
               />
             </div>
@@ -174,7 +176,7 @@ export const MilestoneResultEditForm = () => {
               <label htmlFor="quantity">Quantity:</label>
               <input
                 id="quantity"
-                type="text"
+                type="number"
                 value={milestoneResult.quantity}
                 onChange={handleFieldChange}
               />

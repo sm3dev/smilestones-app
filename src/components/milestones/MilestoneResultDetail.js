@@ -18,6 +18,7 @@ export const MilestoneResultDetail = () => {
     validated: true,
     timeToComplete: 0,
     distance: 0,
+    height: 0,
     quantity: 0,
     remarks: "",
   });
@@ -48,7 +49,7 @@ export const MilestoneResultDetail = () => {
     );
 
     // The conditional should look for either of the conditions then setButtonAccess
-    if (theConnection  || (parseInt(milestoneResult.userId) === currentUserId)) {
+    if (theConnection || parseInt(milestoneResult.userId) === currentUserId) {
       console.log("Buttons should NOT be disabled");
       setButtonAccess(false);
     } else {
@@ -88,25 +89,35 @@ export const MilestoneResultDetail = () => {
       <h1>{milestoneResult.user?.firstName}'s Milestone Achievement</h1>
       <h3>{milestoneResult.milestone?.name}</h3>
       <p>{milestoneResult.milestone?.description}</p>
-      {milestoneResult.milestone?.repeater }
-      {milestoneResult.timeToComplete ? (
+      {/* {milestoneResult.milestone?.repeater === false ? (
+        <div>Achieved on {milestoneResult.date}</div>)} */}
+
+      <div>Date Achieved: {milestoneResult.date}</div>
+
+      {milestoneResult.timeToComplete !== 0 && (
         <>
-          <div>Result: {milestoneResult.timeToComplete}</div>
-          <div>Achieved on {milestoneResult.date}</div>
+          <div>Time: {milestoneResult.timeToComplete}</div>
         </>
-      ) : milestoneResult.distance ? (
-        <>
-          <div>Result: {milestoneResult.distance}</div>
-          <div>Achieved on {milestoneResult.date}</div>
-        </>
-      ) : milestoneResult.quantity ? (
-        <>
-          <div>Result: {milestoneResult.quantity}</div>
-          <div>Achieved on {milestoneResult.date}</div>
-        </>
-      ) : (
-        <div>Date Achieved: {milestoneResult.date}</div>
       )}
+
+      {milestoneResult.distance !== 0 && (
+        <>
+          <div>Distance: {milestoneResult.distance}</div>
+        </>
+      )}
+
+      {milestoneResult.height !== 0 && (
+        <>
+          <div>Height: {milestoneResult.height}</div>
+        </>
+      )}
+
+      {milestoneResult.quantity !== 0 && (
+        <>
+          <div>Amount: {milestoneResult.quantity}</div>
+        </>
+      )}
+
       {milestoneResult.validated === true ? (
         <div>Validated: Yes</div>
       ) : (

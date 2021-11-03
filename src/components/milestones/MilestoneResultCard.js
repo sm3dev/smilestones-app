@@ -1,14 +1,8 @@
-import React from 'react'
+import React from "react";
 import { Link } from "react-router-dom";
 
 // const remoteURL = "http://localhost:7777";
-export const MilestoneResultCard = ({
-  milestoneResult,
-  milestone,
-  user,
-  handleDeleteMilestoneResult
-}) => {
-
+export const MilestoneResultCard = ({ milestoneResult, milestone, user }) => {
   // const thisMilestoneTypeId = parseInt(milestone.milestoneTypeId)
 
   // //fetch milestoneType info by id show the properties where needed
@@ -24,31 +18,32 @@ export const MilestoneResultCard = ({
       {/* <h4>Milestone Type {() => {getMilestoneTypeData(milestone.milestoneTypeId)}}</h4> */}
       <h3>{milestone.name}</h3>
       <p>{milestone.description}</p>
-      {milestoneResult.timeToComplete ? (
+      <div>Date Achieved: {milestoneResult.date}</div>
+
+      {milestoneResult.timeToComplete !== 0 && (
         <>
-          <div>Result: {milestoneResult.timeToComplete}</div>
-          <div>Achieved on {milestoneResult.date}</div>
+          <div>Time: {milestoneResult.timeToComplete}</div>
         </>
-      ) : milestoneResult.distance ? (
-        <>
-          <div>Result: {milestoneResult.distance}</div>
-          <div>Achieved on {milestoneResult.date}</div>
-        </>
-      ) : milestoneResult.quantity ? (
-        <>
-          <div>Result: {milestoneResult.quantity}</div>
-          <div>Achieved on {milestoneResult.date}</div>
-        </>
-      ) : (
-        <div>Date Achieved: {milestoneResult.date}</div>
       )}
-      {milestoneResult.validated === true ? (
-        <div>Validated: Yes</div>
-      ) : (
-        <div>
-          Validation Needed -- Click <strong>Edit</strong> Button to Validate
-        </div>
+
+      {milestoneResult.distance !== 0 && (
+        <>
+          <div>Distance: {milestoneResult.distance}</div>
+        </>
       )}
+
+      {milestoneResult.height !== 0 && (
+        <>
+          <div>Height: {milestoneResult.height}</div>
+        </>
+      )}
+
+      {milestoneResult.quantity !== 0 && (
+        <>
+          <div>Amount: {milestoneResult.quantity}</div>
+        </>
+      )}
+
       <div>
         <button>
           More <small>placeholder for expanding card</small>
