@@ -31,6 +31,7 @@ export const Login = () => {
           // The user if saved under key smilestones_user in Session Storage.
           sessionStorage.setItem("smilestones_user", exists.id);
           sessionStorage.setItem("smilestones_admin", exists.admin);
+          sessionStorage.setItem("smilestones_userObj", exists);
           history.push("/");
         } else {
           setExistDialog(true);
