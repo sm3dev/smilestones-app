@@ -6,10 +6,11 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 
 export const MilestoneCard = ({ milestone, milestoneType }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
+
   return (
     <>
       <Card sx={{ maxWidth: 345 }}>
@@ -25,10 +26,11 @@ export const MilestoneCard = ({ milestone, milestoneType }) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button variant="contained"
+          <Button
+            variant="contained"
             id={milestone.id}
             onClick={() =>
-              history.push(`/milestones/${milestone.id}/achievements/create`)
+              navigate(`/milestones/${milestone.id}/achievements/create`)
             }
           >
             Submit Result

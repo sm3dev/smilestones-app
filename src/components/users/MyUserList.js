@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router';
 import { deleteUser, getAllChildrenConnectionsByParentID, getAllUsers } from '../../modules/APIManager';
 import { MyUserCard } from './MyUserCard';
+import { useNavigate } from 'react-router';
 
 // show all user accounts in the database
 export const MyUserList = () => {
@@ -9,8 +9,7 @@ export const MyUserList = () => {
 
     const [users, setUsers] = useState([]);
     const [childConnections, setChildConnections] = useState([]);    
-    const history = useHistory();
-
+const navigate = useNavigate();
     // I need to get userParentConnections with parentId values that match my User ID
     // Then, I need to take that result ARRAY and set the state of userParentConnections with it
     // SOLUTION: I need one fetch call that gets userParentConnections, and inside that fetch call, I'll need a conditional that runs a fetch call for Users who have matching userIds from the userParentConnections' fetch call
@@ -37,11 +36,11 @@ export const MyUserList = () => {
         <>
             <div><h1>My Managed Accounts</h1></div>
             <div>
-                {/* This button will use the current logged-in user's user.id inside of the history.push to go that specific user's profile URL  */}
-                <button className="my-profile__button" onClick={() => history.push(`/users/${currentUserId}`)}>Manage My Account</button>
+                {/* This button will use the current logged-in user's user.id inside of the navigate to go that specific user's profile URL  */}
+                <button className="my-profile__button" onClick={() => navigate(`/users/${currentUserId}`)}>Manage My Account</button>
             </div>
             <div>
-            <button onClick={() => history.push("/users/create")}>Add Child User</button>
+            <button onClick={() => navigate("/users/create")}>Add Child User</button>
             </div>
             <hr />
             <div>

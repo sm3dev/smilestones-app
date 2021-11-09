@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import "./NavBar.css";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import AppBar from "@mui/material/AppBar";
 import { Box } from "@mui/system";
 import {
@@ -24,7 +24,7 @@ import {
 import { getUserByID } from "../../modules/APIManager";
 
 export const NavBar = () => {
-  const history = useHistory();
+  let navigate = useNavigate();
   const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -48,7 +48,7 @@ export const NavBar = () => {
   const handleLogout = () => {
     handleClose();
     sessionStorage.clear();
-    history.push(`/login`);
+    navigate(`/login`);
   };
 
   useEffect(() => {

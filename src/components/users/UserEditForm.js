@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { getUserByID, updateUser } from "../../modules/APIManager";
+import { useNavigate } from "react-router";
 
 // Edit a User account
 export const UserEditForm = () => {
   const { userId } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [user, setUser] = useState({
     DOB: "",
@@ -31,25 +32,25 @@ export const UserEditForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-// // For ONE PARENT
-// const getParentData = () => {
-//   let firstChildParentObj = {};
-//   // First, get the parent-child relationship using the userId (child) and the parentID.
-//   // It comes back as an array (boooo!) 
-//   getUserChildByParentAndUser(userId, parentChildRelationship.parentId).then(userChildArrayFromAPI => {
-//     const getOnlyIdProperty = (obj) => {
-//       return obj.id === parentChildRelationship.id;
-//     }
+  // // For ONE PARENT
+  // const getParentData = () => {
+  //   let firstChildParentObj = {};
+  //   // First, get the parent-child relationship using the userId (child) and the parentID.
+  //   // It comes back as an array (boooo!)
+  //   getUserChildByParentAndUser(userId, parentChildRelationship.parentId).then(userChildArrayFromAPI => {
+  //     const getOnlyIdProperty = (obj) => {
+  //       return obj.id === parentChildRelationship.id;
+  //     }
 
-//     console.log(userChildArrayFromAPI.find(getOnlyIdProperty));
-//     firstChildParentObj = userChildArrayFromAPI.find(getOnlyIdProperty);
-//     setParentChildRelationship(firstChildParentObj);
-//   })
+  //     console.log(userChildArrayFromAPI.find(getOnlyIdProperty));
+  //     firstChildParentObj = userChildArrayFromAPI.find(getOnlyIdProperty);
+  //     setParentChildRelationship(firstChildParentObj);
+  //   })
 
-//   getUserByID(parentChildRelationship.parentId).then(parentFromAPI => {
-//     setParent(parentFromAPI);
-//   })
-// }
+  //   getUserByID(parentChildRelationship.parentId).then(parentFromAPI => {
+  //     setParent(parentFromAPI);
+  //   })
+  // }
 
   const handleFieldChange = (evt) => {
     const stateToChange = { ...user };
@@ -58,11 +59,11 @@ export const UserEditForm = () => {
   };
 
   useEffect(() => {
-      getUserByID(userId).then(user => {
-          setUser(user);
-          setIsLoading(false);
-      })
-  }, [userId])
+    getUserByID(userId).then((user) => {
+      setUser(user);
+      setIsLoading(false);
+    });
+  }, [userId]);
 
   // useEffect(() => {
   //   getParentData();
@@ -82,12 +83,14 @@ export const UserEditForm = () => {
     };
 
     // This is an edit, so I need the id
-    updateUser(editedUser).then(() => history.push("/users"))
+    updateUser(editedUser).then(() => navigate("/users"));
   };
 
   return (
     <>
-    <div><h1>Update Account</h1></div>
+      <div>
+        <h1>Update Account</h1>
+      </div>
       <form>
         <div>
           <label htmlFor="firstName">First Name:</label>
@@ -96,7 +99,8 @@ export const UserEditForm = () => {
             name="firstName"
             type="text"
             value={user.firstName}
-            onChange={handleFieldChange}/>
+            onChange={handleFieldChange}
+          />
         </div>
         <div>
           <label htmlFor="lastName">Last Name:</label>
@@ -105,7 +109,8 @@ export const UserEditForm = () => {
             name="lastName"
             type="text"
             value={user.lastName}
-            onChange={handleFieldChange}/>
+            onChange={handleFieldChange}
+          />
         </div>
         <div>
           <label htmlFor="DOB">Birthdate:</label>
@@ -114,7 +119,8 @@ export const UserEditForm = () => {
             name="DOB"
             type="date"
             value={user.DOB}
-            onChange={handleFieldChange}/>
+            onChange={handleFieldChange}
+          />
         </div>
         <div>
           <label htmlFor="email">Email:</label>
@@ -123,35 +129,43 @@ export const UserEditForm = () => {
             name="email"
             type="email"
             value={user.email}
-            onChange={handleFieldChange}/>
+            onChange={handleFieldChange}
+          />
         </div>
         <div className="form-group">
           {user.admin === true ? (
             <>
-                <label htmlFor="admin">Administrator:</label>
+              <label htmlFor="admin">Administrator:</label>
               {/* This input needs to be a switch or radio button */}
               <input
-              id="admin"
-              name="admin"
-              type="checkbox"
-              checked
-              value={user.admin}
-              onChange={handleFieldChange}/>
-             <p>Your Parent/Account Manager(s): <small><em>coming soon</em></small>
+                id="admin"
+                name="admin"
+                type="checkbox"
+                checked
+                value={user.admin}
+                onChange={handleFieldChange}
+              />
+              <p>
+                Your Parent/Account Manager(s):{" "}
+                <small>
+                  <em>coming soon</em>
+                </small>
                 {/* {parent.firstName} {parent.lastName}  */}
               </p>
               {/* <input id="parent" type="text" required placeholder="Parent name" value={user.lastName} /> */}
-             </>
-          
+            </>
           ) : (
             <>
-              <p>Your Parent/Account Manager(s): <small><em>coming soon</em></small>
+              <p>
+                Your Parent/Account Manager(s):{" "}
+                <small>
+                  <em>coming soon</em>
+                </small>
                 {/* {parent.firstName} {parent.lastName}  */}
               </p>
               {/* <input id="parent" type="text" required placeholder="Parent name" value={user.lastName} /> */}
             </>
           )}
-
         </div>
         <div>
           <button disabled={isLoading} onClick={updateExistingUser}>

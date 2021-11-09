@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import {
   getMilestoneByID,
@@ -22,7 +22,7 @@ export const MilestoneResultEditForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { userMilestoneId } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [thisMilestone, setThisMilestone] = useState({
     milestoneTypeId: 0,
@@ -65,7 +65,7 @@ export const MilestoneResultEditForm = () => {
     };
 
     updateUserMilestone(editedMilestoneResult).then(() =>
-      history.push("/achievements")
+    navigate("/achievements")
     );
   };
 

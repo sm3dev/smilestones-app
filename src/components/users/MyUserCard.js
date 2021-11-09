@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -8,6 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { GetAge } from "../helpers/GetAge";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router';
 
 export const MyUserCard = ({ user, handleDeleteUser }) => {
   const [open, setOpen] = useState(false);
@@ -20,7 +20,8 @@ export const MyUserCard = ({ user, handleDeleteUser }) => {
     setOpen(false);
   };
 
-  const history = useHistory();
+  const navigate = useNavigate();
+
   // I want to be able to show the total number of Milestone Achievements on the same line that links to the User's Milestone Achievements view
 
   return (
@@ -38,13 +39,13 @@ export const MyUserCard = ({ user, handleDeleteUser }) => {
         <Button
           variant="outlined"
           className="userMilestone__link"
-          onClick={() => history.push(`/achievements/user/${user.id}`)}
+          onClick={() => navigate(`/achievements/user/${user.id}`)}
         >
           View {user.firstName}'s Achievements
         </Button>
         <Button
           variant="outlined"
-          onClick={() => history.push(`/users/${user.id}/edit`)}
+          onClick={() => navigate(`/users/${user.id}/edit`)}
         >
           Manage Account
         </Button>

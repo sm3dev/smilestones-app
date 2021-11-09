@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
 import {
   deleteUser,
   getAllUsers,
 } from "../../modules/APIManager";
 import { UserCard } from "./UserCard";
+import { useNavigate } from 'react-router';
 
 // show all user accounts in the database
 export const UserList = () => {
   const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
 
   const [users, setUsers] = useState([]);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const getUsers = () => {
     return getAllUsers().then((usersFromAPI) => {
@@ -34,7 +34,7 @@ export const UserList = () => {
       <div>
         <button
           className="my-profile__button"
-          onClick={() => history.push(`/users/${currentUserId}`)}>
+          onClick={() => navigate(`/users/${currentUserId}`)}>
           My Account{" "}
           <small>
             <em>coming soon</em>
@@ -42,8 +42,8 @@ export const UserList = () => {
         </button>
       </div>
       <div>
-        <button onClick={() => history.push("/users/create")}>Add User</button>
-        <button onClick={() => history.push("/users/create")}>
+        <button onClick={() => navigate("/users/create")}>Add User</button>
+        <button onClick={() => navigate("/users/create")}>
           Add Child
           <small>
             <em>coming soon</em>
