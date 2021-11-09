@@ -13,3 +13,8 @@
 .MuiBox-root.css-qxh7fn {
     margin-block-start: 56px;
 }
+
+a:-webkit-any-link {
+    text-decoration: none;
+    color: inherit;
+}
