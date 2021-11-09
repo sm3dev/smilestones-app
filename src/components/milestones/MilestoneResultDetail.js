@@ -124,6 +124,14 @@ export const MilestoneResultDetail = () => {
         </div>
       )}
       <div>
+        <Link to={`/achievements/user/${milestoneResult.user?.id}`}>
+          <button>
+            {" "}
+            All {milestoneResult.user?.firstName}'s Achievements
+          </button>
+        </Link>
+      </div>
+      <div>
         <Link to={`/achievements/${milestoneResult.id}/edit`}>
           <button disabled={buttonAccess}>Edit</button>
         </Link>

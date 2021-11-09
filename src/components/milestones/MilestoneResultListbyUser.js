@@ -22,6 +22,7 @@ export const MilestoneResultListbyUser = () => {
 
     return (
         <>
+        <div><h1>{milestoneResults?.user.firstName}'s Achievements</h1></div>
             <div>
                 {milestoneResults.map(milestoneResult => <MilestoneResultCard key={milestoneResult.id} milestoneResult={milestoneResult} milestone={milestoneResult.milestone} user={milestoneResult.user} />) }
             </div>

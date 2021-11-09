@@ -90,7 +90,7 @@ const handleClickSaveUser = (event) => {
 
     return (
         <>
-        <h1>Add New Account</h1>
+        <h1>Create New Child Account</h1>
         {/* I want to have this form show a Switch or Radio to choose between Child Account or Parent Account */}
         <form action="">
             <fieldset>

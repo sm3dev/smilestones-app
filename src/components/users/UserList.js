@@ -29,7 +29,8 @@ export const UserList = () => {
 
   return (
     <>
-      <h2>User Accounts</h2>
+       <h1>Users Everywhere</h1>
+       <p>View All Smilestoners<small><em> No, that definitely won't work</em></small></p>
       <div>
         <button
           className="my-profile__button"
