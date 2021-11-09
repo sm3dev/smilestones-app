@@ -14,7 +14,7 @@ export const Smilestones = () => (
         if (sessionStorage.getItem("smilestones_user")) {
           return (
             <>
-              <NavBar admin={sessionStorage.getItem("smilestones_admin")} />
+              <NavBar />
               <ApplicationViews />
               <BottomNav />
             </>

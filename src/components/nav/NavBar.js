@@ -1,28 +1,30 @@
+import { NavLink } from "react-router-dom";
 import {
   Button,
   Divider,
-  IconButton,
   ListItemIcon,
   Menu,
   MenuItem,
-  MenuList,
   Toolbar,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
 import "./NavBar.css";
 import { useHistory } from "react-router";
 import AppBar from "@mui/material/AppBar";
 import { Box } from "@mui/system";
-import { AccountCircle, Logout, PersonAdd } from "@mui/icons-material";
-import MenuIcon from "@mui/icons-material/Menu";
+import {
+  AccountCircle,
+  Logout,
+  ManageAccounts,
+  People,
+  PersonAdd,
+} from "@mui/icons-material";
 import { getUserByID } from "../../modules/APIManager";
 
-export const NavBar = ({ admin }) => {
+export const NavBar = () => {
   const history = useHistory();
   const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
-  const adminCheck = sessionStorage.getItem("smilestones_admin");
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [loggedInUser, setLoggedInUser] = useState({
@@ -59,7 +61,7 @@ export const NavBar = ({ admin }) => {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton
+            {/* <IconButton
               size="large"
               edge="start"
               color="inherit"
@@ -67,9 +69,14 @@ export const NavBar = ({ admin }) => {
               sx={{ mr: 2 }}
             >
               <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Photos
+            </IconButton> */}
+            <Typography
+              variant="h6"
+              component="a"
+              sx={{ flexGrow: 1 }}
+              href="/"
+            >
+              Smilestones
             </Typography>
             <div>
               <Button
@@ -90,7 +97,7 @@ export const NavBar = ({ admin }) => {
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 anchorOrigin={{
-                  vertical: "top",
+                  vertical: "bottom",
                   horizontal: "right",
                 }}
                 keepMounted
@@ -126,32 +133,35 @@ export const NavBar = ({ admin }) => {
                     },
                   },
                 }}
-                transformOrigin={{ horizontal: "right", vertical: "top" }}
-                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
               >
                 <MenuItem onClick={handleClose}>
-                  <NavLink
-                    to={{ pathname: `/users/${currentUserId}` }}
-                    style={(isActive) => ({
-                      color: isActive ? "green" : "blue",
-                    })}
-                  >
+                  <ListItemIcon>
+                    <ManageAccounts />
+                  </ListItemIcon>
+                  <NavLink to={{ pathname: `/users/${currentUserId}` }}>
                     Profile
                   </NavLink>
                 </MenuItem>
-                {adminCheck === true && (
+                {loggedInUser.admin === true && (
                   <>
                     <MenuItem onClick={handleClose}>
-                      <Link to={{ pathname: `/users/${currentUserId}/myKids` }}>
-                        My Kids
-                      </Link>
+                      <ListItemIcon>
+                        <People />
+                      </ListItemIcon>
+                      <NavLink
+                        to={{ pathname: `/users/${currentUserId}/myKids` }}
+                      >
+                        Kids
+                      </NavLink>
                     </MenuItem>
                     <Divider />
                     <MenuItem onClick={handleClose}>
                       <ListItemIcon>
-                        <PersonAdd fontSize="small" />
+                        <PersonAdd />
                       </ListItemIcon>
-                      Add a Child
+                      <NavLink to={{ pathname: `/users/create` }}>
+                        Add Child
+                      </NavLink>
                     </MenuItem>
                   </>
                 )}
@@ -167,60 +177,6 @@ export const NavBar = ({ admin }) => {
           </Toolbar>
         </AppBar>
       </Box>
-
-      <ul className="navbar">
-        <li className="navbar__item">
-          <Link className="navbar__link" to="/">
-            Home
-          </Link>
-        </li>
-        <li className="navbar__item">
-          <Link className="navbar__link" to="/milestones">
-            Milestones
-          </Link>
-        </li>
-        <li className="navbar__item">
-          <Link className="navbar__link" to="/achievements">
-            Milestone Achievements
-          </Link>
-        </li>
-        {adminCheck === true && (
-          <>
-            <li className="navbar__item">
-              <Link className="navbar__link" to="/users">
-                Users
-              </Link>
-            </li>
-            <li className="navbar__item">
-              <Link
-                className="navbar__link"
-                to={{ pathname: `/users/${currentUserId}/myKids` }}
-              >
-                My Kids
-              </Link>
-            </li>
-          </>
-        )}
-
-        <li className="navbar__item">
-          <Link
-            className="navbar__link"
-            to={{ pathname: `/users/${currentUserId}` }}
-          >
-            My Profile
-          </Link>
-        </li>
-        <li className="navbar__item">
-          <Button
-            onClick={() => {
-              sessionStorage.clear();
-              history.push(`/login`);
-            }}
-          >
-            Log out
-          </Button>
-        </li>
-      </ul>
     </>
   );
 };
