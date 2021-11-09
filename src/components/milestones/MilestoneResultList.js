@@ -24,7 +24,7 @@ export const MilestoneResultList = () => {
 
     return (
         <>
-        <h2>Celebrate Achievements!</h2>
+        <h2>Milestone Achievements!</h2>
             <div>
                 {milestoneResults.map(milestoneResult => <MilestoneResultCard key={milestoneResult.id} milestoneResult={milestoneResult} milestone={milestoneResult.milestone} user={milestoneResult.user} handleDeleteMilestoneResult={handleDeleteMilestoneResult} />).reverse() }
             </div>

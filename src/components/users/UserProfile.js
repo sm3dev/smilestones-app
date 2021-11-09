@@ -97,6 +97,7 @@ export const UserProfile = () => {
 
   return (
     <>
+      <div><h1>Profile Info</h1></div>
       <h3>
         {user.firstName} {user.lastName}
       </h3>

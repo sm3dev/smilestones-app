@@ -35,18 +35,17 @@ export const MyUserList = () => {
 
     return (
         <>
-            <h2>My Managed Accounts</h2>
+            <div><h1>My Managed Accounts</h1></div>
             <div>
                 {/* This button will use the current logged-in user's user.id inside of the history.push to go that specific user's profile URL  */}
                 <button className="my-profile__button" onClick={() => history.push(`/users/${currentUserId}`)}>Manage My Account</button>
             </div>
             <div>
-            <button onClick={() => history.push("/users/create")}>Add New User</button>
-            <button onClick={() => history.push("/users/create")}>Add Child <small><em>coming soon</em></small></button>
+            <button onClick={() => history.push("/users/create")}>Add Child User</button>
             </div>
             <hr />
             <div>
-                <h2>Your Kiddos</h2>
+                <h2>Your Children Accounts</h2>
                 {childConnections.map(childConnection => <MyUserCard key={childConnection.id} user={childConnection.user} handleDeleteUser={handleDeleteUser} />)
 
                 }

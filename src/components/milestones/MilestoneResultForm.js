@@ -94,7 +94,7 @@ export const MilestoneResultForm = () => {
     <>
       <h1>New Milestone Achievement</h1>
       <h2>Milestone: {thisMilestone.name}</h2>
-      <h4>Type: {thisMilestone.milestoneType?.name}</h4>
+      <h5>Type: {thisMilestone.milestoneType?.name}</h5>
       <form>
         <div className="form-group">
           <input

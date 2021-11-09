@@ -84,10 +84,11 @@ export const MilestoneResultEditForm = () => {
   return (
     <>
       <h1>Update an Achievement</h1>
+      <h2>Achiever: {milestoneResult.user?.firstName} {milestoneResult.user?.lastName}</h2>
       <div className="form-group">
-        <h2>Milestone: {thisMilestone.name}</h2>
+        <h3>Milestone: {thisMilestone.name}</h3>
       </div>
-      <div>Milestone Type: {thisMilestone.milestoneType?.name}</div>
+      <h5>Milestone Type: {thisMilestone.milestoneType?.name}</h5>
       <form>
         <div className="form-group">
           <input

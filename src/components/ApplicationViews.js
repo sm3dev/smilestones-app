@@ -39,6 +39,9 @@ export const ApplicationViews = () => {
             <Route exact path="/achievements/user/:userId(\d+)">
                 <MilestoneResultListbyUser />                
             </Route>
+            <Route exact path="/achievements/:userMilestoneId(\d+)">
+                <MilestoneResultDetail />
+            </Route>
             <Route exact path="/users/">
                 <UserList />
             </Route>
@@ -53,9 +56,6 @@ export const ApplicationViews = () => {
             </Route>
             <Route exact path="/users/:userId(\d+)">
                 <UserProfile />
-            </Route>
-            <Route exact path="/achievements/:userMilestoneId(\d+)">
-                <MilestoneResultDetail />
             </Route>
         </>
     )
