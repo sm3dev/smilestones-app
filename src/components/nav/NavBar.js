@@ -15,6 +15,7 @@ import AppBar from "@mui/material/AppBar";
 import { Box } from "@mui/system";
 import {
   AccountCircle,
+  EmojiEvents,
   Logout,
   ManageAccounts,
   People,
@@ -140,6 +141,14 @@ export const NavBar = () => {
                   </ListItemIcon>
                   <NavLink to={{ pathname: `/users/${currentUserId}` }}>
                     Profile
+                  </NavLink>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <ListItemIcon>
+                    <EmojiEvents />
+                  </ListItemIcon>
+                  <NavLink to={{ pathname: `/achievements/user/${currentUserId}` }}>
+                    Achievements
                   </NavLink>
                 </MenuItem>
                 {loggedInUser.admin === true && (

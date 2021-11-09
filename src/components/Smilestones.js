@@ -1,3 +1,5 @@
+import { Container } from "@mui/material";
+import { Box } from "@mui/system";
 import React from "react";
 import { Redirect, Route } from "react-router";
 import { ApplicationViews } from "./ApplicationViews";
@@ -15,7 +17,12 @@ export const Smilestones = () => (
           return (
             <>
               <NavBar />
-              <ApplicationViews />
+              <Container maxWidth={false}>
+                <Box sx={{ flexGrow: 1 }}>
+                <ApplicationViews />
+              </Box>
+              </Container>
+              
               <BottomNav />
             </>
           );

@@ -1,13 +1,13 @@
 # Smilestones App
-The Smilestones app lets a parent create milestones for their children to achieve.
+The Smilestones App lets a parent create milestones for their children to achieve.
 
 ## How It Works 
-A parent creates and manages child's account. A parent can create and modify milestones, and a child can log in, choose a completed milestone, and submit their results.
+A parent creates and manages a child's account. A parent can create and modify milestones. Both children and parents can log in, choose a milestone, and submit results for a milestone.
 
 ## Smilestones Mockup/Wireframe
-![Mockup Page 1 - Smilestone App](./public/images/mockup-wireframe-smilestones-nss_Page_1.png)
-![Mockup Page 2 - Smilestone App](./public/images/mockup-wireframe-smilestones-nss_Page_2.png)
-![Mockup Page 3 - Smilestone App](./public/images/mockup-wireframe-smilestones-nss_Page_3.png)
+![Mockup Page 1 - Smilestones App](./public/images/mockup-wireframe-smilestones-nss_Page_1.png)
+![Mockup Page 2 - Smilestones App](./public/images/mockup-wireframe-smilestones-nss_Page_2.png)
+![Mockup Page 3 - Smilestones App](./public/images/mockup-wireframe-smilestones-nss_Page_3.png)
 
 ## Smilestone Entity Relationship Diagram (ERD)
-![ERD -Smilestone App](./public/images/ERD-smilestones-app-nss.png)
+![ERD - Smilestones App](./public/images/ERD-smilestones-app-nss.png)

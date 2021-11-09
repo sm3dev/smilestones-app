@@ -1,3 +1,5 @@
+import { Card, Grid } from "@mui/material";
+import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { getAllMilestones } from "../../modules/APIManager";
 import { MilestoneCard } from "./MilestoneCard";
@@ -14,8 +16,8 @@ export const MilestoneList = () => {
   };
 
   useEffect(() => {
-      getMilestones();
-  }, [])
+    getMilestones();
+  }, []);
 
   // const getCurrentMilestones = () => {
   //   return getAllMilestones().then((milestonesFromAPI) => {
@@ -28,21 +30,36 @@ export const MilestoneList = () => {
   // }, [])
 
   return (
-      <>
+    <>
       <h1>Checkout the Milestones!</h1>
       <div>
-          {/* The Add Milestone button should only be visible if the logged-in user is an Admin */}
-          <button disabled>Add Milestone <small><em>coming soon</em></small></button>
+        {/* The Add Milestone button should only be visible if the logged-in user is an Admin */}
+        <button disabled>
+          Add Milestone{" "}
+          <small>
+            <em>coming soon</em>
+          </small>
+        </button>
       </div>
       <hr />
       <hr />
-      <div>
-          {milestones.map(milestone => <MilestoneCard key={milestone.id} milestone={milestone} milestoneType={milestone.milestoneType} /> )}
-      </div>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+          {milestones.map((milestone) => (
+            <Grid item xs={4}>
+                <MilestoneCard
+                  key={milestone.id}
+                  milestone={milestone}
+                  milestoneType={milestone.milestoneType}
+                />
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+
       {/* <div>
           {currentMilestones.map(currentMilestone => <MilestoneResultForm key={currentMilestone.id} currentMilestone={currentMilestone} currentMilestoneMilestoneType={currentMilestone.milestoneType} /> )}
       </div> */}
-      
-      </>
+    </>
   );
 };
