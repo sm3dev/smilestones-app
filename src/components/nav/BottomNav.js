@@ -1,19 +1,19 @@
-import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+  Link,
+  Paper,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import "./NavBar.css";
 import { getUserByID } from "../../modules/APIManager";
-import {
-  EmojiEvents,
-  EmojiEventsOutlined,
-  Home,
-  People,
-  SportsScore,
-} from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { EmojiEvents, Home, People, SportsScore } from "@mui/icons-material";
+import { useNavigate } from "react-router";
 
 export const BottomNav = () => {
-  const [activeNavItem, setActiveNavItem] = useState("recents");
+  const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
+  const [value, setValue] = useState("recents");
   const [loggedInUser, setLoggedInUser] = useState({
     firstName: "",
     lastName: "",
@@ -21,8 +21,11 @@ export const BottomNav = () => {
     email: "",
     admin: true,
   });
+const navigate = useNavigate();
 
-  const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   useEffect(() => {
     getUserByID(currentUserId).then((user) => {
@@ -36,37 +39,26 @@ export const BottomNav = () => {
         sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
         elevation={2}
       >
-        <BottomNavigation
-          showLabels
-          value={activeNavItem}
-          onChange={(event, newActiveNavItem) => {
-            setActiveNavItem(newActiveNavItem);
-          }}
-        >
-          <BottomNavigationAction
-            label="Home"
-            icon={<Home />}
-            LinkComponent="a"
-            href="/"
-          />
+        <BottomNavigation value={value} onChange={handleChange}>
+          <BottomNavigationAction label="Home" value="home" icon={<Home />} />
           <BottomNavigationAction
             label="Milestones"
+            value="milestones"
             icon={<SportsScore />}
-            LinkComponent="a"
-            href="/milestones"
-          />
+          >
+            <Link to="milestones"></Link>
+          </BottomNavigationAction>
+
           <BottomNavigationAction
             label="Achievements"
+            value="achievements"
             icon={<EmojiEvents />}
-            LinkComponent="a"
-            href="/achievements"
           />
           {loggedInUser.admin === true && (
             <BottomNavigationAction
               label="Users"
-              icon={<People />}
-              LinkComponent="a"
-              href="/users"
+              value="users"
+              icon={<People />} onClick={() => navigate("users")}
             />
           )}
         </BottomNavigation>

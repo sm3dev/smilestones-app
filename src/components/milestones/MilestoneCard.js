@@ -13,7 +13,7 @@ export const MilestoneCard = ({ milestone, milestoneType }) => {
 
   return (
     <>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 345 }} key={milestone.id}>
         <CardContent>
           <Typography variant="h5" component="div" gutterBottom>
             {milestone.name}

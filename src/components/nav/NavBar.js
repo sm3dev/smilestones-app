@@ -143,14 +143,6 @@ export const NavBar = () => {
                     Profile
                   </NavLink>
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
-                  <ListItemIcon>
-                    <EmojiEvents />
-                  </ListItemIcon>
-                  <NavLink to={{ pathname: `/achievements/user/${currentUserId}` }}>
-                    Achievements
-                  </NavLink>
-                </MenuItem>
                 {loggedInUser.admin === true && (
                   <>
                     <MenuItem onClick={handleClose}>
@@ -160,7 +152,7 @@ export const NavBar = () => {
                       <NavLink
                         to={{ pathname: `/users/${currentUserId}/myKids` }}
                       >
-                        Kids
+                        My Kids
                       </NavLink>
                     </MenuItem>
                     <Divider />
@@ -174,6 +166,16 @@ export const NavBar = () => {
                     </MenuItem>
                   </>
                 )}
+                <MenuItem onClick={handleClose}>
+                  <ListItemIcon>
+                    <EmojiEvents />
+                  </ListItemIcon>
+                  <NavLink
+                    to={{ pathname: `/achievements/user/${currentUserId}` }}
+                  >
+                    Achievements
+                  </NavLink>
+                </MenuItem>
 
                 <MenuItem onClick={handleLogout}>
                   <ListItemIcon>

@@ -46,12 +46,12 @@ export const MilestoneList = () => {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           {milestones.map((milestone) => (
-            <Grid item xs={4}>
-                <MilestoneCard
-                  key={milestone.id}
-                  milestone={milestone}
-                  milestoneType={milestone.milestoneType}
-                />
+            <Grid key={milestone.id} item xs={4}>
+              <MilestoneCard
+                key={milestone.id}
+                milestone={milestone}
+                milestoneType={milestone.milestoneType}
+              />
             </Grid>
           ))}
         </Grid>

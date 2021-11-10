@@ -16,44 +16,39 @@ import { UserProfile } from "./users/UserProfile";
 
 export const ApplicationViews = () => {
   return (
+    <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route exact path="/milestones">
-          <MilestoneList />
+        <Route path="/milestones" element={<MilestoneList />}>
+          <Route path=":milestoneId(\d+)" element={<MilestoneCard />} />
+          <Route
+            path=":milestoneId(\d+)/achievements/create"
+            element={<MilestoneResultForm />}
+          />
         </Route>
-        <Route exact path="/milestones/:milestoneId(\d+)">
-          <MilestoneCard />
+
+        <Route path="/achievements" element={<MilestoneResultList />}>
+          <Route
+            path=":userMilestoneId(\d+)/edit"
+            element={<MilestoneResultEditForm />}
+          />
+          <Route
+            path={`user/:userId(\d+)`}
+            element={<MilestoneResultListbyUser />}
+          />
+          <Route
+            path={":userMilestoneId(\d+)"}
+            element={<MilestoneResultDetail />}
+          />
         </Route>
-        <Route exact path="/achievements">
-          <MilestoneResultList />
-        </Route>
-        <Route exact path="/achievements/:userMilestoneId(\d+)/edit">
-          <MilestoneResultEditForm />
-        </Route>
-        <Route exact path="/milestones/:milestoneId(\d+)/achievements/create">
-          <MilestoneResultForm />
-        </Route>
-        <Route exact path="/achievements/user/:userId(\d+)">
-          <MilestoneResultListbyUser />
-        </Route>
-        <Route exact path="/achievements/:userMilestoneId(\d+)">
-          <MilestoneResultDetail />
-        </Route>
-        <Route exact path="/users/">
-          <UserList />
-        </Route>
-        <Route exact path="/users/:userId(\d+)/edit">
-          <UserEditForm />
-        </Route>
-        <Route exact path="/users/create">
-          <UserForm />
-        </Route>
-        <Route exact path="/users/:userId(\d+)/myKids">
-          <MyUserList />
-        </Route>
-        <Route exact path="/users/:userId(\d+)">
-          <UserProfile />
+
+        <Route path="users" element={<UserList />}>
+          <Route path=":userId(\d+)/edit" element={<UserEditForm />} />
+          <Route path="create" element={<UserForm />} />
+          <Route path=":userId(\d+)/myKids" element={<MyUserList />} />
+          <Route path=":userId(\d+)" element={<UserProfile />} />
         </Route>
       </Routes>
+    </>
   );
 };

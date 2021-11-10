@@ -11,16 +11,24 @@ import "./Smilestones.css";
 import { Home } from "./Home";
 
 export const Smilestones = () => (
-  <Routes>
-    <Route path="/" element={<Home />} />
-    <Route path="/login" element={<Login />} />
-    <Route path="/register" element={<Register />} />
-    <Route element={<Layout />} />
-  </Routes>
+  <>
+    <NavBar />
+        <Container maxWidth={false}>
+          <Box sx={{ flexGrow: 1 }}>
+            <ApplicationViews />
+          </Box>
+        </Container>
+        <BottomNav />
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+    </Routes>
+  </>
 );
 
 const Layout = () => {
-  <Home />
+  // <Home />
   if (sessionStorage.getItem("smilestones_user")) {
     return (
       <>
