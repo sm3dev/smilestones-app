@@ -13,10 +13,10 @@ export const MilestoneResultCard = ({ milestoneResult, milestone, user }) => {
   return (
     <>
       <Link to={`/achievements/${milestoneResult.id}`}>
-        <h2>{user.firstName}'s Milestone Achievement</h2>
+        <h3>{user.firstName} {user.lastName}</h3>
       </Link>
       {/* <h4>Milestone Type {() => {getMilestoneTypeData(milestone.milestoneTypeId)}}</h4> */}
-      <h3>{milestone.name}</h3>
+      <h2>{milestone.name}</h2>
       <p>{milestone.description}</p>
       <div>Date Achieved: {milestoneResult.date}</div>
 

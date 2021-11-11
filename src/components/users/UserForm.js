@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { addUser, addUserChild, getAllParents } from '../../modules/APIManager';
+import { useNavigate } from 'react-router';
 
 // Add New User Account to database
 export const UserForm = () => {
@@ -21,8 +22,8 @@ const [userParentChild, setUserParentChild] = useState({
 })
 
 const [parents, setParents] = useState([])
-const history = useHistory();
 const { userId } = useParams();
+const navigate = useNavigate();
 
 // I need a fetch that gets all parent users (for now get all Admins)
 const getParents = () => {
@@ -84,7 +85,7 @@ const handleClickSaveUser = (event) => {
     addUser(user).then(user => {
 
         addUserChild(user.id, newParentChild.parentId);
-    }).then(() => history.push("/users"))
+    }).then(() => navigate("/users"))
     
 }
 
@@ -129,10 +130,9 @@ const handleClickSaveUser = (event) => {
             </div>
             </fieldset>
             
-            
             <input id="email" type="hidden" value={user.admin} />
             <button onClick={handleClickSaveUser} className="save__button">Create Account</button>
-            <Link to="/users"><button>Cancel</button></Link>
+            <button onClick={() => navigate(-1)}>Cancel</button>
         </form>
             
         </>

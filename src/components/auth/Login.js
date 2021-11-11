@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 
 const remoteURL = "http://localhost:7777";
@@ -8,7 +8,7 @@ export const Login = () => {
     const [loginUser, setLoginUser] = useState({ email: "" });
     const [existDialog, setExistDialog] = useState(false);
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleInputChange = (event) => {
       const newUser = { ...loginUser };
@@ -28,11 +28,11 @@ export const Login = () => {
       existingUserCheck().then((exists) => {
         if (exists) {
           console.log(exists)
+          navigate("/");
           // The user if saved under key smilestones_user in Session Storage.
           sessionStorage.setItem("smilestones_user", exists.id);
           sessionStorage.setItem("smilestones_admin", exists.admin);
           sessionStorage.setItem("smilestones_userObj", exists);
-          history.push("/");
         } else {
           setExistDialog(true);
         }

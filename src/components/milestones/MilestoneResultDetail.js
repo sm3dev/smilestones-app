@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import {
   deleteUserMilestone,
   getAllChildrenConnectionsByParentID,
   getUserMilestoneByID,
 } from "../../modules/APIManager";
+import { useNavigate } from "react-router";
 
 export const MilestoneResultDetail = () => {
   const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
@@ -24,7 +25,7 @@ export const MilestoneResultDetail = () => {
   });
 
   const [buttonAccess, setButtonAccess] = useState({ value: "" });
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // check for child connections and return TRUE or FALSE; returns a boolean
   const getUserChildrenConnections = () => {
@@ -61,14 +62,10 @@ export const MilestoneResultDetail = () => {
     // if the logged-in user tries to delete their own account, alert them and clear the sessionStorage -- which "should" take them to login screen maybe.
     if (currentUserId === id) {
       alert("This Milestone Achievement will be permanently deleted!");
-      deleteUserMilestone(id).then(() => history.push(`/achievements`));
+      deleteUserMilestone(id).then(() => navigate(`/achievements`));
     } else {
-      deleteUserMilestone(id).then(() => history.push(`/achievements`));
+      deleteUserMilestone(id).then(() => navigate(`/achievements`));
     }
-  };
-
-  const handleBack = () => {
-    history.goBack();
   };
 
   useEffect(() => {
@@ -84,8 +81,8 @@ export const MilestoneResultDetail = () => {
 
   return (
     <>
-      <h1>{milestoneResult.user?.firstName}'s Milestone Achievement</h1>
-      <h3>{milestoneResult.milestone?.name}</h3>
+      <h1>{milestoneResult.user?.firstName}'s Achievement</h1>
+      <h2>Milestone: {milestoneResult.milestone?.name}</h2>
       <p>{milestoneResult.milestone?.description}</p>
       {/* {milestoneResult.milestone?.repeater === false ? (
         <div>Achieved on {milestoneResult.date}</div>)} */}
@@ -124,11 +121,8 @@ export const MilestoneResultDetail = () => {
         </div>
       )}
       <div>
-        <Link to={`/achievements/user/${milestoneResult.user?.id}`}>
-          <button>
-            {" "}
-            All {milestoneResult.user?.firstName}'s Achievements
-          </button>
+        <Link to={`/users/${milestoneResult.user?.id}/achievements`}>
+          <button> More of {milestoneResult.user?.firstName}'s Achievements</button>
         </Link>
       </div>
       <div>
@@ -143,7 +137,9 @@ export const MilestoneResultDetail = () => {
         </button>
       </div>
       <div>
-        <button onClick={() => handleBack()}>Back</button>
+        <Link to="/achievements">
+          <button>All Achievements</button>
+        </Link>
       </div>
     </>
   );

@@ -10,20 +10,21 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import "./NavBar.css";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import AppBar from "@mui/material/AppBar";
 import { Box } from "@mui/system";
 import {
   AccountCircle,
+  EmojiEvents,
   Logout,
   ManageAccounts,
-  People,
   PersonAdd,
+  ChildCare,
 } from "@mui/icons-material";
 import { getUserByID } from "../../modules/APIManager";
 
 export const NavBar = () => {
-  const history = useHistory();
+  let navigate = useNavigate();
   const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -47,7 +48,7 @@ export const NavBar = () => {
   const handleLogout = () => {
     handleClose();
     sessionStorage.clear();
-    history.push(`/login`);
+    navigate(`/login`);
   };
 
   useEffect(() => {
@@ -144,14 +145,15 @@ export const NavBar = () => {
                 </MenuItem>
                 {loggedInUser.admin === true && (
                   <>
+                  
                     <MenuItem onClick={handleClose}>
                       <ListItemIcon>
-                        <People />
+                        <ChildCare />
                       </ListItemIcon>
                       <NavLink
                         to={{ pathname: `/users/${currentUserId}/myKids` }}
                       >
-                        Kids
+                        My Kids
                       </NavLink>
                     </MenuItem>
                     <Divider />
@@ -165,6 +167,16 @@ export const NavBar = () => {
                     </MenuItem>
                   </>
                 )}
+                <MenuItem onClick={handleClose}>
+                  <ListItemIcon>
+                    <EmojiEvents />
+                  </ListItemIcon>
+                  <NavLink
+                    to={{ pathname: `/users/${currentUserId}/achievements` }}
+                  >
+                    Achievements
+                  </NavLink>
+                </MenuItem>
 
                 <MenuItem onClick={handleLogout}>
                   <ListItemIcon>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import {
   addNewUserMilestone,
@@ -30,7 +30,7 @@ export const MilestoneResultForm = () => {
     repeater: false,
   });
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleValidatedTrueFalse = (stringAnswer) => {
     let result;
@@ -86,7 +86,7 @@ export const MilestoneResultForm = () => {
     setIsLoading(true);
 
     addNewUserMilestone(milestoneResult).then(() =>
-      history.push(`/achievements`)
+      navigate(`/achievements`)
     );
   };
 

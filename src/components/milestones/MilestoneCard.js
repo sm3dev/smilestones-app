@@ -1,25 +1,47 @@
-import React from 'react'
-import { useHistory } from 'react-router'
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Typography,
+} from "@mui/material";
+import React from "react";
+import { useNavigate } from "react-router";
 
 export const MilestoneCard = ({ milestone, milestoneType }) => {
-    const history = useHistory();
-    return (
-        <>
-            <h3>{milestone.name}</h3>
-            <h5>{milestoneType.name}</h5>
-            <p>{milestone.description}</p>
-            <div>
-                {/* Can I get the milestone card to show how many Milestone Achievements this milestone has? */}
+  const navigate = useNavigate();
 
-            {/* Submit result opens the MilestoneResultForm using milestone.id */}
-            <button id={milestone.id} onClick={() => history.push(`/milestones/${milestone.id}/achievements/create`)}>Submit Milestone Result</button>
-
-            <button>View Achievements for This Milestone <small><em>coming soon</em></small></button>
-
-             {/* The Edit button should only be visible (OR DISABLED) if the logged-in user is an Admin */}
-            <button>Edit <small><em>coming soon</em></small></button>
-            </div>
-            <hr />
-        </>
-    )
-}
+  return (
+    <>
+      <Card sx={{ maxWidth: 345 }} key={milestone.id}>
+        <CardContent>
+          <Typography variant="h5" component="div" gutterBottom>
+            {milestone.name}
+          </Typography>
+          <Typography variant="overline" component="div">
+            {milestoneType.name}
+          </Typography>
+          <Typography variant="body2" component="div">
+            {milestone.description}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button
+            variant="contained"
+            id={milestone.id}
+            onClick={() =>
+              navigate(`/milestones/${milestone.id}/achievements/create`)
+            }
+          >
+            Submit Result
+          </Button>
+          <Button variant="outlined">Edit</Button>
+        </CardActions>
+        <CardActions>
+          {" "}
+          <Button disabled>Achievements for this Milestone</Button>
+        </CardActions>
+      </Card>
+    </>
+  );
+};
