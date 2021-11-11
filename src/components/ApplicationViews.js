@@ -19,37 +19,34 @@ export const ApplicationViews = () => {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
+        
         <Route path="milestones" element={<MilestoneList />} />
         <Route
-          path="milestones/:milestoneId(\d+)"
+          path="milestones/:milestoneId"
           element={<MilestoneCard />}
         />
         <Route
-          path="milestones/:milestoneId(\d+)/achievements/create"
+          path="milestones/:milestoneId/achievements/create"
           element={<MilestoneResultForm />}
         />
 
         <Route path="achievements" element={<MilestoneResultList />} />
-
         <Route
-          path="achievements/:userMilestoneId(\d+)/edit"
+          path="achievements/:userMilestoneId/edit"
           element={<MilestoneResultEditForm />}
         />
-
         <Route
-          path={"achievements/user/:userId"}
-          element={<MilestoneResultListbyUser />}
-        />
-
-        <Route
-          path={"achievements/achievements/:userMilestoneId(d+)"}
+          path={"achievements/:userMilestoneId"}
           element={<MilestoneResultDetail />}
         />
 
         <Route path="/users" element={<UserList />} />
-        <Route path="user/:userId" element={<UserProfile />} />
-        <Route path="user/create" element={<UserForm />} />
-
+        <Route path="users/:userId" element={<UserProfile />} />
+        <Route path="users/create" element={<UserForm />} />
+        <Route
+          path={"users/:userId/achievements"}
+          element={<MilestoneResultListbyUser />}
+        />
         <Route path="users/:userId/edit" element={<UserEditForm />} />
         <Route path="users/:userId/myKids" element={<MyUserList />} />
       </Routes>

@@ -65,7 +65,7 @@ export const MilestoneResultEditForm = () => {
     };
 
     updateUserMilestone(editedMilestoneResult).then(() =>
-    navigate("/achievements")
+    navigate(`/users/${editedMilestoneResult.userId}/achievements`)
     );
   };
 

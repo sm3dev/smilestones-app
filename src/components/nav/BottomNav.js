@@ -1,7 +1,6 @@
 import {
   BottomNavigation,
   BottomNavigationAction,
-  Link,
   Paper,
 } from "@mui/material";
 import { Box } from "@mui/system";
@@ -9,7 +8,7 @@ import React, { useEffect, useState } from "react";
 import "./NavBar.css";
 import { getUserByID } from "../../modules/APIManager";
 import { EmojiEvents, Home, People, SportsScore } from "@mui/icons-material";
-import { useNavigate } from "react-router";
+import { NavLink } from "react-router-dom";
 
 export const BottomNav = () => {
   const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
@@ -21,7 +20,6 @@ export const BottomNav = () => {
     email: "",
     admin: true,
   });
-const navigate = useNavigate();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -40,25 +38,35 @@ const navigate = useNavigate();
         elevation={2}
       >
         <BottomNavigation value={value} onChange={handleChange}>
-          <BottomNavigationAction label="Home" value="home" icon={<Home />} />
+          <BottomNavigationAction
+            label="Home"
+            value="home"
+            icon={<Home />}
+            component={NavLink}
+            to={"/"}
+          />
           <BottomNavigationAction
             label="Milestones"
             value="milestones"
             icon={<SportsScore />}
-          >
-            <Link to="milestones"></Link>
-          </BottomNavigationAction>
+            component={NavLink}
+            to={"/milestones"}
+          />
 
           <BottomNavigationAction
             label="Achievements"
             value="achievements"
             icon={<EmojiEvents />}
+            component={NavLink}
+            to={"/achievements"}
           />
           {loggedInUser.admin === true && (
             <BottomNavigationAction
               label="Users"
               value="users"
-              icon={<People />} onClick={() => navigate("users")}
+              icon={<People />}
+              component={NavLink}
+              to={"/users"}
             />
           )}
         </BottomNavigation>

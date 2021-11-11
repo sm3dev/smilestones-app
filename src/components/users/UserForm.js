@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { addUser, addUserChild, getAllParents } from '../../modules/APIManager';
 import { useNavigate } from 'react-router';
 
@@ -130,10 +130,9 @@ const handleClickSaveUser = (event) => {
             </div>
             </fieldset>
             
-            
             <input id="email" type="hidden" value={user.admin} />
             <button onClick={handleClickSaveUser} className="save__button">Create Account</button>
-            <Link to="/users"><button>Cancel</button></Link>
+            <button onClick={() => navigate(-1)}>Cancel</button>
         </form>
             
         </>

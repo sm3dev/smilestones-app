@@ -83,7 +83,7 @@ export const UserEditForm = () => {
     };
 
     // This is an edit, so I need the id
-    updateUser(editedUser).then(() => navigate("/users"));
+    updateUser(editedUser).then(() => navigate(`/users/${editedUser.id}`));
   };
 
   return (

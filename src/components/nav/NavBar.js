@@ -171,7 +171,7 @@ export const NavBar = () => {
                     <EmojiEvents />
                   </ListItemIcon>
                   <NavLink
-                    to={{ pathname: `/achievements/user/${currentUserId}` }}
+                    to={{ pathname: `/users/${currentUserId}/achievements` }}
                   >
                     Achievements
                   </NavLink>

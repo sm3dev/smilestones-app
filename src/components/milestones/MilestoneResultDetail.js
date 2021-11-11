@@ -6,7 +6,7 @@ import {
   getAllChildrenConnectionsByParentID,
   getUserMilestoneByID,
 } from "../../modules/APIManager";
-import { useNavigate } from 'react-router';
+import { useNavigate } from "react-router";
 
 export const MilestoneResultDetail = () => {
   const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
@@ -81,8 +81,8 @@ export const MilestoneResultDetail = () => {
 
   return (
     <>
-      <h1>{milestoneResult.user?.firstName}'s Milestone Achievement</h1>
-      <h3>{milestoneResult.milestone?.name}</h3>
+      <h1>{milestoneResult.user?.firstName}'s Achievement</h1>
+      <h2>Milestone: {milestoneResult.milestone?.name}</h2>
       <p>{milestoneResult.milestone?.description}</p>
       {/* {milestoneResult.milestone?.repeater === false ? (
         <div>Achieved on {milestoneResult.date}</div>)} */}
@@ -121,11 +121,8 @@ export const MilestoneResultDetail = () => {
         </div>
       )}
       <div>
-        <Link to={`/achievements/user/${milestoneResult.user?.id}`}>
-          <button>
-            {" "}
-            All {milestoneResult.user?.firstName}'s Achievements
-          </button>
+        <Link to={`/users/${milestoneResult.user?.id}/achievements`}>
+          <button> More of {milestoneResult.user?.firstName}'s Achievements</button>
         </Link>
       </div>
       <div>
@@ -140,7 +137,9 @@ export const MilestoneResultDetail = () => {
         </button>
       </div>
       <div>
-        <button onClick={() => navigate(-1)}>Back</button>
+        <Link to="/achievements">
+          <button>All Achievements</button>
+        </Link>
       </div>
     </>
   );

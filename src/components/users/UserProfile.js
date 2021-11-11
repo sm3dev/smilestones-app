@@ -51,7 +51,6 @@ export const UserProfile = () => {
         childConnection.userId === parseInt(userId) &&
         childConnection.parentId === currentUserId
     );
-    console.log(theConnection);
     if (theConnection) {
       console.log("Buttons should NOT be disabled");
       setButtonAccess(false);
@@ -102,10 +101,10 @@ export const UserProfile = () => {
       {/* Add conditional statement that shows a link to All Milestones view when a user has no userMilestones (milestone results) */}
       <button
         className="userMilestone__link"
-        onClick={() => navigate(`/achievements/user/${user.id}`)}
+        onClick={() => navigate(`/users/${user.id}/achievements`)}
       >
         <strong>{milestoneResults.length}</strong> {user.firstName}'s
-        Achievements
+        Achievements!
       </button>
 
       {user.id === currentUserId ? (

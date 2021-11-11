@@ -31,6 +31,7 @@ const navigate = useNavigate();
     useEffect(() => {
         getMyUserChildrenConnections(); 
     }, [])
+    console.log(users.length)
 
     return (
         <>
@@ -40,11 +41,11 @@ const navigate = useNavigate();
                 <button className="my-profile__button" onClick={() => navigate(`/users/${currentUserId}`)}>Manage My Account</button>
             </div>
             <div>
-            <button onClick={() => navigate("/users/create")}>Add Child User</button>
+            <button onClick={() => navigate("/users/create")}>Add Child User </button>
             </div>
             <hr />
             <div>
-                <h2>Your Children Accounts</h2>
+                <h2>Your Children Account&#40;s&#41;: {childConnections.length} Total</h2>
                 {childConnections.map(childConnection => <MyUserCard key={childConnection.id} user={childConnection.user} handleDeleteUser={handleDeleteUser} />)
 
                 }
