@@ -19,35 +19,39 @@ export const ApplicationViews = () => {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/milestones" element={<MilestoneList />}>
-          <Route path=":milestoneId(\d+)" element={<MilestoneCard />} />
-          <Route
-            path=":milestoneId(\d+)/achievements/create"
-            element={<MilestoneResultForm />}
-          />
-        </Route>
+        <Route path="milestones" element={<MilestoneList />} />
+        <Route
+          path="milestones/:milestoneId(\d+)"
+          element={<MilestoneCard />}
+        />
+        <Route
+          path="milestones/:milestoneId(\d+)/achievements/create"
+          element={<MilestoneResultForm />}
+        />
 
-        <Route path="/achievements" element={<MilestoneResultList />}>
-          <Route
-            path=":userMilestoneId(\d+)/edit"
-            element={<MilestoneResultEditForm />}
-          />
-          <Route
-            path={`user/:userId(\d+)`}
-            element={<MilestoneResultListbyUser />}
-          />
-          <Route
-            path={":userMilestoneId(\d+)"}
-            element={<MilestoneResultDetail />}
-          />
-        </Route>
+        <Route path="achievements" element={<MilestoneResultList />} />
 
-        <Route path="users" element={<UserList />}>
-          <Route path=":userId(\d+)/edit" element={<UserEditForm />} />
-          <Route path="create" element={<UserForm />} />
-          <Route path=":userId(\d+)/myKids" element={<MyUserList />} />
-          <Route path=":userId(\d+)" element={<UserProfile />} />
-        </Route>
+        <Route
+          path="achievements/:userMilestoneId(\d+)/edit"
+          element={<MilestoneResultEditForm />}
+        />
+
+        <Route
+          path={"achievements/user/:userId"}
+          element={<MilestoneResultListbyUser />}
+        />
+
+        <Route
+          path={"achievements/achievements/:userMilestoneId(d+)"}
+          element={<MilestoneResultDetail />}
+        />
+
+        <Route path="/users" element={<UserList />} />
+        <Route path="user/:userId" element={<UserProfile />} />
+        <Route path="user/create" element={<UserForm />} />
+
+        <Route path="users/:userId/edit" element={<UserEditForm />} />
+        <Route path="users/:userId/myKids" element={<MyUserList />} />
       </Routes>
     </>
   );

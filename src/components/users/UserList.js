@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {
-  deleteUser,
-  getAllUsers,
-} from "../../modules/APIManager";
+import { deleteUser, getAllUsers } from "../../modules/APIManager";
 import { UserCard } from "./UserCard";
-import { useNavigate } from 'react-router';
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 // show all user accounts in the database
 export const UserList = () => {
@@ -29,16 +27,20 @@ export const UserList = () => {
 
   return (
     <>
-       <h1>Users Everywhere</h1>
-       <p>View All Smilestoners<small><em> No, that definitely won't work</em></small></p>
+      <h1>Users Everywhere</h1>
+      <p>
+        View All Smilestoners
+        <small>
+          <em> No, that definitely won't work</em>
+        </small>
+      </p>
       <div>
+    
         <button
           className="my-profile__button"
-          onClick={() => navigate(`/users/${currentUserId}`)}>
-          My Account{" "}
-          <small>
-            <em>coming soon</em>
-          </small>
+          // onClick={() => <Link to={`user/${currentUserId}`} />}
+        >
+          <Link to={`/user/${currentUserId}`}>My Account</Link>
         </button>
       </div>
       <div>
