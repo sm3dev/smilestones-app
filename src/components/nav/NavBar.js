@@ -18,8 +18,8 @@ import {
   EmojiEvents,
   Logout,
   ManageAccounts,
-  People,
   PersonAdd,
+  ChildCare,
 } from "@mui/icons-material";
 import { getUserByID } from "../../modules/APIManager";
 
@@ -145,9 +145,10 @@ export const NavBar = () => {
                 </MenuItem>
                 {loggedInUser.admin === true && (
                   <>
+                  
                     <MenuItem onClick={handleClose}>
                       <ListItemIcon>
-                        <People />
+                        <ChildCare />
                       </ListItemIcon>
                       <NavLink
                         to={{ pathname: `/users/${currentUserId}/myKids` }}

@@ -40,7 +40,7 @@ export const UserList = () => {
           className="my-profile__button"
           // onClick={() => <Link to={`user/${currentUserId}`} />}
         >
-          <Link to={`/users/${currentUserId}`}>My Account</Link>
+          <Link to={`/users/${currentUserId}`}>Manage My Account</Link>
         </button>
       </div>
       <div>

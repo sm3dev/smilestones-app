@@ -13,7 +13,7 @@ export const UserCard = ({ user, totalMilestoneResults }) => {
         <Link to={`/users/${user.id}`}><h3>{user.firstName} {user.lastName}</h3></Link>
         <div>Age: {GetAge(user.DOB)}</div>
         {/* Add conditional statement that shows a link to All Milestones view when a user has no userMilestones (milestone results) */}
-        <button className="userMilestone__link" onClick={() => navigate(`/achievements/user/${user.id}`)}><strong>{totalMilestoneResults}</strong> {user.firstName}'s Milestone Achievements 
+        <button className="userMilestone__link" onClick={() => navigate(`/users/${user.id}/achievements`)}><strong>{totalMilestoneResults}</strong> {user.firstName}'s Milestone Achievements 
         </button>
         <hr/>
         </>
