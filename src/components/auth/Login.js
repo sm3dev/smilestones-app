@@ -1,6 +1,7 @@
+import { Button } from '@mui/material';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const remoteURL = "http://localhost:7777";
 
@@ -23,20 +24,20 @@ export const Login = () => {
     };
 
     const handleLogin = (event) => {
-      event.preventDefault();
+      // event.preventDefault();
 
       existingUserCheck().then((exists) => {
         if (exists) {
           console.log(exists)
-          navigate("/");
-          // The user if saved under key smilestones_user in Session Storage.
+          // The user is saved under key smilestones_user in Session Storage.
           sessionStorage.setItem("smilestones_user", exists.id);
           sessionStorage.setItem("smilestones_admin", exists.admin);
           sessionStorage.setItem("smilestones_userObj", exists);
         } else {
           setExistDialog(true);
         }
-      });
+      })
+      navigate("/");
     };
 
     return (
@@ -74,7 +75,7 @@ export const Login = () => {
                 </form>
             </section>
             <section className="link--register">
-                <Link to="/register">{"Register for an account"}</Link>
+            <NavLink to="/register"><Button variant="outlined">Register for an account</Button></NavLink>
             </section>
         </main>
     )
