@@ -20,6 +20,7 @@ import {
   ManageAccounts,
   PersonAdd,
   ChildCare,
+  Login,
 } from "@mui/icons-material";
 import { getUserByID } from "../../modules/APIManager";
 
@@ -51,10 +52,29 @@ export const NavBar = () => {
     navigate(`/login`);
   };
 
+  const handleLogin = () => {
+    navigate(`/login`);
+  };
+
+  const checkForUser = () => {
+    if (sessionStorage.getItem("smilestones_user")) {
+      return getUserByID(currentUserId).then((user) => {
+        setLoggedInUser(user);
+      });
+    } else {
+      return console.log(
+        "this is working to stop the useEffect running if there's no user sign-in"
+      );
+    }
+
+    // if (sessionStorage.getItem("smilestones_user")) {
+    //   getUserByID(currentUserId).then((user) => { setLoggedInUser(user); }, {
+    //     console,: .log("this is working to stop the useEffect running if there's no user sign-in")
+    //   });
+  };
+
   useEffect(() => {
-    getUserByID(currentUserId).then((user) => {
-      setLoggedInUser(user);
-    });
+    checkForUser();
   }, [currentUserId]);
 
   return (
@@ -62,15 +82,6 @@ export const NavBar = () => {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
-            {/* <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon />
-            </IconButton> */}
             <Typography
               variant="h6"
               component="a"
@@ -80,20 +91,36 @@ export const NavBar = () => {
               Smilestones
             </Typography>
             <div>
-              <Button
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                aria-expanded={open ? "true" : undefined}
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <Typography fontSize="small" variant="overline">
-                  Hi, {loggedInUser.firstName}!{" "}
-                </Typography>
-                <AccountCircle sx={{ width: 32, height: 32 }}></AccountCircle>
-              </Button>
+              {sessionStorage.getItem("smilestones_user") ? (
+                <Button
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                  onClick={handleMenu}
+                  color="inherit"
+                >
+                  <Typography fontSize="small" variant="overline">
+                    Hi, {loggedInUser.firstName}!{" "}
+                  </Typography>
+                  <AccountCircle sx={{ width: 32, height: 32 }}></AccountCircle>
+                </Button>
+              ) : (
+                <Button
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  color="inherit"
+                  onClick={handleLogin}
+                >
+                  <Typography fontSize="small" variant="overline">
+                    Sign In To Get Started{" "}
+                  </Typography>
+                  <Login fontSize="small"></Login>
+                </Button>
+              )}
+
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
@@ -135,55 +162,66 @@ export const NavBar = () => {
                   },
                 }}
               >
-                <MenuItem onClick={handleClose}>
-                  <ListItemIcon>
-                    <ManageAccounts />
-                  </ListItemIcon>
-                  <NavLink to={{ pathname: `/users/${currentUserId}` }}>
-                    Profile
-                  </NavLink>
-                </MenuItem>
-                {loggedInUser.admin === true && (
+                {sessionStorage.getItem("smilestones_user") ? (
                   <>
-                  
                     <MenuItem onClick={handleClose}>
                       <ListItemIcon>
-                        <ChildCare />
+                        <ManageAccounts />
+                      </ListItemIcon>
+                      <NavLink to={{ pathname: `/users/${currentUserId}` }}>
+                        Profile
+                      </NavLink>
+                    </MenuItem>
+                    {loggedInUser.admin === true && (
+                      <>
+                        <MenuItem onClick={handleClose}>
+                          <ListItemIcon>
+                            <ChildCare />
+                          </ListItemIcon>
+                          <NavLink
+                            to={{ pathname: `/users/${currentUserId}/myKids` }}
+                          >
+                            My Kids
+                          </NavLink>
+                        </MenuItem>
+                        <Divider />
+                        <MenuItem onClick={handleClose}>
+                          <ListItemIcon>
+                            <PersonAdd />
+                          </ListItemIcon>
+                          <NavLink to={{ pathname: `/users/create` }}>
+                            Add Child
+                          </NavLink>
+                        </MenuItem>
+                      </>
+                    )}
+                    <MenuItem onClick={handleClose}>
+                      <ListItemIcon>
+                        <EmojiEvents />
                       </ListItemIcon>
                       <NavLink
-                        to={{ pathname: `/users/${currentUserId}/myKids` }}
+                        to={{
+                          pathname: `/users/${currentUserId}/achievements`,
+                        }}
                       >
-                        My Kids
+                        Achievements
                       </NavLink>
                     </MenuItem>
-                    <Divider />
-                    <MenuItem onClick={handleClose}>
+                    <MenuItem onClick={handleLogout}>
                       <ListItemIcon>
-                        <PersonAdd />
+                        <Logout fontSize="small" />
                       </ListItemIcon>
-                      <NavLink to={{ pathname: `/users/create` }}>
-                        Add Child
-                      </NavLink>
+                      Logout
                     </MenuItem>
                   </>
+                ) : (
+                  <MenuItem onClick={() => navigate("/login")}>
+                    <ListItemIcon>
+                      <Login fontSize="small" />
+                    </ListItemIcon>
+                    Log In
+                  </MenuItem>
                 )}
-                <MenuItem onClick={handleClose}>
-                  <ListItemIcon>
-                    <EmojiEvents />
-                  </ListItemIcon>
-                  <NavLink
-                    to={{ pathname: `/users/${currentUserId}/achievements` }}
-                  >
-                    Achievements
-                  </NavLink>
-                </MenuItem>
-
-                <MenuItem onClick={handleLogout}>
-                  <ListItemIcon>
-                    <Logout fontSize="small" />
-                  </ListItemIcon>
-                  Logout
-                </MenuItem>
               </Menu>
             </div>
           </Toolbar>
