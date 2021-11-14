@@ -1,5 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  Typography,
+} from "@mui/material";
+import { CalendarToday, Today } from "@mui/icons-material";
 
 // const remoteURL = "http://localhost:7777";
 export const MilestoneResultCard = ({ milestoneResult, milestone, user }) => {
@@ -9,54 +18,60 @@ export const MilestoneResultCard = ({ milestoneResult, milestone, user }) => {
   // const getMilestoneTypeData = (thisMilestoneTypeId) => {
   //   return fetch(`${remoteURL}/milestoneTypes/${thisMilestoneTypeId}`).then(results => results.json())
   // }
-
+ let fullName = `${user.firstName} ${user.lastName}`;
   return (
     <>
-      <Link to={`/achievements/${milestoneResult.id}`}>
-        <h3>{user.firstName} {user.lastName}</h3>
-      </Link>
-      {/* <h4>Milestone Type {() => {getMilestoneTypeData(milestone.milestoneTypeId)}}</h4> */}
-      <h2>{milestone.name}</h2>
-      <p>{milestone.description}</p>
-      <div>Date Achieved: {milestoneResult.date}</div>
+      <Card
+        sx={{
+          m: 2,
+          flexShrink: 0,
+          flexGrow: 0,
+          width: 300,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+        key={milestone.id}
+      >
+        <CardHeader
+          title={milestone.name}
+          subheader={fullName}
+          component={Link}
+          title={milestone.name}
+          to={`/achievements/${milestoneResult.id}`}
+        />
+        <CardContent>
+          <Typography variant="h5" gutterBottom>
+            {milestoneResult.timeToComplete !== 0 && (
+              <>Time: {milestoneResult.timeToComplete} seconds</>
+            )}
 
-      {milestoneResult.timeToComplete !== 0 && (
-        <>
-          <div>Time &#40;seconds&#41;: {milestoneResult.timeToComplete}</div>
-        </>
-      )}
+            {milestoneResult.distance !== 0 && (
+              <>Distance &#40;feet&#41;: {milestoneResult.distance}</>
+            )}
 
-      {milestoneResult.distance !== 0 && (
-        <>
-          <div>Distance &#40;feet&#41;: {milestoneResult.distance}</div>
-        </>
-      )}
+            {milestoneResult.height !== 0 && (
+              <>Height &#40;inches&#41;: {milestoneResult.height}</>
+            )}
 
-      {milestoneResult.height !== 0 && (
-        <>
-          <div>Height &#40;inches&#41;: {milestoneResult.height}</div>
-        </>
-      )}
-
-      {milestoneResult.quantity !== 0 && (
-        <>
-          <div>Amount: {milestoneResult.quantity}</div>
-        </>
-      )}
-
-      <div>
-        <button>
-          More <small>placeholder for expanding card</small>
-        </button>
-      </div>
-      <div>
-        <Link to={`/achievements/${milestoneResult.id}`}>
-          <button>Achievement Details</button>
-        </Link>
-      </div>
-
-      <p>Remarks: {milestoneResult.remarks}</p>
-      <hr />
+            {milestoneResult.quantity !== 0 && (
+              <>Amount: {milestoneResult.quantity}</>
+            )}
+          </Typography>
+          <Typography variant="subtitle">
+            Achieved: {milestoneResult.date}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button
+            component={Link}
+            to={`/achievements/${milestoneResult.id}`}
+            variant="text"
+          >
+            More Details
+          </Button>
+        </CardActions>
+      </Card>
     </>
   );
 };

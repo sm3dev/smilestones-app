@@ -1,3 +1,4 @@
+import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { getAllUserMilestonesByUserID } from "../../modules/APIManager";
@@ -32,7 +33,17 @@ export const MilestoneResultListbyUser = () => {
         <h1>Personal Achievements</h1>
         <p>Viewing Achievements for {thisUser.firstName} {thisUser.lastName}</p>
       </div>
-      <div>
+      <Box
+        spacing={2}
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          maxWidth: "100%",
+          alignContent: "flex-start",
+          flexBasis: 300,
+        }}
+      >
         {milestoneResults.map((milestoneResult) => 
           <MilestoneResultCard
             key={milestoneResult.id}
@@ -41,7 +52,7 @@ export const MilestoneResultListbyUser = () => {
             user={milestoneResult.user}
           />
         )}
-      </div>
+      </Box>
     </>
   );
 };
