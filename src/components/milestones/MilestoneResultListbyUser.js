@@ -1,6 +1,7 @@
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import { getAllUserMilestonesByUserID } from "../../modules/APIManager";
 import { MilestoneResultCard } from "./MilestoneResultCard";
 
@@ -31,7 +32,7 @@ export const MilestoneResultListbyUser = () => {
     <>
       <div>
         <h1>Personal Achievements</h1>
-        <p>Viewing Achievements for {thisUser.firstName} {thisUser.lastName}</p>
+        <p>Viewing Achievements for <Link to={`/users/${thisUser.id}/`} title={`View ${thisUser.firstName} ${thisUser.lastName}'s Profile`}>{thisUser.firstName} {thisUser.lastName}</Link> </p>
       </div>
       <Box
         spacing={2}

@@ -7,7 +7,16 @@ import {
   getUserByID,
 } from "../../modules/APIManager";
 import { GetAge } from "../helpers/GetAge";
-import { useNavigate } from 'react-router';
+import { useNavigate } from "react-router";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  Paper,
+  Typography,
+} from "@mui/material";
 
 export const UserProfile = () => {
   const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
@@ -91,60 +100,74 @@ export const UserProfile = () => {
     getUserChildrenConnections();
   }, [userId]);
 
+  let fullName = `${user.firstName} ${user.lastName}`;
+  let userAge = `Age: ${GetAge(user.DOB)}`;
+
   return (
     <>
-      <div><h1>Profile Info</h1></div>
-      <h3>
-        {user.firstName} {user.lastName}
-      </h3>
-      <div>Age: {GetAge(user.DOB)}</div>
-      {/* Add conditional statement that shows a link to All Milestones view when a user has no userMilestones (milestone results) */}
-      <button
-        className="userMilestone__link"
-        onClick={() => navigate(`/users/${user.id}/achievements`)}
+      <Card
+        // variant="outlined"
+        key={user.id}
+        sx={{
+          m: 1,
+          flexShrink: 1,
+          flexGrow: 1,
+          display: "flex",
+          flexDirection: "column",
+          // justifyContent: "space-between",
+          maxWidth: "100%",
+          width: "100%",
+        }}
       >
-        <strong>{milestoneResults.length}</strong> {user.firstName}'s
-        Achievements!
-      </button>
+        <CardHeader title={fullName} subheader={userAge} />
 
-      {user.id === currentUserId ? (
-        <>
-          <div>
-            <button
-              id={`user__edit-${user.id}`}
-              onClick={() => navigate(`/users/${user.id}/edit`)}
-              disabled={isLoading}
-            >
-              Update My Profile
-            </button>
-          </div>
-          <div>
-            <button onClick={() => navigate(-1)}>Back</button>
-          </div>
-        </>
-      ) : (
-        <>
-          <div>
-            <button
-              id={`user__edit-${user.id}`}
-              disabled={buttonAccess}
-              onClick={() => navigate(`/users/${user.id}/edit`)}
-            >
-              Manage
-            </button>
-            <button
-              id={`user__delete-${user.id}`}
-              disabled={buttonAccess}
-              onClick={() => handleDeleteUser(user.id)}
-            >
-              Delete
-            </button>
-          </div>
-          <div>
-            <button onClick={() => navigate(-1)}>Back</button>
-          </div>
-        </>
-      )}
+        <CardContent>
+
+          <Typography variant="body2">
+            Administrator: {user.admin === true ? "Yes" : "No"}
+          </Typography>
+        </CardContent>
+        <CardActions sx={{ alignItems: "stretch" }}>
+          {user.id === currentUserId ? (
+            <>
+              <Button
+                id={`user__edit-${user.id}`}
+                onClick={() => navigate(`/users/${user.id}/edit`)}
+                disabled={isLoading}
+              >
+                Update My Profile
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                variant="contained"
+                id={`user__edit-${user.id}`}
+                disabled={buttonAccess}
+                onClick={() => navigate(`/users/${user.id}/edit`)}
+              >
+                Manage
+              </Button>
+              <Button
+                id={`user__delete-${user.id}`}
+                disabled={buttonAccess}
+                onClick={() => handleDeleteUser(user.id)}
+              >
+                Delete
+              </Button>
+            </>
+          )}
+        </CardActions>
+        <CardActions>
+          <Button
+            variant="contained"
+            className="userMilestone__link"
+            onClick={() => navigate(`/users/${user.id}/achievements`)}
+          >
+            {milestoneResults.length} Achievements
+          </Button>
+        </CardActions>
+      </Card>
     </>
   );
 };

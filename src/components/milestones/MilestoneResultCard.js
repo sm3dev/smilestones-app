@@ -37,7 +37,6 @@ export const MilestoneResultCard = ({ milestoneResult, milestone, user }) => {
           title={milestone.name}
           subheader={fullName}
           component={Link}
-          title={milestone.name}
           to={`/achievements/${milestoneResult.id}`}
         />
         <CardContent>
@@ -62,7 +61,7 @@ export const MilestoneResultCard = ({ milestoneResult, milestone, user }) => {
             Achieved: {milestoneResult.date}
           </Typography>
         </CardContent>
-        <CardActions>
+        <CardActions sx={{ alignItems: "stretch" }}>
           <Button
             component={Link}
             to={`/achievements/${milestoneResult.id}`}

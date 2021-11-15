@@ -7,7 +7,16 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { GetAge } from "../helpers/GetAge";
 import { Link } from "react-router-dom";
-import { useNavigate } from 'react-router';
+import { useNavigate } from "react-router";
+import {
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  ListItemIcon,
+  Typography,
+} from "@mui/material";
+import { EmojiEvents } from "@mui/icons-material";
 
 export const MyUserCard = ({ user, handleDeleteUser }) => {
   const [open, setOpen] = useState(false);
@@ -21,35 +30,66 @@ export const MyUserCard = ({ user, handleDeleteUser }) => {
   };
 
   const navigate = useNavigate();
+  let fullName = `${user.firstName} ${user.lastName}`;
+  let birthDateText = `Birthday: ${user.DOB}, Age: ${GetAge(user.DOB)}`;
 
   // I want to be able to show the total number of Milestone Achievements on the same line that links to the User's Milestone Achievements view
 
   return (
     <>
-      <Link to={`/users/${user.id}`}>
-        <h3>
-          {user.firstName} {user.lastName}
-        </h3>
-      </Link>
+      <Card
+        sx={{
+          m: 1,
+          flexShrink: 0,
+          flexGrow: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          maxWidth: "100%",
+          width: "100%",
+          height: "auto",
+        }}
+        key={user.id}
+      >
+        <CardHeader
+          title={fullName}
+          subheader={birthDateText}
+          component={Link}
+          to={`/users/${user.id}`}
+        />
 
-      <div>Age: {GetAge(user.DOB)} </div>
+        <CardContent>
+          <Typography
+            variant="body1"
+            component="a"
+            href={`mailto:${user.email}`}
+          >
+            Email&#58; {user.email}
+          </Typography>
+        </CardContent>
+        <CardActions sx={{ alignItems: "stretch" }} >
+          <Button
+            variant="contained"
+            className="userMilestone__link"
+            onClick={() => navigate(`/users/${user.id}/achievements`)}
+          >
+            Achievements
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => navigate(`/users/${user.id}/edit`)}
+          >
+            Manage Account
+          </Button>
+          <Button variant="outlined" onClick={handleClickOpen}>
+            Delete
+          </Button>
+        </CardActions>
+      </Card>
+
       {/* Add conditional statement that shows a link to All Milestones view when a user has no userMilestones (milestone results) */}
 
       <div>
-        <Button
-          variant="outlined"
-          className="userMilestone__link"
-          onClick={() => navigate(`/achievements/user/${user.id}`)}
-        >
-          View {user.firstName}'s Achievements
-        </Button>
-        <Button
-          variant="outlined"
-          onClick={() => navigate(`/users/${user.id}/edit`)}
-        >
-          Manage Account
-        </Button>
-        <Button onClick={handleClickOpen}>delete</Button>
         <Dialog
           open={open}
           onClose={handleClose}
@@ -68,13 +108,12 @@ export const MyUserCard = ({ user, handleDeleteUser }) => {
             <Button onClick={() => handleDeleteUser(user.id)}>
               Delete User
             </Button>
-            <Button onClick={handleClose} autoFocus>
+            <Button variant="outlined" onClick={handleClose} autoFocus>
               Cancel
             </Button>
           </DialogActions>
         </Dialog>
       </div>
-      <hr />
     </>
   );
 };
