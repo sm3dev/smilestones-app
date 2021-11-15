@@ -25,7 +25,7 @@ export const MilestoneCard = ({ milestone, milestoneType }) => {
             {milestone.description}
           </Typography>
         </CardContent>
-        <CardActions>
+        <CardActions sx={{ alignItems: "stretch" }}>
           <Button
             variant="contained"
             id={milestone.id}
