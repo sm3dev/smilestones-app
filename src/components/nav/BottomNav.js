@@ -37,7 +37,7 @@ export const BottomNav = () => {
         sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
         elevation={2}
       >
-        <BottomNavigation value={value} onChange={handleChange}>
+        <BottomNavigation value={value} onChange={handleChange} showLabels >
           <BottomNavigationAction
             label="Home"
             value="home"
