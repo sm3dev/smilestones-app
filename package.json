@@ -2,6 +2,12 @@
   "name": "smilestones-app",
   "version": "0.1.0",
   "private": true,
+  "description": "The Smilestones App lets a parent create milestones for their children to achieve. A social platform for achieving milestones.",
+  "author": {
+    "name": "Michael P. Wright",
+    "email": "mwright@michaelpwright.com",
+    "url": "https://www.michaelpwright.com/"
+  },
   "dependencies": {
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
