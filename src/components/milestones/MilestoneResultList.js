@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import {
@@ -30,7 +30,12 @@ export const MilestoneResultList = () => {
 
   return (
     <>
-      <h2>Milestone Achievements!</h2>
+      <Typography variant="h4" component="h2">
+        Milestone Achievements! 
+      </Typography>
+      <Typography variant="subtitle1">
+      {milestoneResults.length} ACHIEVEMENTS AND COUNTING! 
+      </Typography>
       <Box
         spacing={2}
         sx={{

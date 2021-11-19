@@ -3,6 +3,14 @@ import { deleteUser, getAllUsers } from "../../modules/APIManager";
 import { UserCard } from "./UserCard";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import {
+  Button,
+  ButtonGroup,
+  Card,
+  CardActions,
+  Typography,
+} from "@mui/material";
+import { Box } from "@mui/system";
 
 // show all user accounts in the database
 export const UserList = () => {
@@ -27,42 +35,32 @@ export const UserList = () => {
 
   return (
     <>
-      <h1>Users Everywhere</h1>
-      <p>
-        View All Smilestoners
-        <small>
-          <em> No, that definitely won't work</em>
-        </small>
-      </p>
-      <div>
-    
-        <button
-          className="my-profile__button"
-          // onClick={() => <Link to={`user/${currentUserId}`} />}
-        >
-          <Link to={`/users/${currentUserId}`}>Manage My Account</Link>
-        </button>
-      </div>
-      <div>
-        <button onClick={() => navigate("/users/create")}>Add User</button>
-        <button onClick={() => navigate("/users/create")}>
-          Add Child
-          <small>
-            <em>coming soon</em>
-          </small>
-        </button>
-      </div>
-      <div>
-        {users.map((user) => (
-          <UserCard
-            key={user.id}
-            user={user}
-            userMilestones={user.userMilestones}
-            totalMilestoneResults={user.userMilestones.length}
-            handleDeleteUser={handleDeleteUser}
-          />
-        ))}
-      </div>
+      <Typography variant="h4" component="h1">
+        Users Everywhere{" "}
+      </Typography>
+      <Typography variant="subtitle1">View All Smilestoners</Typography>
+      <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
+        <ButtonGroup variant="outlined" aria-label="outlined button group">
+          <Button component={Link} to={`/users/${currentUserId}`}>
+            My Account
+          </Button>
+          <Button component={Link} to={"/users/create"}>
+            Add Child
+          </Button>
+          <Button component={Link} to={"/users/create"} disabled>
+            Add Parent
+          </Button>
+        </ButtonGroup>
+      </Box>
+      {users.map((user) => (
+        <UserCard
+          key={user.id}
+          user={user}
+          userMilestones={user.userMilestones}
+          totalMilestoneResults={user.userMilestones.length}
+          handleDeleteUser={handleDeleteUser}
+        />
+      ))}
     </>
   );
 };

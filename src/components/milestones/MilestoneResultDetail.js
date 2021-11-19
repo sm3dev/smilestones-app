@@ -7,6 +7,16 @@ import {
   getUserMilestoneByID,
 } from "../../modules/APIManager";
 import { useNavigate } from "react-router";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  Paper,
+  Typography,
+} from "@mui/material";
+import { ChildCare, EmojiEvents } from "@mui/icons-material";
 
 export const MilestoneResultDetail = () => {
   const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
@@ -81,66 +91,111 @@ export const MilestoneResultDetail = () => {
 
   return (
     <>
-      <h1>{milestoneResult.user?.firstName}'s Achievement</h1>
-      <h2>Milestone: {milestoneResult.milestone?.name}</h2>
-      <p>{milestoneResult.milestone?.description}</p>
+      <Typography variant="h4" component="h1">
+        {milestoneResult.user?.firstName}'s Achievement
+      </Typography>
+      <Card
+        key={milestoneResult.id}
+        elevation={4}
+        sx={{
+          m: 1,
+          flexShrink: 1,
+          flexGrow: 1,
+          display: "flex",
+          flexDirection: "column",
+          maxWidth: "100%",
+          width: "100%",
+        }}
+      >
+        <CardHeader
+          title={milestoneResult.milestone?.name}
+          subheader={milestoneResult.milestone?.description}
+        />
+        <CardContent>
+          {milestoneResult.timeToComplete !== 0 && (
+            <>
+              <Typography variant="h5">
+                Time &#40;seconds&#41;: {milestoneResult.timeToComplete}
+              </Typography>
+            </>
+          )}
+
+          {milestoneResult.distance !== 0 && (
+            <>
+              {" "}
+              <Typography variant="h5">
+                Distance: {milestoneResult.distance}{" "}
+              </Typography>
+            </>
+          )}
+
+          {milestoneResult.height !== 0 && (
+            <>
+              {" "}
+              <Typography variant="h5">
+                Height: {milestoneResult.height}{" "}
+              </Typography>
+            </>
+          )}
+
+          {milestoneResult.quantity !== 0 && (
+            <>
+              {" "}
+              <Typography variant="h5">
+                Amount: {milestoneResult.quantity}{" "}
+              </Typography>
+            </>
+          )}
+          <Typography variant="subtitle1">
+            Date Achieved: {milestoneResult.date}
+          </Typography>
+          {milestoneResult.validated === true ? (
+            <>
+              <Typography variant="body1">Validated: Yes</Typography>
+            </>
+          ) : (
+            <>
+              <Typography variant="body1">
+                {" "}
+                Validation Needed -- Click <strong>Edit</strong> Button to
+                Validate
+              </Typography>
+            </>
+          )}
+          <Typography></Typography>
+        </CardContent>
+        <CardActions>
+          <Button
+            variant="contained"
+            onClick={() =>
+              navigate(`/users/${milestoneResult.user?.id}/achievements`)
+            }
+          >
+            All of {milestoneResult.user?.firstName}'s Achievements
+          </Button>
+          <Button
+            disabled={buttonAccess}
+            variant="contained"
+            onClick={() =>
+              navigate(`/users/${milestoneResult.user?.id}/achievements`)
+            }
+          >
+            Edit
+          </Button>
+          <Button
+            variant="outlined"
+            onClick={() => handleDeleteMilestoneResult(milestoneResult.id)}
+            disabled={buttonAccess}
+          >
+            Delete
+          </Button>
+        </CardActions>
+      </Card>
+      <Button variant="outlined" onClick={() => navigate("/achievements")}>
+        <EmojiEvents /> View All Achievements
+      </Button>
       {/* {milestoneResult.milestone?.repeater === false ? (
         <div>Achieved on {milestoneResult.date}</div>)} */}
-
-      <div>Date Achieved: {milestoneResult.date}</div>
-
-      {milestoneResult.timeToComplete !== 0 && (
-        <>
-          <div>Time &#40;seconds&#41;: {milestoneResult.timeToComplete}</div>
-        </>
-      )}
-
-      {milestoneResult.distance !== 0 && (
-        <>
-          <div>Distance: {milestoneResult.distance}</div>
-        </>
-      )}
-
-      {milestoneResult.height !== 0 && (
-        <>
-          <div>Height: {milestoneResult.height}</div>
-        </>
-      )}
-
-      {milestoneResult.quantity !== 0 && (
-        <>
-          <div>Amount: {milestoneResult.quantity}</div>
-        </>
-      )}
-
-      {milestoneResult.validated === true ? (
-        <div>Validated: Yes</div>
-      ) : (
-        <div>
-          Validation Needed -- Click <strong>Edit</strong> Button to Validate
-        </div>
-      )}
-      <div>
-        <Link to={`/users/${milestoneResult.user?.id}/achievements`}>
-          <button> More of {milestoneResult.user?.firstName}'s Achievements</button>
-        </Link>
-      </div>
-      <div>
-        <Link to={`/achievements/${milestoneResult.id}/edit`}>
-          <button disabled={buttonAccess}>Edit</button>
-        </Link>
-        <button
-          onClick={() => handleDeleteMilestoneResult(milestoneResult.id)}
-          disabled={buttonAccess}
-        >
-          Delete
-        </button>
-      </div>
-      <div>
-        <Link to="/achievements">
-          <button>All Achievements</button>
-        </Link>
-      </div>
     </>
   );
 };

@@ -29,9 +29,6 @@ export const Smilestones = () => {
       {sessionStorage.getItem("smilestones_user") ? (
         <>
           {" "}
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
           <Container maxWidth={false}>
             <Box sx={{ flexGrow: 1 }}>
               <ApplicationViews />
@@ -57,6 +54,7 @@ const ApplicationViews = () => {
   return (
     <>
       <Routes>
+      <Route path="/" element={<Home />} />
         <Route path="milestones" element={<MilestoneList />} />
         <Route path="milestones/:milestoneId" element={<MilestoneCard />} />
         <Route

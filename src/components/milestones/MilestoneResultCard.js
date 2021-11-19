@@ -57,7 +57,7 @@ export const MilestoneResultCard = ({ milestoneResult, milestone, user }) => {
               <>Amount: {milestoneResult.quantity}</>
             )}
           </Typography>
-          <Typography variant="subtitle">
+          <Typography variant="subtitle1">
             Achieved: {milestoneResult.date}
           </Typography>
         </CardContent>
