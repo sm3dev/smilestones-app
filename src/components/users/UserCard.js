@@ -1,21 +1,52 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
-import { GetAge } from '../helpers/GetAge';
-import { useNavigate } from 'react-router';
+import React from "react";
+import { Link } from "react-router-dom";
+import { GetAge } from "../helpers/GetAge";
+import { useNavigate } from "react-router";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  Typography,
+} from "@mui/material";
 
 export const UserCard = ({ user, totalMilestoneResults }) => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  let fullName = `${user.firstName} ${user.lastName}`;
+  let birthDateText = `Age: ${GetAge(user.DOB)}`;
+  // I want to be able to show the total number of Milestone Achievements on the same line that links to the User's Milestone Achievements view
 
-    // I want to be able to show the total number of Milestone Achievements on the same line that links to the User's Milestone Achievements view
-
-    return (
-        <>
-        <Link to={`/users/${user.id}`}><h3>{user.firstName} {user.lastName}</h3></Link>
-        <div>Age: {GetAge(user.DOB)}</div>
-        {/* Add conditional statement that shows a link to All Milestones view when a user has no userMilestones (milestone results) */}
-        <button className="userMilestone__link" onClick={() => navigate(`/users/${user.id}/achievements`)}><strong>{totalMilestoneResults}</strong> {user.firstName}'s Milestone Achievements 
-        </button>
-        <hr/>
-        </>
-    )
-}
+  return (
+    <>
+      <Card
+        sx={{
+            m: 2,
+            flexShrink: 0,
+            flexGrow: 0,
+            width: 300,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+        }}
+        key={user.id}
+      >
+        <CardHeader
+          title={fullName}
+          subheader={birthDateText}
+          component={Link}
+          to={`/users/${user.id}`}
+        />
+        <CardActions>
+          <Button
+            variant="contained"
+            className="userMilestone__link"
+            onClick={() => navigate(`/users/${user.id}/achievements`)}
+          >
+            {totalMilestoneResults} Achievements
+          </Button>
+        </CardActions>
+      </Card>
+    </>
+  );
+};

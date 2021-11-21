@@ -31,10 +31,10 @@ export const MilestoneResultList = () => {
   return (
     <>
       <Typography variant="h4" component="h2">
-        Milestone Achievements! 
+        Milestone Achievements
       </Typography>
       <Typography variant="subtitle1">
-      {milestoneResults.length} ACHIEVEMENTS AND COUNTING! 
+      {milestoneResults.length} Achievements and counting! 
       </Typography>
       <Box
         spacing={2}
