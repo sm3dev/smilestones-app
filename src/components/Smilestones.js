@@ -54,9 +54,10 @@ const ApplicationViews = () => {
   return (
     <>
       <Routes>
-      <Route path="/" element={<Home />} />
-        <Route path="milestones" element={<MilestoneList />} />
-        <Route path="milestones/:milestoneId" element={<MilestoneCard />} />
+        <Route path="/" element={<Home />} />
+        <Route path="milestones" element={<MilestoneList />}>
+          <Route path=":milestoneId" element={<MilestoneCard />} />
+        </Route>
         <Route
           path="milestones/:milestoneId/achievements/create"
           element={<MilestoneResultForm />}

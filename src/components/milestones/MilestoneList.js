@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Button, ButtonGroup, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { getAllMilestones } from "../../modules/APIManager";
@@ -31,30 +31,32 @@ export const MilestoneList = () => {
 
   return (
     <>
-      <h1>Checkout the Milestones!</h1>
-      <div>
-        {/* The Add Milestone button should only be visible if the logged-in user is an Admin */}
-        <button disabled>
-          Add Milestone{" "}
-          <small>
-            <em>coming soon</em>
-          </small>
-        </button>
-      </div>
-      <hr />
-      <hr />
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          {milestones.map((milestone) => (
-            <Grid key={milestone.id} item xs={4}>
-              <MilestoneCard
-                key={milestone.id}
-                milestone={milestone}
-                milestoneType={milestone.milestoneType}
-              />
-            </Grid>
-          ))}
-        </Grid>
+      <Typography variant="h4" component="h1">
+        Checkout the Milestones!
+      </Typography>
+      <ButtonGroup>
+        <Button variant="outlined" disabled>
+          Add Milestone
+        </Button>
+      </ButtonGroup>
+       <Box
+        spacing={2}
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          maxWidth: "100%",
+          alignContent: "flex-start",
+          flexBasis: 300,
+        }}
+      >
+        {milestones.map((milestone) => (
+          <MilestoneCard
+            key={milestone.id}
+            milestone={milestone}
+            milestoneType={milestone.milestoneType}
+          />
+        ))}
       </Box>
 
       {/* <div>

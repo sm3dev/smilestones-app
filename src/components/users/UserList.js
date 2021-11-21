@@ -6,8 +6,6 @@ import { Link } from "react-router-dom";
 import {
   Button,
   ButtonGroup,
-  Card,
-  CardActions,
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
@@ -36,7 +34,7 @@ export const UserList = () => {
   return (
     <>
       <Typography variant="h4" component="h1">
-        Users Everywhere{" "}
+        All Users {" "}
       </Typography>
       <Typography variant="subtitle1">View All Smilestoners</Typography>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
@@ -51,16 +49,28 @@ export const UserList = () => {
             Add Parent
           </Button>
         </ButtonGroup>
+      </Box>{" "}
+      <Box
+        spacing={2}
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          maxWidth: "100%",
+          alignContent: "flex-start",
+          flexBasis: 300,
+        }}
+      >
+        {users.map((user) => (
+          <UserCard
+            key={user.id}
+            user={user}
+            userMilestones={user.userMilestones}
+            totalMilestoneResults={user.userMilestones.length}
+            handleDeleteUser={handleDeleteUser}
+          />
+        ))}
       </Box>
-      {users.map((user) => (
-        <UserCard
-          key={user.id}
-          user={user}
-          userMilestones={user.userMilestones}
-          totalMilestoneResults={user.userMilestones.length}
-          handleDeleteUser={handleDeleteUser}
-        />
-      ))}
     </>
   );
 };
