@@ -1,3 +1,5 @@
+import { Typography, Button, ButtonGroup } from "@mui/material";
+import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
@@ -85,17 +87,17 @@ export const MilestoneResultForm = () => {
     event.preventDefault();
     setIsLoading(true);
 
-    addNewUserMilestone(milestoneResult).then(() =>
-      navigate(`/achievements`)
-    );
+    addNewUserMilestone(milestoneResult).then(() => navigate(`/achievements`));
   };
 
   return (
     <>
-      <h1>New Milestone Achievement</h1>
-      <h2>Milestone: {thisMilestone.name}</h2>
+      <Typography variant="h4" component="h1">
+        New Achievement
+      </Typography>
+      <Typography variant="h5">Milestone: {thisMilestone.name}</Typography>
       <h5>Type: {thisMilestone.milestoneType?.name}</h5>
-      <form>
+      <Box className="milestone-result__form">
         <div className="form-group">
           <input
             value={milestoneResult.userId}
@@ -114,7 +116,7 @@ export const MilestoneResultForm = () => {
               <input
                 value={milestoneResult.timeToComplete}
                 id="timeToComplete"
-                type="number"
+                type="time"
                 onChange={handleControlledInputChange}
               />
             </div>
@@ -214,7 +216,7 @@ export const MilestoneResultForm = () => {
             <p>{thisMilestone.description}</p>
           </div>
         </div>
-      </form>
+      </Box>
     </>
   );
 };
