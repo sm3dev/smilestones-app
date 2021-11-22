@@ -8,7 +8,11 @@ import {
   CardHeader,
   Typography,
 } from "@mui/material";
-import { CalendarToday, Today } from "@mui/icons-material";
+import {
+  ReadMore,
+  AddCircleOutline,
+} from "@mui/icons-material";
+import { useNavigate } from "react-router";
 
 // const remoteURL = "http://localhost:7777";
 export const MilestoneResultCard = ({ milestoneResult, milestone, user }) => {
@@ -18,7 +22,9 @@ export const MilestoneResultCard = ({ milestoneResult, milestone, user }) => {
   // const getMilestoneTypeData = (thisMilestoneTypeId) => {
   //   return fetch(`${remoteURL}/milestoneTypes/${thisMilestoneTypeId}`).then(results => results.json())
   // }
- let fullName = `${user.firstName} ${user.lastName}`;
+  let fullName = `${user.firstName} ${user.lastName}`;
+  const navigate = useNavigate();
+
   return (
     <>
       <Card
@@ -63,13 +69,25 @@ export const MilestoneResultCard = ({ milestoneResult, milestone, user }) => {
         </CardContent>
         <CardActions sx={{ alignItems: "stretch" }}>
           <Button
+            startIcon={<ReadMore />}
             component={Link}
             to={`/achievements/${milestoneResult.id}`}
-            variant="text"
+            variant="outlined"
+            fullWidth
           >
             More Details
           </Button>
         </CardActions>
+
+        <Button startIcon={<AddCircleOutline/>}
+          variant="contained"
+          id={milestone.id}
+          onClick={() =>
+            navigate(`/milestones/${milestone.id}/achievements/create`)
+          }
+        >
+          Submit Result
+        </Button>
       </Card>
     </>
   );
