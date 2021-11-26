@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "@mui/material";
+import { Container, createTheme, ThemeProvider } from "@mui/material";
 import { Box } from "@mui/system";
 import { Navigate, Route, Routes } from "react-router";
 // import { ApplicationViews } from "./ApplicationViews";
@@ -25,7 +25,8 @@ import { UserProfile } from "./users/UserProfile";
 export const Smilestones = () => {
   return (
     <>
-      <NavBar />
+    <ThemeProvider theme={theme}>
+            <NavBar />
       {sessionStorage.getItem("smilestones_user") ? (
         <>
           {" "}
@@ -46,6 +47,8 @@ export const Smilestones = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
+    </ThemeProvider>
+
     </>
   );
 };
@@ -86,3 +89,14 @@ const ApplicationViews = () => {
     </>
   );
 };
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#3d5afe",
+    },
+    secondary: {
+      main: "#fee13d",
+    },
+  },
+});
