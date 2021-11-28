@@ -186,7 +186,7 @@ export const MilestoneResultDetail = () => {
             disabled={buttonAccess}
             variant="contained"
             onClick={() =>
-              navigate(`/users/${milestoneResult.user?.id}/achievements`)
+              navigate(`/achievements/${milestoneResult.id}/edit`)
             }
           >
             Edit

@@ -1,4 +1,10 @@
-import { Typography, Button, ButtonGroup } from "@mui/material";
+import {
+  Typography,
+  Button,
+  ButtonGroup,
+  TextField,
+  InputAdornment,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
@@ -53,11 +59,18 @@ export const MilestoneResultForm = () => {
     if (
       event.target.id.includes("Id") ||
       event.target.id.includes("timeToComplete") ||
-      event.target.id.includes("distance") ||
-      event.target.id.includes("height") ||
+      // event.target.id.includes("distance") ||
+      // event.target.id.includes("height") ||
       event.target.id.includes("quantity")
     ) {
       selectedVal = parseInt(selectedVal);
+    }
+
+    if (event.target.id === "height" || event.target.id === "distance") {
+      function distance(numValue) {
+        return Number.parseFloat(numValue).toFixed(2);
+      }
+      selectedVal = distance(selectedVal);
     }
 
     // run function tht makes the value a boolean that gets saved to the MilestoneResult
@@ -139,6 +152,24 @@ export const MilestoneResultForm = () => {
 
         {thisMilestone.milestoneType?.id === 3 && (
           <>
+            <TextField
+              type="number"
+              value={milestoneResult.height}
+              variant="filled"
+              inputProps={{
+                maxLength: 999,
+                step: "0.25",
+              }}
+              label="Height"
+              id="height"
+              sx={{ m: 1, width: "25ch" }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">inch</InputAdornment>
+                ),
+              }}
+              onChange={handleControlledInputChange}
+            />
             <div className="form-group">
               <label htmlFor="height">Height &#40;inches&#41;:</label>
               <input
