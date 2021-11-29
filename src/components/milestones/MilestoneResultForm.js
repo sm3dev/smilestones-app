@@ -1,3 +1,4 @@
+import { TimePicker } from "@mui/lab";
 import {
   Typography,
   Button,
@@ -38,6 +39,8 @@ export const MilestoneResultForm = () => {
     repeater: false,
   });
 
+  const [timeValue, setTimeValue] = useState(new Date());
+
   const navigate = useNavigate();
 
   const handleValidatedTrueFalse = (stringAnswer) => {
@@ -59,8 +62,6 @@ export const MilestoneResultForm = () => {
     if (
       event.target.id.includes("Id") ||
       event.target.id.includes("timeToComplete") ||
-      // event.target.id.includes("distance") ||
-      // event.target.id.includes("height") ||
       event.target.id.includes("quantity")
     ) {
       selectedVal = parseInt(selectedVal);
@@ -122,6 +123,28 @@ export const MilestoneResultForm = () => {
 
         {thisMilestone.milestoneType?.id === 1 && (
           <>
+            <TimePicker
+              ampm={false}
+              openTo="hours"
+              views={["hours", "minutes", "seconds"]}
+              inputFormat="HH:mm:ss"
+              mask="__:__:__"
+              id="timeToComplete"
+              label="Time"
+              value={milestoneResult.timeToComplete}
+              onChange={handleControlledInputChange}
+              type="time"
+              // sx={{ m: 1, width: "25ch" }}
+              variant="outlined"
+              focused
+              // InputProps={{
+              //   endAdornment: (
+              //     <InputAdornment position="end">seconds</InputAdornment>
+              //   ),
+              // }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+
             <div className="form-group">
               <label htmlFor="timeToComplete">
                 Your Time &#40;seconds&#41;:
@@ -138,15 +161,24 @@ export const MilestoneResultForm = () => {
 
         {thisMilestone.milestoneType?.id === 2 && (
           <>
-            <div className="form-group">
-              <label htmlFor="distance">Distance/Length &#40;feet&#41;:</label>
-              <input
-                id="distance"
-                type="number"
-                value={milestoneResult.distance}
-                onChange={handleControlledInputChange}
-              />
-            </div>
+            <TextField
+              id="distance"
+              type="number"
+              label="Distance/Length"
+              value={milestoneResult.distance}
+              onChange={handleControlledInputChange}
+              sx={{ m: 1, width: "25ch" }}
+              variant="outlined"
+              focused
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">ft</InputAdornment>
+                ),
+              }}
+              inputProps={{
+                step: "0.25",
+              }}
+            />
           </>
         )}
 
@@ -155,7 +187,7 @@ export const MilestoneResultForm = () => {
             <TextField
               type="number"
               value={milestoneResult.height}
-              variant="filled"
+              variant="outlined"
               inputProps={{
                 maxLength: 999,
                 step: "0.25",
@@ -169,16 +201,8 @@ export const MilestoneResultForm = () => {
                 ),
               }}
               onChange={handleControlledInputChange}
+              focused
             />
-            <div className="form-group">
-              <label htmlFor="height">Height &#40;inches&#41;:</label>
-              <input
-                id="height"
-                type="number"
-                value={milestoneResult.height}
-                onChange={handleControlledInputChange}
-              />
-            </div>
           </>
         )}
 

@@ -1,3 +1,4 @@
+import { InputAdornment, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
@@ -58,14 +59,14 @@ export const MilestoneResultEditForm = () => {
       date: milestoneResult.date,
       validated: milestoneResult.validated,
       timeToComplete: parseInt(milestoneResult.timeToComplete),
-      distance: parseInt(milestoneResult.distance),
-      height: parseInt(milestoneResult.height),
+      distance: milestoneResult.distance,
+      height: milestoneResult.height,
       quantity: parseInt(milestoneResult.quantity),
       remarks: milestoneResult.remarks,
     };
 
     updateUserMilestone(editedMilestoneResult).then(() =>
-    navigate(`/users/${editedMilestoneResult.userId}/achievements`)
+      navigate(`/users/${editedMilestoneResult.userId}/achievements`)
     );
   };
 
@@ -84,7 +85,10 @@ export const MilestoneResultEditForm = () => {
   return (
     <>
       <h1>Update an Achievement</h1>
-      <h2>Achiever: {milestoneResult.user?.firstName} {milestoneResult.user?.lastName}</h2>
+      <h2>
+        Achiever: {milestoneResult.user?.firstName}{" "}
+        {milestoneResult.user?.lastName}
+      </h2>
       <div className="form-group">
         <h3>Milestone: {thisMilestone.name}</h3>
       </div>
@@ -117,29 +121,48 @@ export const MilestoneResultEditForm = () => {
 
         {thisMilestone.milestoneType?.id === 2 && (
           <>
-            <div className="form-group">
-              <label htmlFor="distance">Distance/Length &#40;feet&#41;:</label>
-              <input
-                id="distance"
-                type="number"
-                value={milestoneResult.distance}
-                onChange={handleFieldChange}
-              />
-            </div>
+            <TextField
+              id="distance"
+              type="number"
+              label="Distance/Length"
+              value={milestoneResult.distance}
+              onChange={handleFieldChange}
+              sx={{ m: 1, width: "25ch" }}
+              variant="outlined"
+              focused
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">ft</InputAdornment>
+                ),
+              }}
+              inputProps={{
+                step: "0.25",
+              }}
+            />
           </>
         )}
 
         {thisMilestone.milestoneType?.id === 3 && (
           <>
-            <div className="form-group">
-              <label htmlFor="height">Height &#40;inch&#41;:</label>
-              <input
-                id="height"
-                type="number"
-                value={milestoneResult.height}
-                onChange={handleFieldChange}
-              />
-            </div>
+            <TextField
+              type="number"
+              value={milestoneResult.height}
+              variant="outlined"
+              inputProps={{
+                maxLength: 999,
+                step: "0.25",
+              }}
+              label="Height"
+              id="height"
+              sx={{ m: 1, width: "25ch" }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">inch</InputAdornment>
+                ),
+              }}
+              onChange={handleFieldChange}
+              focused
+            />
           </>
         )}
 

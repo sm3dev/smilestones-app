@@ -1,4 +1,5 @@
 import React from "react";
+import { LocalizationProvider } from "@mui/lab";
 import { Container, createTheme, ThemeProvider } from "@mui/material";
 import { Box } from "@mui/system";
 import { Navigate, Route, Routes } from "react-router";
@@ -21,34 +22,36 @@ import { UserEditForm } from "./users/UserEditForm";
 import { UserForm } from "./users/UserForm";
 import { UserList } from "./users/UserList";
 import { UserProfile } from "./users/UserProfile";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
 
 export const Smilestones = () => {
   return (
     <>
-    <ThemeProvider theme={theme}>
-            <NavBar />
-      {sessionStorage.getItem("smilestones_user") ? (
-        <>
-          {" "}
-          <Container maxWidth={false}>
-            <Box sx={{ flexGrow: 1 }}>
-              <ApplicationViews />
-            </Box>
-          </Container>
-          <BottomNav />
-        </>
-      ) : (
-        <Routes>
-          <Route path="/" element={<Navigate replace to="/login" />} />
-        </Routes>
-      )}
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <ThemeProvider theme={theme}>
+          <NavBar />
+          {sessionStorage.getItem("smilestones_user") ? (
+            <>
+              {" "}
+              <Container maxWidth={false}>
+                <Box sx={{ flexGrow: 1 }}>
+                  <ApplicationViews />
+                </Box>
+              </Container>
+              <BottomNav />
+            </>
+          ) : (
+            <Routes>
+              <Route path="/" element={<Navigate replace to="/login" />} />
+            </Routes>
+          )}
 
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
-    </ThemeProvider>
-
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </ThemeProvider>
+      </LocalizationProvider>
     </>
   );
 };
