@@ -61,7 +61,7 @@ export const MilestoneResultForm = () => {
     // I need a function that makes my number values save as integers and not strings. I can add on to this conditional. BOOM!
     if (
       event.target.id.includes("Id") ||
-      event.target.id.includes("timeToComplete") ||
+      // event.target.id.includes("timeToComplete") ||
       event.target.id.includes("quantity")
     ) {
       selectedVal = parseInt(selectedVal);
@@ -125,37 +125,22 @@ export const MilestoneResultForm = () => {
           <>
             <TimePicker
               ampm={false}
-              openTo="hours"
-              views={["hours", "minutes", "seconds"]}
-              inputFormat="HH:mm:ss"
-              mask="__:__:__"
+              openTo="minutes"
+              views={["minutes", "seconds"]}
+              inputFormat="mm:ss"
+              mask="__:__"
               id="timeToComplete"
-              label="Time"
-              value={milestoneResult.timeToComplete}
-              onChange={handleControlledInputChange}
+              label="Time in mm:ss"
+              value={timeValue}
+              onChange={(newValue) => {
+                setTimeValue(newValue);
+              }}
               type="time"
-              // sx={{ m: 1, width: "25ch" }}
+              sx={{ m: 1, width: "25ch" }}
               variant="outlined"
               focused
-              // InputProps={{
-              //   endAdornment: (
-              //     <InputAdornment position="end">seconds</InputAdornment>
-              //   ),
-              // }}
               renderInput={(params) => <TextField {...params} />}
             />
-
-            <div className="form-group">
-              <label htmlFor="timeToComplete">
-                Your Time &#40;seconds&#41;:
-              </label>
-              <input
-                value={milestoneResult.timeToComplete}
-                id="timeToComplete"
-                type="time"
-                onChange={handleControlledInputChange}
-              />
-            </div>
           </>
         )}
 

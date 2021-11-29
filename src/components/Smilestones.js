@@ -23,11 +23,12 @@ import { UserForm } from "./users/UserForm";
 import { UserList } from "./users/UserList";
 import { UserProfile } from "./users/UserProfile";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import DateAdapter from '@mui/lab/AdapterDateFns';
 
 export const Smilestones = () => {
   return (
     <>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <LocalizationProvider dateAdapter={DateAdapter}>
         <ThemeProvider theme={theme}>
           <NavBar />
           {sessionStorage.getItem("smilestones_user") ? (
