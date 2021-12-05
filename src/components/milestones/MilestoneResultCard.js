@@ -32,7 +32,7 @@ export const MilestoneResultCard = ({ milestoneResult, milestone, user }) => {
           m: 2,
           flexShrink: 0,
           flexGrow: 0,
-          width: 300,
+          width: 320,
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
