@@ -108,7 +108,7 @@ export const UserForm = () => {
       </Typography>
       {/* I want to have this form show a Switch or Radio to choose between Child Account or Parent Account */}
       <Box sx={{ minWidth: 345, maxWidth: 600 }} component="form">
-        <Box sx={{ marginBlock: 1 }}>
+        <Box sx={{ "& > :not(style)": { m: 1 } }}>
           <FormControl fullWidth>
             <InputLabel id="parentId__label">Parent(s)</InputLabel>
             <Select
@@ -127,8 +127,6 @@ export const UserForm = () => {
             </Select>
             <FormHelperText>Select Your Parent's Name</FormHelperText>
           </FormControl>
-        </Box>
-        <Box sx={{ marginBlock: 1 }}>
           <div>
             <input
               type="hidden"
@@ -150,10 +148,17 @@ export const UserForm = () => {
               placeholder="First Name"
               value={user.firstName}
             ></TextField>
-
           </FormControl>
           <FormControl fullWidth variant="outlined">
-            <TextField label="Last Name"></TextField>
+            <TextField
+              label="Last Name"
+              onChange={handleControlledInputChange}
+              id="lastName"
+              type="text"
+              required
+              placeholder="Last Name"
+              value={user.lastName}
+            ></TextField>
           </FormControl>
           <FormControl fullWidth></FormControl>
           <FormControl fullWidth></FormControl>
