@@ -3,10 +3,14 @@ import { useParams } from "react-router-dom";
 import { addUser, addUserChild, getAllParents } from "../../modules/APIManager";
 import { useNavigate } from "react-router";
 import {
+  Divider,
   FormControl,
+  FormHelperText,
+  Input,
   InputLabel,
   MenuItem,
   Select,
+  TextField,
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
@@ -103,23 +107,57 @@ export const UserForm = () => {
         Create New Child Account{" "}
       </Typography>
       {/* I want to have this form show a Switch or Radio to choose between Child Account or Parent Account */}
-      <Box sx={{ minWidth: 360, width: 345 }}>
-        <FormControl fullWidth>
-          <InputLabel id="parentId__label">Parent</InputLabel>
-          <Select variant="outlined"
-            labelId="parentId__label"
-            id="parentId"
-            value={userParentChild.parentId}
-            label="Parent"
-            onChange={handleControlledInputChangeParent}
-          >
-            {parents.map((parent) => (
-              <MenuItem key={parent.id} value={parent.id} user={userId}>
-                {parent.firstName} {parent.lastName}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+      <Box sx={{ minWidth: 345, maxWidth: 600 }} component="form">
+        <Box sx={{ marginBlock: 1 }}>
+          <FormControl fullWidth>
+            <InputLabel id="parentId__label">Parent(s)</InputLabel>
+            <Select
+              variant="outlined"
+              labelId="parentId__label"
+              id="parentId"
+              value={userParentChild.parentId}
+              label="Parent(s)"
+              onChange={handleControlledInputChangeParent}
+            >
+              {parents.map((parent) => (
+                <MenuItem key={parent.id} value={parent.id} user={userId}>
+                  {parent.firstName} {parent.lastName}
+                </MenuItem>
+              ))}
+            </Select>
+            <FormHelperText>Select Your Parent's Name</FormHelperText>
+          </FormControl>
+        </Box>
+        <Box sx={{ marginBlock: 1 }}>
+          <div>
+            <input
+              type="hidden"
+              value={userParentChild.userId}
+              name="userId"
+              id="userId"
+              onChange={handleControlledInputChangeParent}
+            />
+          </div>
+
+          <FormControl fullWidth>
+            <TextField
+              variant="filled"
+              label="First Name"
+              onChange={handleControlledInputChange}
+              id="firstName"
+              type="text"
+              required
+              placeholder="First Name"
+              value={user.firstName}
+            ></TextField>
+
+          </FormControl>
+          <FormControl fullWidth variant="outlined">
+            <TextField label="Last Name"></TextField>
+          </FormControl>
+          <FormControl fullWidth></FormControl>
+          <FormControl fullWidth></FormControl>
+        </Box>
       </Box>
 
       <form action="">
