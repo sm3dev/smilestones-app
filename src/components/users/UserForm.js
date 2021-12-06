@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { addUser, addUserChild, getAllParents } from "../../modules/APIManager";
 import { useNavigate } from "react-router";
 import {
-  Divider,
   FormControl,
   FormHelperText,
   Input,
@@ -14,6 +13,13 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import {
+  LocalizationProvider,
+  MobileDatePicker,
+  DesktopDatePicker,
+  DatePicker,
+} from "@mui/lab";
 
 // Add New User Account to database
 export const UserForm = () => {
@@ -103,68 +109,84 @@ export const UserForm = () => {
 
   return (
     <>
-      <Typography variant="h4" component="h1">
-        Create New Child Account{" "}
-      </Typography>
-      {/* I want to have this form show a Switch or Radio to choose between Child Account or Parent Account */}
-      <Box sx={{ minWidth: 345, maxWidth: 600 }} component="form">
-        <Box sx={{ "& > :not(style)": { m: 1 } }}>
-          <FormControl fullWidth>
-            <InputLabel id="parentId__label">Parent(s)</InputLabel>
-            <Select
-              variant="outlined"
-              labelId="parentId__label"
-              id="parentId"
-              value={userParentChild.parentId}
-              label="Parent(s)"
-              onChange={handleControlledInputChangeParent}
-            >
-              {parents.map((parent) => (
-                <MenuItem key={parent.id} value={parent.id} user={userId}>
-                  {parent.firstName} {parent.lastName}
-                </MenuItem>
-              ))}
-            </Select>
-            <FormHelperText>Select Your Parent's Name</FormHelperText>
-          </FormControl>
-          <div>
-            <input
-              type="hidden"
-              value={userParentChild.userId}
-              name="userId"
-              id="userId"
-              onChange={handleControlledInputChangeParent}
-            />
-          </div>
+      {" "}
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <Typography variant="h4" component="h1">
+          Create New Child Account{" "}
+        </Typography>
+        {/* I want to have this form show a Switch or Radio to choose between Child Account or Parent Account */}
+        <Box sx={{ minWidth: 345, maxWidth: 600 }} component="form">
+          <Box sx={{ "& > :not(style)": { m: 1 } }}>
+            <FormControl fullWidth>
+              <InputLabel id="parentId__label">Parent(s)</InputLabel>
+              <Select
+                variant="outlined"
+                labelId="parentId__label"
+                id="parentId"
+                value={userParentChild.parentId}
+                label="Parent(s)"
+                onChange={handleControlledInputChangeParent}
+              >
+                {parents.map((parent) => (
+                  <MenuItem key={parent.id} value={parent.id} user={userId}>
+                    {parent.firstName} {parent.lastName}
+                  </MenuItem>
+                ))}
+              </Select>
+              <FormHelperText>Select Your Parent's Name</FormHelperText>
+            </FormControl>
+            <div>
+              <input
+                type="hidden"
+                value={userParentChild.userId}
+                name="userId"
+                id="userId"
+                onChange={handleControlledInputChangeParent}
+              />
+            </div>
 
-          <FormControl fullWidth>
-            <TextField
-              variant="filled"
-              label="First Name"
-              onChange={handleControlledInputChange}
-              id="firstName"
-              type="text"
-              required
-              placeholder="First Name"
-              value={user.firstName}
-            ></TextField>
-          </FormControl>
-          <FormControl fullWidth variant="outlined">
-            <TextField
-              label="Last Name"
-              onChange={handleControlledInputChange}
-              id="lastName"
-              type="text"
-              required
-              placeholder="Last Name"
-              value={user.lastName}
-            ></TextField>
-          </FormControl>
-          <FormControl fullWidth></FormControl>
-          <FormControl fullWidth></FormControl>
+            <FormControl fullWidth>
+              <TextField
+                variant="outlined"
+                label="First Name"
+                onChange={handleControlledInputChange}
+                id="firstName"
+                type="text"
+                required
+                placeholder="First Name"
+                value={user.firstName}
+              ></TextField>
+            </FormControl>
+            <FormControl fullWidth variant="outlined">
+              <TextField
+                label="Last Name"
+                onChange={handleControlledInputChange}
+                id="lastName"
+                type="text"
+                required
+                placeholder="Last Name"
+                value={user.lastName}
+              ></TextField>
+            </FormControl>
+            <FormControl fullWidth variant="outlined">
+              {" "}
+              <Input
+                inputComponent="input"
+                variant="outline"
+                inputProps={{
+                  variant: "outlined",
+                  label: "Date of Birth",
+                }}
+                type="date"
+                id="DOB"
+                value={user.DOB}
+                onChange={handleControlledInputChange}
+              />
+            </FormControl>
+            <FormControl fullWidth></FormControl>
+          </Box>
         </Box>
-      </Box>
-
+      </LocalizationProvider>
       <form action="">
         <fieldset>
           <label htmlFor="parent">Select Your Parent's Name:</label>
