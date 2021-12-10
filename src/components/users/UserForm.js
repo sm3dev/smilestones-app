@@ -36,7 +36,7 @@ export const UserForm = () => {
   // A new parent-child relationship (userParentConnection object) needs to take in either a parentId or a userId the assign the other. It makes sense to pass-in the new user and assign that to userID, then assign parentId based on what is selected in the Parent Select input field
   const [userParentChild, setUserParentChild] = useState({
     userId: 1,
-    parentId: "",
+    parentId: 1,
   });
 
   const [parents, setParents] = useState([]);
@@ -76,7 +76,7 @@ export const UserForm = () => {
     let selectedVal = event.target.value;
 
     // forms always provide values as strings, but we want to save the ids as numbers
-    if (event.target.id.includes("Id")) {
+    if (event.target.id === "parentId") {
       selectedVal = parseInt(selectedVal);
     }
 
@@ -115,35 +115,27 @@ export const UserForm = () => {
           Create New Child Account{" "}
         </Typography>
         {/* I want to have this form show a Switch or Radio to choose between Child Account or Parent Account */}
-        <Box sx={{ minWidth: 345, maxWidth: 600 }} component="form">
-          <Box sx={{ "& > :not(style)": { m: 1 } }}>
-            <FormControl fullWidth>
-              <InputLabel id="parentId__label">Parent(s)</InputLabel>
-              <Select
-                variant="outlined"
-                labelId="parentId__label"
-                id="parentId"
-                value={userParentChild.parentId}
-                label="Parent(s)"
-                onChange={handleControlledInputChangeParent}
-              >
-                {parents.map((parent) => (
-                  <MenuItem key={parent.id} value={parent.id} user={userId}>
-                    {parent.firstName} {parent.lastName}
-                  </MenuItem>
-                ))}
-              </Select>
-              <FormHelperText>Select Your Parent's Name</FormHelperText>
-            </FormControl>
-            <div>
-              <input
-                type="hidden"
-                value={userParentChild.userId}
-                name="userId"
-                id="userId"
-                onChange={handleControlledInputChangeParent}
-              />
-            </div>
+        <Box sx={{ minWidth: 345, maxWidth: 600 }}>
+          <Box
+            sx={{ "& > :not(style)": { m: 1 } }}
+            component="form"
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              id="parentId"
+              select
+              label="Parent(s)"
+              value={userParentChild.parentId}
+              onChange={handleControlledInputChangeParent}
+              helperText="Select Parent's Name"
+            >
+              {parents.map((parent) => (
+                <MenuItem key={parent.id} value={parent.id} user={userId}>
+                  {parent.firstName} {parent.lastName}
+                </MenuItem>
+              ))}
+            </TextField>
 
             <FormControl fullWidth>
               <TextField
@@ -183,12 +175,15 @@ export const UserForm = () => {
                 onChange={handleControlledInputChange}
               />
             </FormControl>
-            <FormControl fullWidth></FormControl>
+            <button onClick={handleClickSaveUser} className="save__button">
+              Create Account
+            </button>
+            <button onClick={() => navigate(-1)}>Cancel</button>
           </Box>
         </Box>
       </LocalizationProvider>
-      <form action="">
-        <fieldset>
+      {/* <form action="">
+        {/* <fieldset>
           <label htmlFor="parent">Select Your Parent's Name:</label>
           <select
             value={userParentChild.parentId}
@@ -210,9 +205,9 @@ export const UserForm = () => {
             id="userId"
             onChange={handleControlledInputChangeParent}
           />
-        </fieldset>
+        </fieldset> */}
 
-        <fieldset>
+        {/* <fieldset>
           <div className="form-group">
             <label htmlFor="firstName">First Name:</label>
             <input
@@ -266,7 +261,7 @@ export const UserForm = () => {
           Create Account
         </button>
         <button onClick={() => navigate(-1)}>Cancel</button>
-      </form>
+      </form> */}
     </>
   );
 };
