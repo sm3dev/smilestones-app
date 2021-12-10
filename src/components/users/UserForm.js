@@ -122,7 +122,8 @@ export const UserForm = () => {
             noValidate
             autoComplete="off"
           >
-            <TextField
+            <FormControl fullWidth>
+              <TextField
               id="parentId"
               select
               label="Parent(s)"
@@ -137,6 +138,8 @@ export const UserForm = () => {
               ))}
             </TextField>
 
+            </FormControl>
+            
             <FormControl fullWidth>
               <TextField
                 variant="outlined"
