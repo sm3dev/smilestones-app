@@ -177,6 +177,18 @@ export const UserForm = () => {
                 value={user.DOB}
                 onChange={handleControlledInputChange}
               />
+              {/* <TextField
+                inputComponent="input"
+                variant="outline"
+                inputProps={{
+                  variant: "outlined",
+                  label: "Date of Birth",
+                }}
+                type="date"
+                id="DOB"
+                value={user.DOB}
+                onChange={handleControlledInputChange}
+              /> */}
             </FormControl>
             <button onClick={handleClickSaveUser} className="save__button">
               Create Account
