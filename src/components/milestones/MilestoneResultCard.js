@@ -14,7 +14,7 @@ import {
 } from "@mui/icons-material";
 import { useNavigate } from "react-router";
 
-// const remoteURL = "http://localhost:7777";
+// const remoteURL = "https://git.heroku.com/smilestones-app-api.git";
 export const MilestoneResultCard = ({ milestoneResult, milestone, user }) => {
   // const thisMilestoneTypeId = parseInt(milestone.milestoneTypeId)
 

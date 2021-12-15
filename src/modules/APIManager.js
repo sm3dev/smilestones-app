@@ -1,4 +1,4 @@
-const remoteURL = "http://localhost:7777";
+const remoteURL = "https://git.heroku.com/smilestones-app-api.git";
 
 // ******* USERS ******************************************
 
