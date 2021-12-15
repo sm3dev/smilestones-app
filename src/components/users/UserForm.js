@@ -163,11 +163,11 @@ export const UserForm = () => {
                 value={user.lastName}
               ></TextField>
             </FormControl>
-            <FormControl fullWidth variant="outlined">
+            <FormControl fullWidth variant="filled">
               {" "}
               <Input
                 inputComponent="input"
-                variant="outline"
+                // variant="outline"
                 inputProps={{
                   variant: "outlined",
                   label: "Date of Birth",
