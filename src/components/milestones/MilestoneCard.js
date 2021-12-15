@@ -1,4 +1,9 @@
 import {
+  AddCircleOutline,
+  Edit,
+  List,
+} from "@mui/icons-material";
+import {
   Button,
   Card,
   CardActions,
@@ -48,6 +53,7 @@ export const MilestoneCard = ({ milestone, milestoneType }) => {
         </CardContent>
         <CardActions sx={{ alignItems: "stretch" }}>
           <Button
+            startIcon={<AddCircleOutline />}
             variant="contained"
             id={milestone.id}
             onClick={() =>
@@ -56,13 +62,13 @@ export const MilestoneCard = ({ milestone, milestoneType }) => {
           >
             Submit Result
           </Button>
-          <Button variant="outlined" disabled>
+          <Button startIcon={<Edit />} variant="outlined" disabled>
             Edit
           </Button>
         </CardActions>
         <CardActions>
           {" "}
-          <Button variant="outlined" disabled>
+          <Button startIcon={<List />} variant="outlined" disabled fullWidth>
             Achievements <small> coming soon</small>
           </Button>
         </CardActions>

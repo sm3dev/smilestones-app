@@ -16,7 +16,13 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { ChildCare, EmojiEvents } from "@mui/icons-material";
+import {
+  ChildCare,
+  EmojiEvents,
+  List,
+  Edit,
+  Delete,
+} from "@mui/icons-material";
 
 export const MilestoneResultDetail = () => {
   const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
@@ -164,8 +170,10 @@ export const MilestoneResultDetail = () => {
           )}
           <Typography></Typography>
         </CardContent>
+
         <CardActions>
           <Button
+            startIcon={<List />}
             variant="contained"
             onClick={() =>
               navigate(`/users/${milestoneResult.user?.id}/achievements`)
@@ -174,15 +182,17 @@ export const MilestoneResultDetail = () => {
             All of {milestoneResult.user?.firstName}'s Achievements
           </Button>
           <Button
+            startIcon={<Edit />}
             disabled={buttonAccess}
             variant="contained"
             onClick={() =>
-              navigate(`/users/${milestoneResult.user?.id}/achievements`)
+              navigate(`/achievements/${milestoneResult.id}/edit`)
             }
           >
             Edit
           </Button>
           <Button
+            startIcon={<Delete />}
             variant="outlined"
             onClick={() => handleDeleteMilestoneResult(milestoneResult.id)}
             disabled={buttonAccess}
@@ -191,11 +201,13 @@ export const MilestoneResultDetail = () => {
           </Button>
         </CardActions>
       </Card>
-      <Button variant="outlined" onClick={() => navigate("/achievements")}>
-        <EmojiEvents /> View All Achievements
+      <Button
+        startIcon={<EmojiEvents />}
+        variant="outlined"
+        onClick={() => navigate("/achievements")}
+      >
+        View All Achievements
       </Button>
-      {/* {milestoneResult.milestone?.repeater === false ? (
-        <div>Achieved on {milestoneResult.date}</div>)} */}
     </>
   );
 };

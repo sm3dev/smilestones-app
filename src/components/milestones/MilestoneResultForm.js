@@ -1,3 +1,12 @@
+import { TimePicker } from "@mui/lab";
+import {
+  Typography,
+  Button,
+  ButtonGroup,
+  TextField,
+  InputAdornment,
+} from "@mui/material";
+import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
@@ -30,6 +39,8 @@ export const MilestoneResultForm = () => {
     repeater: false,
   });
 
+  const [timeValue, setTimeValue] = useState(new Date());
+
   const navigate = useNavigate();
 
   const handleValidatedTrueFalse = (stringAnswer) => {
@@ -50,12 +61,17 @@ export const MilestoneResultForm = () => {
     // I need a function that makes my number values save as integers and not strings. I can add on to this conditional. BOOM!
     if (
       event.target.id.includes("Id") ||
-      event.target.id.includes("timeToComplete") ||
-      event.target.id.includes("distance") ||
-      event.target.id.includes("height") ||
+      // event.target.id.includes("timeToComplete") ||
       event.target.id.includes("quantity")
     ) {
       selectedVal = parseInt(selectedVal);
+    }
+
+    if (event.target.id === "height" || event.target.id === "distance") {
+      function distance(numValue) {
+        return Number.parseFloat(numValue).toFixed(2);
+      }
+      selectedVal = distance(selectedVal);
     }
 
     // run function tht makes the value a boolean that gets saved to the MilestoneResult
@@ -85,17 +101,17 @@ export const MilestoneResultForm = () => {
     event.preventDefault();
     setIsLoading(true);
 
-    addNewUserMilestone(milestoneResult).then(() =>
-      navigate(`/achievements`)
-    );
+    addNewUserMilestone(milestoneResult).then(() => navigate(`/achievements`));
   };
 
   return (
     <>
-      <h1>New Milestone Achievement</h1>
-      <h2>Milestone: {thisMilestone.name}</h2>
+      <Typography variant="h4" component="h1">
+        New Achievement
+      </Typography>
+      <Typography variant="h5">Milestone: {thisMilestone.name}</Typography>
       <h5>Type: {thisMilestone.milestoneType?.name}</h5>
-      <form>
+      <Box className="milestone-result__form">
         <div className="form-group">
           <input
             value={milestoneResult.userId}
@@ -107,45 +123,71 @@ export const MilestoneResultForm = () => {
 
         {thisMilestone.milestoneType?.id === 1 && (
           <>
-            <div className="form-group">
-              <label htmlFor="timeToComplete">
-                Your Time &#40;seconds&#41;:
-              </label>
-              <input
-                value={milestoneResult.timeToComplete}
-                id="timeToComplete"
-                type="number"
-                onChange={handleControlledInputChange}
-              />
-            </div>
+            <TimePicker
+              ampm={false}
+              openTo="minutes"
+              views={["minutes", "seconds"]}
+              inputFormat="mm:ss"
+              mask="__:__"
+              id="timeToComplete"
+              label="Time in mm:ss"
+              value={timeValue}
+              onChange={(newValue) => {
+                setTimeValue(newValue);
+              }}
+              type="time"
+              sx={{ m: 1, width: "25ch" }}
+              variant="outlined"
+              focused
+              renderInput={(params) => <TextField {...params} />}
+            />
           </>
         )}
 
         {thisMilestone.milestoneType?.id === 2 && (
           <>
-            <div className="form-group">
-              <label htmlFor="distance">Distance/Length &#40;feet&#41;:</label>
-              <input
-                id="distance"
-                type="number"
-                value={milestoneResult.distance}
-                onChange={handleControlledInputChange}
-              />
-            </div>
+            <TextField
+              id="distance"
+              type="number"
+              label="Distance/Length"
+              value={milestoneResult.distance}
+              onChange={handleControlledInputChange}
+              sx={{ m: 1, width: "25ch" }}
+              variant="outlined"
+              focused
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">ft</InputAdornment>
+                ),
+              }}
+              inputProps={{
+                step: "0.25",
+              }}
+            />
           </>
         )}
 
         {thisMilestone.milestoneType?.id === 3 && (
           <>
-            <div className="form-group">
-              <label htmlFor="height">Height &#40;inches&#41;:</label>
-              <input
-                id="height"
-                type="number"
-                value={milestoneResult.height}
-                onChange={handleControlledInputChange}
-              />
-            </div>
+            <TextField
+              type="number"
+              value={milestoneResult.height}
+              variant="outlined"
+              inputProps={{
+                maxLength: 999,
+                step: "0.25",
+              }}
+              label="Height"
+              id="height"
+              sx={{ m: 1, width: "25ch" }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">inch</InputAdornment>
+                ),
+              }}
+              onChange={handleControlledInputChange}
+              focused
+            />
           </>
         )}
 
@@ -214,7 +256,7 @@ export const MilestoneResultForm = () => {
             <p>{thisMilestone.description}</p>
           </div>
         </div>
-      </form>
+      </Box>
     </>
   );
 };

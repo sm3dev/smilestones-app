@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "@mui/material";
+import { Container, createTheme, ThemeProvider } from "@mui/material";
 import { Box } from "@mui/system";
 import { Navigate, Route, Routes } from "react-router";
 // import { ApplicationViews } from "./ApplicationViews";
@@ -25,27 +25,29 @@ import { UserProfile } from "./users/UserProfile";
 export const Smilestones = () => {
   return (
     <>
-      <NavBar />
-      {sessionStorage.getItem("smilestones_user") ? (
-        <>
-          {" "}
-          <Container maxWidth={false}>
-            <Box sx={{ flexGrow: 1 }}>
-              <ApplicationViews />
-            </Box>
-          </Container>
-          <BottomNav />
-        </>
-      ) : (
-        <Routes>
-          <Route path="/" element={<Navigate replace to="/login" />} />
-        </Routes>
-      )}
+      <ThemeProvider theme={theme}>
+        <NavBar />
+        {sessionStorage.getItem("smilestones_user") ? (
+          <>
+            {" "}
+            <Container maxWidth={false}>
+              <Box sx={{ flexGrow: 1 }}>
+                <ApplicationViews />
+              </Box>
+            </Container>
+            <BottomNav />
+          </>
+        ) : (
+          <Routes>
+            <Route path="/" element={<Navigate replace to="/login" />} />
+          </Routes>
+        )}
 
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </ThemeProvider>
     </>
   );
 };
@@ -86,3 +88,14 @@ const ApplicationViews = () => {
     </>
   );
 };
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#3d5afe",
+    },
+    secondary: {
+      main: "#fee13d",
+    },
+  },
+});
