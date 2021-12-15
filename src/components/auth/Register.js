@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom';
 import "./Login.css"
 
-const remoteURL = "https://git.heroku.com/smilestones-app-api.git";
+const remoteURL = "https://smilestones-app-api.herokuapp.com";
 export const Register = () => {
     const [registerUser, setRegisterUser] = useState({
         firstName: "",

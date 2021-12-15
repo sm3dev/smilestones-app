@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { NavLink } from "react-router-dom";
 import { Home } from "../Home";
 
-const remoteURL = "https://git.heroku.com/smilestones-app-api.git";
+const remoteURL = "https://smilestones-app-api.herokuapp.com";
 
 export const Login = () => {
   const [loginUser, setLoginUser] = useState({ email: "" });
