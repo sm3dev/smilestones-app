@@ -19,15 +19,7 @@ export const MilestoneList = () => {
     getMilestones();
   }, []);
 
-  // const getCurrentMilestones = () => {
-  //   return getAllMilestones().then((milestonesFromAPI) => {
-  //     setCurrentMilestones(milestonesFromAPI);
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   getCurrentMilestones();
-  // }, [])
+// changing some lines to try and fix heroku error
 
   return (
     <>
