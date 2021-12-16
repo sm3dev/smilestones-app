@@ -163,7 +163,7 @@ export const NavBar = () => {
                 }}
               >
                 {sessionStorage.getItem("smilestones_user") ? (
-                  <>
+                  <div>
                     <MenuItem onClick={handleClose}>
                       <ListItemIcon>
                         <ManageAccounts />
@@ -213,7 +213,7 @@ export const NavBar = () => {
                       </ListItemIcon>
                       Logout
                     </MenuItem>
-                  </>
+                  </div>
                 ) : (
                   <MenuItem onClick={() => navigate("/login")}>
                     <ListItemIcon>

@@ -34,7 +34,7 @@ export const MilestoneResultList = () => {
         Milestone Achievements
       </Typography>
       <Typography variant="subtitle1">
-      {milestoneResults.length} Achievements and counting! 
+        {milestoneResults.length} Achievements and counting!
       </Typography>
       <Box
         spacing={2}
@@ -49,15 +49,13 @@ export const MilestoneResultList = () => {
       >
         {milestoneResults
           .map((milestoneResult) => (
-            <>
-              <MilestoneResultCard
-                key={milestoneResult.id}
-                milestoneResult={milestoneResult}
-                milestone={milestoneResult.milestone}
-                user={milestoneResult.user}
-                handleDeleteMilestoneResult={handleDeleteMilestoneResult}
-              />
-            </>
+            <MilestoneResultCard
+              key={milestoneResult.id}
+              milestoneResult={milestoneResult}
+              milestone={milestoneResult.milestone}
+              user={milestoneResult.user}
+              handleDeleteMilestoneResult={handleDeleteMilestoneResult}
+            />
           ))
           .reverse()}
       </Box>
