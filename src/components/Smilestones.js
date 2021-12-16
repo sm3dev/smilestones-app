@@ -32,20 +32,20 @@ export const Smilestones = () => {
             {" "}
             <Container maxWidth={false}>
               <Box sx={{ flexGrow: 1 }}>
-                <ApplicationViews />
+                {/* <ApplicationViews /> */}
               </Box>
             </Container>
             <BottomNav />
           </>
         ) : (
           <Routes>
-            <Route path="/" element={<Navigate replace to="/login" />} />
+            {/* <Route path="/" element={<Navigate replace to="/login" />} /> */}
           </Routes>
         )}
 
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          {/* <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} /> */}
         </Routes>
       </ThemeProvider>
     </>
