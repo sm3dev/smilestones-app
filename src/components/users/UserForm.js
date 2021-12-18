@@ -172,6 +172,7 @@ export const UserForm = () => {
                 value={user.DOB}
                 onChange={handleControlledInputChange}
                 label="Date of Birth"
+                placeholder=""
                 // InputLabel="Date of Birth"
               />
               {/* <TextField
