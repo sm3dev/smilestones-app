@@ -111,9 +111,8 @@ export const UserForm = () => {
           noValidate
           autoComplete="off"
         >
-          <FormControl fullWidth>
+          <FormControl fullWidth variant="outlined">
             <TextField
-              variant="outlined"
               label="First Name"
               onChange={handleControlledInputChange}
               id="firstName"

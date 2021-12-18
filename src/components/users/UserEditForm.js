@@ -3,6 +3,14 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { getUserByID, updateUser } from "../../modules/APIManager";
 import { useNavigate } from "react-router";
+import {
+  Button,
+  ButtonGroup,
+  FormControl,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { Box } from "@mui/system";
 
 // Edit a User account
 export const UserEditForm = () => {
@@ -88,11 +96,31 @@ export const UserEditForm = () => {
 
   return (
     <>
-      <div>
-        <h1>Update Account</h1>
-      </div>
-      <form>
-        <div>
+      <Typography variant="h4" component="h1">
+        Update Account
+      </Typography>
+      <Box sx={{ minWidth: 345, maxWidth: 600 }}>
+        <Box
+          sx={{ "& > :not(style)": { m: 1 } }}
+          component="form"
+          noValidate
+          autoComplete="off"
+        >
+          <FormControl fullWidth variant="outlined">
+            <TextField
+              id="firstName"
+              name="firstName"
+              label="First Name"
+              value={user.firstName}
+              onChange={handleFieldChange}
+              type="text"
+              required
+              placeholder={user.firstName}
+            ></TextField>
+          </FormControl>
+        </Box>
+        <form>
+          {/* <div>
           <label htmlFor="firstName">First Name:</label>
           <input
             id="firstName"
@@ -101,83 +129,84 @@ export const UserEditForm = () => {
             value={user.firstName}
             onChange={handleFieldChange}
           />
-        </div>
-        <div>
-          <label htmlFor="lastName">Last Name:</label>
-          <input
-            id="lastName"
-            name="lastName"
-            type="text"
-            value={user.lastName}
-            onChange={handleFieldChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="DOB">Birthdate:</label>
-          <input
-            id="DOB"
-            name="DOB"
-            type="date"
-            value={user.DOB}
-            onChange={handleFieldChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            value={user.email}
-            onChange={handleFieldChange}
-          />
-        </div>
-        <div className="form-group">
-          {user.admin === true ? (
-            <>
-              <label htmlFor="admin">Administrator:</label>
-              {/* This input needs to be a switch or radio button */}
-              <input
-                id="admin"
-                name="admin"
-                type="checkbox"
-                checked
-                value={user.admin}
-                onChange={handleFieldChange}
-              />
-              <p>
-                Your Parent/Account Manager(s):{" "}
-                <small>
-                  <em>coming soon</em>
-                </small>
-                {/* {parent.firstName} {parent.lastName}  */}
-              </p>
-              {/* <input id="parent" type="text" required placeholder="Parent name" value={user.lastName} /> */}
-            </>
-          ) : (
-            <>
-              <p>
-                Your Parent/Account Manager(s):{" "}
-                <small>
-                  <em>coming soon</em>
-                </small>
-                {/* {parent.firstName} {parent.lastName}  */}
-              </p>
-              {/* <input id="parent" type="text" required placeholder="Parent name" value={user.lastName} /> */}
-            </>
-          )}
-        </div>
-        <div>
-          <button disabled={isLoading} onClick={updateExistingUser}>
-            Save Changes
-          </button>
-          {/* To make delete work here, I think I have to create a User Detail View that will have this Edit form inside it. Maybe I can re-use the UserCard and show it on the same view as this edit form -- like a side-by-side, so you can easily see what the User's info is currently   */}
-          {/* <button onClick={() => handleDeleteUser(userId)}>Delete</button> */}
-          <Link to="/users">
-            <button>Cancel</button>
-          </Link>
-        </div>
-      </form>
+        </div> */}
+          <div>
+            <label htmlFor="lastName">Last Name:</label>
+            <input
+              id="lastName"
+              name="lastName"
+              type="text"
+              value={user.lastName}
+              onChange={handleFieldChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="DOB">Birthdate:</label>
+            <input
+              id="DOB"
+              name="DOB"
+              type="date"
+              value={user.DOB}
+              onChange={handleFieldChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="email">Email:</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              value={user.email}
+              onChange={handleFieldChange}
+            />
+          </div>
+          <div className="form-group">
+            {user.admin === true ? (
+              <>
+                <label htmlFor="admin">Administrator:</label>
+                {/* This input needs to be a switch or radio button */}
+                <input
+                  id="admin"
+                  name="admin"
+                  type="checkbox"
+                  checked
+                  value={user.admin}
+                  onChange={handleFieldChange}
+                />
+                <p>
+                  Your Parent/Account Manager(s):{" "}
+                  <small>
+                    <em>coming soon</em>
+                  </small>
+                  {/* {parent.firstName} {parent.lastName}  */}
+                </p>
+                {/* <input id="parent" type="text" required placeholder="Parent name" value={user.lastName} /> */}
+              </>
+            ) : (
+              <>
+                <p>
+                  Your Parent/Account Manager(s):{" "}
+                  <small>
+                    <em>coming soon</em>
+                  </small>
+                  {/* {parent.firstName} {parent.lastName}  */}
+                </p>
+                {/* <input id="parent" type="text" required placeholder="Parent name" value={user.lastName} /> */}
+              </>
+            )}
+          </div>
+          <div>
+            <button disabled={isLoading} onClick={updateExistingUser}>
+              Save Changes
+            </button>
+            {/* To make delete work here, I think I have to create a User Detail View that will have this Edit form inside it. Maybe I can re-use the UserCard and show it on the same view as this edit form -- like a side-by-side, so you can easily see what the User's info is currently   */}
+            {/* <button onClick={() => handleDeleteUser(userId)}>Delete</button> */}
+            <Link to="/users">
+              <button>Cancel</button>
+            </Link>
+          </div>
+        </form>
+      </Box>
     </>
   );
 };
