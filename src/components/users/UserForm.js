@@ -3,23 +3,16 @@ import { useParams } from "react-router-dom";
 import { addUser, addUserChild, getAllParents } from "../../modules/APIManager";
 import { useNavigate } from "react-router";
 import {
+  Button,
+  ButtonGroup,
   FormControl,
-  FormHelperText,
-  Input,
-  InputLabel,
   MenuItem,
-  Select,
   TextField,
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import {
-  LocalizationProvider,
-  MobileDatePicker,
-  DesktopDatePicker,
-  DatePicker,
-} from "@mui/lab";
+import { LocalizationProvider } from "@mui/lab";
 
 // Add New User Account to database
 export const UserForm = () => {
@@ -124,23 +117,6 @@ export const UserForm = () => {
           >
             <FormControl fullWidth>
               <TextField
-                id="parentId"
-                select
-                label="Parent(s)"
-                value={userParentChild.parentId}
-                onChange={handleControlledInputChangeParent}
-                helperText="Select Parent's Name"
-              >
-                {parents.map((parent) => (
-                  <MenuItem key={parent.id} value={parent.id} user={userId}>
-                    {parent.firstName} {parent.lastName}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </FormControl>
-
-            <FormControl fullWidth>
-              <TextField
                 variant="outlined"
                 label="First Name"
                 onChange={handleControlledInputChange}
@@ -162,118 +138,61 @@ export const UserForm = () => {
                 value={user.lastName}
               ></TextField>
             </FormControl>
-            <FormControl fullWidth variant="outline">
-              {" "}
+            <FormControl fullWidth variant="outlined">
               <TextField
-                // component="input"
+                label="Email Address"
+                required
+                onChange={handleControlledInputChange}
+                id="email"
+                type="email"
+                value={user.email}
+              ></TextField>
+            </FormControl>
+            <FormControl fullWidth variant="outlined">
+              <TextField
+                required
                 variant="outlined"
                 type="date"
                 id="DOB"
                 value={user.DOB}
                 onChange={handleControlledInputChange}
                 label="Date of Birth"
-                placeholder=""
-                // InputLabel="Date of Birth"
-              />
-              {/* <TextField
-                inputComponent="input"
-                variant="outline"
-                inputProps={{
-                  variant: "outlined",
-                  label: "Date of Birth",
-                }}
-                type="date"
-                id="DOB"
-                value={user.DOB}
-                onChange={handleControlledInputChange}
-              /> */}
+                helperText="Date of Birth"
+                InputLabelProps={{ shrink: true }}
+              ></TextField>
             </FormControl>
-            <button onClick={handleClickSaveUser} className="save__button">
-              Create Account
-            </button>
-            <button onClick={() => navigate(-1)}>Cancel</button>
+            <FormControl fullWidth>
+              <TextField
+                id="parentId"
+                select
+                label="Parent(s)"
+                value={userParentChild.parentId}
+                onChange={handleControlledInputChangeParent}
+                helperText="Select Parent's Name"
+                disabled
+              >
+                {parents.map((parent) => (
+                  <MenuItem key={parent.id} value={parent.id} user={userId}>
+                    {parent.firstName} {parent.lastName}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </FormControl>
           </Box>
+          <input id="admin" type="hidden" value={user.admin} />
+          <ButtonGroup>
+            <Button
+              onClick={handleClickSaveUser}
+              className="save__button"
+              variant="contained"
+            >
+              {" "}
+              Create Account
+            </Button>
+            <Button onClick={() => navigate(-1)}>Cancel</Button>
+          </ButtonGroup>
         </Box>
       </LocalizationProvider>
-      {/* <form action="">
-        {/* <fieldset>
-          <label htmlFor="parent">Select Your Parent's Name:</label>
-          <select
-            value={userParentChild.parentId}
-            name="parentId"
-            id="parentId"
-            onChange={handleControlledInputChangeParent}
-          >
-            <option value="0">Select a Parent</option>
-            {parents.map((parent) => (
-              <option key={parent.id} value={parent.id} user={userId}>
-                {parent.firstName} {parent.lastName}
-              </option>
-            ))}
-          </select>
-          <input
-            type="hidden"
-            value={userParentChild.userId}
-            name="userId"
-            id="userId"
-            onChange={handleControlledInputChangeParent}
-          />
-        </fieldset> */}
-      {/* <fieldset>
-          <div className="form-group">
-            <label htmlFor="firstName">First Name:</label>
-            <input
-              onChange={handleControlledInputChange}
-              id="firstName"
-              type="text"
-              required
-              placeholder="First Name"
-              value={user.firstName}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="lastName">Last Name:</label>
-            <input
-              onChange={handleControlledInputChange}
-              id="lastName"
-              type="text"
-              required
-              placeholder="Last Name"
-              value={user.lastName}
-            />
-          </div>
-        </fieldset>
-        <fieldset>
-          <div className="form-group">
-            <label htmlFor="DOB">Date of Birth:</label>
-            <input
-              onChange={handleControlledInputChange}
-              id="DOB"
-              type="date"
-              required
-              value={user.DOB}
-            />
-          </div>
-        </fieldset>
-        <fieldset>
-          <div className="form-group">
-            <label htmlFor="email">Email:</label>
-            <input
-              onChange={handleControlledInputChange}
-              id="email"
-              type="email"
-              placeholder="Email Address"
-              value={user.email}
-            />
-          </div>
-        </fieldset>
-
-        <input id="email" type="hidden" value={user.admin} />
-        <button onClick={handleClickSaveUser} className="save__button">
-          Create Account
-        </button>
-        <button onClick={() => navigate(-1)}>Cancel</button>
-      </form> */}
     </>
   );
 };

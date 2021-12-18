@@ -46,7 +46,7 @@ export const UserProfile = () => {
       const thisUsersConnections = connections.filter(
         (connection) => connection.parentId === currentUserId
       );
-      console.log(thisUsersConnections);
+      console.log("This parent of this user has these connections:", thisUsersConnections);
       setChildConnections(thisUsersConnections);
     });
   };
