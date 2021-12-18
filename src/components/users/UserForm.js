@@ -11,8 +11,6 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import { LocalizationProvider } from "@mui/lab";
 
 // Add New User Account to database
 export const UserForm = () => {
@@ -102,97 +100,94 @@ export const UserForm = () => {
 
   return (
     <>
-      {" "}
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <Typography variant="h4" component="h1">
-          Create New Child Account{" "}
-        </Typography>
-        {/* I want to have this form show a Switch or Radio to choose between Child Account or Parent Account */}
-        <Box sx={{ minWidth: 345, maxWidth: 600 }}>
-          <Box
-            sx={{ "& > :not(style)": { m: 1 } }}
-            component="form"
-            noValidate
-            autoComplete="off"
-          >
-            <FormControl fullWidth>
-              <TextField
-                variant="outlined"
-                label="First Name"
-                onChange={handleControlledInputChange}
-                id="firstName"
-                type="text"
-                required
-                placeholder="First Name"
-                value={user.firstName}
-              ></TextField>
-            </FormControl>
-            <FormControl fullWidth variant="outlined">
-              <TextField
-                label="Last Name"
-                onChange={handleControlledInputChange}
-                id="lastName"
-                type="text"
-                required
-                placeholder="Last Name"
-                value={user.lastName}
-              ></TextField>
-            </FormControl>
-            <FormControl fullWidth variant="outlined">
-              <TextField
-                label="Email Address"
-                required
-                onChange={handleControlledInputChange}
-                id="email"
-                type="email"
-                value={user.email}
-              ></TextField>
-            </FormControl>
-            <FormControl fullWidth variant="outlined">
-              <TextField
-                required
-                variant="outlined"
-                type="date"
-                id="DOB"
-                value={user.DOB}
-                onChange={handleControlledInputChange}
-                label="Date of Birth"
-                helperText="Date of Birth"
-                InputLabelProps={{ shrink: true }}
-              ></TextField>
-            </FormControl>
-            <FormControl fullWidth>
-              <TextField
-                id="parentId"
-                select
-                label="Parent(s)"
-                value={userParentChild.parentId}
-                onChange={handleControlledInputChangeParent}
-                helperText="Select Parent's Name"
-                disabled
-              >
-                {parents.map((parent) => (
-                  <MenuItem key={parent.id} value={parent.id} user={userId}>
-                    {parent.firstName} {parent.lastName}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </FormControl>
-          </Box>
-          <input id="admin" type="hidden" value={user.admin} />
-          <ButtonGroup>
-            <Button
-              onClick={handleClickSaveUser}
-              className="save__button"
-              variant="contained"
+      <Typography variant="h4" component="h1">
+        Create New Child Account{" "}
+      </Typography>
+      {/* I want to have this form show a Switch or Radio to choose between Child Account or Parent Account */}
+      <Box sx={{ minWidth: 345, maxWidth: 600 }}>
+        <Box
+          sx={{ "& > :not(style)": { m: 1 } }}
+          component="form"
+          noValidate
+          autoComplete="off"
+        >
+          <FormControl fullWidth>
+            <TextField
+              variant="outlined"
+              label="First Name"
+              onChange={handleControlledInputChange}
+              id="firstName"
+              type="text"
+              required
+              placeholder="First Name"
+              value={user.firstName}
+            ></TextField>
+          </FormControl>
+          <FormControl fullWidth variant="outlined">
+            <TextField
+              label="Last Name"
+              onChange={handleControlledInputChange}
+              id="lastName"
+              type="text"
+              required
+              placeholder="Last Name"
+              value={user.lastName}
+            ></TextField>
+          </FormControl>
+          <FormControl fullWidth variant="outlined">
+            <TextField
+              label="Email Address"
+              required
+              onChange={handleControlledInputChange}
+              id="email"
+              type="email"
+              value={user.email}
+            ></TextField>
+          </FormControl>
+          <FormControl fullWidth variant="outlined">
+            <TextField
+              required
+              variant="outlined"
+              type="date"
+              id="DOB"
+              value={user.DOB}
+              onChange={handleControlledInputChange}
+              label="Date of Birth"
+              helperText="Date of Birth"
+              InputLabelProps={{ shrink: true }}
+            ></TextField>
+          </FormControl>
+          <FormControl fullWidth>
+            <TextField
+              id="parentId"
+              select
+              label="Parent(s)"
+              value={userParentChild.parentId}
+              onChange={handleControlledInputChangeParent}
+              helperText="Select Parent's Name"
+              disabled
             >
-              {" "}
-              Create Account
-            </Button>
-            <Button onClick={() => navigate(-1)}>Cancel</Button>
-          </ButtonGroup>
+              {parents.map((parent) => (
+                <MenuItem key={parent.id} value={parent.id} user={userId}>
+                  {parent.firstName} {parent.lastName}
+                </MenuItem>
+              ))}
+            </TextField>
+          </FormControl>
         </Box>
-      </LocalizationProvider>
+        <input id="admin" type="hidden" value={user.admin} />
+        <ButtonGroup>
+          <Button
+            onClick={handleClickSaveUser}
+            className="save__button"
+            variant="contained"
+          >
+            {" "}
+            Create Account
+          </Button>
+          <Button onClick={() => navigate(-1)}>Cancel</Button>
+        </ButtonGroup>
+      </Box>
     </>
   );
 };
