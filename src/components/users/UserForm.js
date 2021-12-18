@@ -124,22 +124,21 @@ export const UserForm = () => {
           >
             <FormControl fullWidth>
               <TextField
-              id="parentId"
-              select
-              label="Parent(s)"
-              value={userParentChild.parentId}
-              onChange={handleControlledInputChangeParent}
-              helperText="Select Parent's Name"
-            >
-              {parents.map((parent) => (
-                <MenuItem key={parent.id} value={parent.id} user={userId}>
-                  {parent.firstName} {parent.lastName}
-                </MenuItem>
-              ))}
-            </TextField>
-
+                id="parentId"
+                select
+                label="Parent(s)"
+                value={userParentChild.parentId}
+                onChange={handleControlledInputChangeParent}
+                helperText="Select Parent's Name"
+              >
+                {parents.map((parent) => (
+                  <MenuItem key={parent.id} value={parent.id} user={userId}>
+                    {parent.firstName} {parent.lastName}
+                  </MenuItem>
+                ))}
+              </TextField>
             </FormControl>
-            
+
             <FormControl fullWidth>
               <TextField
                 variant="outlined"
@@ -163,19 +162,17 @@ export const UserForm = () => {
                 value={user.lastName}
               ></TextField>
             </FormControl>
-            <FormControl fullWidth variant="filled">
+            <FormControl fullWidth variant="outline">
               {" "}
-              <Input
-                inputComponent="input"
-                // variant="outline"
-                inputProps={{
-                  variant: "outlined",
-                  label: "Date of Birth",
-                }}
+              <TextField
+                // component="input"
+                variant="outlined"
                 type="date"
                 id="DOB"
                 value={user.DOB}
                 onChange={handleControlledInputChange}
+                label="Date of Birth"
+                // InputLabel="Date of Birth"
               />
               {/* <TextField
                 inputComponent="input"
@@ -221,8 +218,7 @@ export const UserForm = () => {
             onChange={handleControlledInputChangeParent}
           />
         </fieldset> */}
-
-        {/* <fieldset>
+      {/* <fieldset>
           <div className="form-group">
             <label htmlFor="firstName">First Name:</label>
             <input
