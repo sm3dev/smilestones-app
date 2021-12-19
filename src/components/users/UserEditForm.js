@@ -161,9 +161,11 @@ export const UserEditForm = () => {
                 <Switch
                   id="admin"
                   name="admin"
-                  checked="false"
+                  checked={user.admin}
                   onChange={handleFieldChange}
                   inputProps={{ "aria-label": "controlled" }}
+                  value={user.admin}
+                  disabled
                 />
               }
               label="Admin Account"
