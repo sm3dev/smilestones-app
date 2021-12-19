@@ -135,6 +135,8 @@ export const UserProfile = () => {
           {user.id === currentUserId ? (
             <>
               <Button
+              variant="contained"
+                startIcon={<Edit />}
                 id={`user__edit-${user.id}`}
                 onClick={() => navigate(`/users/${user.id}/edit`)}
                 disabled={isLoading}
