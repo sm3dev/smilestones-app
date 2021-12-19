@@ -9,6 +9,7 @@ import {
 import { useNavigate } from "react-router";
 import {
   Button,
+  ButtonGroup,
   Card,
   CardActions,
   CardContent,
@@ -172,32 +173,37 @@ export const MilestoneResultDetail = () => {
         </CardContent>
 
         <CardActions>
+          <ButtonGroup>
+            {" "}
+            <Button
+              startIcon={<Edit />}
+              disabled={buttonAccess}
+              variant="contained"
+              onClick={() =>
+                navigate(`/achievements/${milestoneResult.id}/edit`)
+              }
+            >
+              Edit
+            </Button>
+            <Button
+              startIcon={<Delete />}
+              variant="outlined"
+              onClick={() => handleDeleteMilestoneResult(milestoneResult.id)}
+              disabled={buttonAccess}
+            >
+              Delete
+            </Button>
+          </ButtonGroup>
+        </CardActions>
+        <CardActions>
           <Button
-            startIcon={<List />}
+            startIcon={<EmojiEvents />}
             variant="contained"
             onClick={() =>
               navigate(`/users/${milestoneResult.user?.id}/achievements`)
             }
           >
-            All of {milestoneResult.user?.firstName}'s Achievements
-          </Button>
-          <Button
-            startIcon={<Edit />}
-            disabled={buttonAccess}
-            variant="contained"
-            onClick={() =>
-              navigate(`/achievements/${milestoneResult.id}/edit`)
-            }
-          >
-            Edit
-          </Button>
-          <Button
-            startIcon={<Delete />}
-            variant="outlined"
-            onClick={() => handleDeleteMilestoneResult(milestoneResult.id)}
-            disabled={buttonAccess}
-          >
-            Delete
+            More of {milestoneResult.user?.firstName}'s Achievements
           </Button>
         </CardActions>
       </Card>

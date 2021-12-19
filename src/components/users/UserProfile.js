@@ -14,9 +14,11 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  ListItemIcon,
   Paper,
   Typography,
 } from "@mui/material";
+import { Delete, Edit, EmojiEvents } from "@mui/icons-material";
 
 export const UserProfile = () => {
   const currentUserId = parseInt(sessionStorage.getItem("smilestones_user"));
@@ -46,7 +48,10 @@ export const UserProfile = () => {
       const thisUsersConnections = connections.filter(
         (connection) => connection.parentId === currentUserId
       );
-      console.log("This parent of this user has these connections:", thisUsersConnections);
+      console.log(
+        "This parent of this user has these connections:",
+        thisUsersConnections
+      );
       setChildConnections(thisUsersConnections);
     });
   };
@@ -122,7 +127,6 @@ export const UserProfile = () => {
         <CardHeader title={fullName} subheader={userAge} />
 
         <CardContent>
-
           <Typography variant="body2">
             Administrator: {user.admin === true ? "Yes" : "No"}
           </Typography>
@@ -141,6 +145,7 @@ export const UserProfile = () => {
           ) : (
             <>
               <Button
+                startIcon={<Edit />}
                 variant="contained"
                 id={`user__edit-${user.id}`}
                 disabled={buttonAccess}
@@ -149,9 +154,11 @@ export const UserProfile = () => {
                 Manage
               </Button>
               <Button
+                startIcon={<Delete />}
                 id={`user__delete-${user.id}`}
                 disabled={buttonAccess}
                 onClick={() => handleDeleteUser(user.id)}
+                variant=""
               >
                 Delete
               </Button>
@@ -160,6 +167,7 @@ export const UserProfile = () => {
         </CardActions>
         <CardActions>
           <Button
+            startIcon={<EmojiEvents />}
             variant="contained"
             className="userMilestone__link"
             onClick={() => navigate(`/users/${user.id}/achievements`)}

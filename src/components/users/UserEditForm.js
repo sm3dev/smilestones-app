@@ -15,6 +15,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import { Save } from "@mui/icons-material";
 
 // Edit a User account
 export const UserEditForm = () => {
@@ -171,54 +172,27 @@ export const UserEditForm = () => {
               label="Admin Account"
             />
           </FormGroup>
-        </Box>
-        <form>
-          <div className="form-group">
-            {user.admin === true ? (
-              <>
-                <label htmlFor="admin">Administrator:</label>
-                {/* This input needs to be a switch or radio button */}
-                <input
-                  id="admin"
-                  name="admin"
-                  type="checkbox"
-                  checked
-                  value={user.admin}
-                  onChange={handleFieldChange}
-                />
-                <p>
-                  Your Parent(s):
-                  <small>
-                    <em>coming soon</em>
-                  </small>
-                  {/* {parent.firstName} {parent.lastName}  */}
-                </p>
-                {/* <input id="parent" type="text" required placeholder="Parent name" value={user.lastName} /> */}
-              </>
-            ) : (
-              <>
-                <p>
-                  Your Parent/Account Manager(s):{" "}
-                  <small>
-                    <em>coming soon</em>
-                  </small>
-                  {/* {parent.firstName} {parent.lastName}  */}
-                </p>
-                {/* <input id="parent" type="text" required placeholder="Parent name" value={user.lastName} /> */}
-              </>
-            )}
-          </div>
-          <div>
-            <button disabled={isLoading} onClick={updateExistingUser}>
+          <FormGroup>
+            <Typography variant="body1">
+              Your Parent(s):
+              <small>
+                <em>coming soon</em>
+              </small>
+            </Typography>
+          </FormGroup>
+          <ButtonGroup>
+            <Button
+              disabled={isLoading}
+              onClick={updateExistingUser}
+              variant="contained"
+              startIcon={<Save />}
+            >
+              {" "}
               Save Changes
-            </button>
-            {/* To make delete work here, I think I have to create a User Detail View that will have this Edit form inside it. Maybe I can re-use the UserCard and show it on the same view as this edit form -- like a side-by-side, so you can easily see what the User's info is currently   */}
-            {/* <button onClick={() => handleDeleteUser(userId)}>Delete</button> */}
-            <Link to="/users">
-              <button>Cancel</button>
-            </Link>
-          </div>
-        </form>
+            </Button>
+            <Button onClick={() => navigate(-1)}>Cancel</Button>
+          </ButtonGroup>
+        </Box>
       </Box>
     </>
   );
