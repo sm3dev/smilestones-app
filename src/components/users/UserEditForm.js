@@ -114,32 +114,33 @@ export const UserEditForm = () => {
               value={user.firstName}
               onChange={handleFieldChange}
               type="text"
-              required
               placeholder={user.firstName}
             ></TextField>
           </FormControl>
-        </Box>
-        <form>
-          {/* <div>
-          <label htmlFor="firstName">First Name:</label>
-          <input
-            id="firstName"
-            name="firstName"
-            type="text"
-            value={user.firstName}
-            onChange={handleFieldChange}
-          />
-        </div> */}
-          <div>
-            <label htmlFor="lastName">Last Name:</label>
-            <input
+          <FormControl fullWidth variant="outlined">
+            <TextField
+              label="Last Name"
+              onChange={handleFieldChange}
               id="lastName"
               name="lastName"
               type="text"
+              placeholder={user.lastName}
               value={user.lastName}
+            ></TextField>
+          </FormControl>
+          <FormControl fullWidth variant="outlined">
+            <TextField
+              label="Email Address"
+              required
+              value={user.email}
               onChange={handleFieldChange}
+              id="email"
+              type="email"
+              placeholder={user.email}
             />
-          </div>
+          </FormControl>
+        </Box>
+        <form>
           <div>
             <label htmlFor="DOB">Birthdate:</label>
             <input
@@ -150,7 +151,7 @@ export const UserEditForm = () => {
               onChange={handleFieldChange}
             />
           </div>
-          <div>
+          {/* <div>
             <label htmlFor="email">Email:</label>
             <input
               id="email"
@@ -159,7 +160,7 @@ export const UserEditForm = () => {
               value={user.email}
               onChange={handleFieldChange}
             />
-          </div>
+          </div> */}
           <div className="form-group">
             {user.admin === true ? (
               <>
