@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import {
   Button,
   ButtonGroup,
+  Divider,
   FormControl,
   MenuItem,
   TextField,
@@ -143,6 +144,7 @@ export const UserForm = () => {
               value={user.email}
             ></TextField>
           </FormControl>
+          <Divider variant="middle" />
           <FormControl fullWidth variant="outlined">
             <TextField
               required

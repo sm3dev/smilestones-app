@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import {
   Button,
   ButtonGroup,
+  Divider,
   FormControl,
   TextField,
   Typography,
@@ -131,7 +132,6 @@ export const UserEditForm = () => {
           <FormControl fullWidth variant="outlined">
             <TextField
               label="Email Address"
-              required
               value={user.email}
               onChange={handleFieldChange}
               id="email"
@@ -139,25 +139,28 @@ export const UserEditForm = () => {
               placeholder={user.email}
             />
           </FormControl>
+          <Divider variant="middle" />
+          <FormControl fullWidth variant="outlined">
+          <TextField
+              variant="outlined"
+              type="date"
+              id="DOB"
+              value={user.DOB}
+              onChange={handleFieldChange}
+              label="Date of Birth"
+              helperText={"Current DOB: " + user.DOB}
+              InputLabelProps={{ shrink: true }}
+            >Age ##</TextField>
+</FormControl>
         </Box>
         <form>
-          <div>
+          {/* <div>
             <label htmlFor="DOB">Birthdate:</label>
             <input
               id="DOB"
               name="DOB"
               type="date"
               value={user.DOB}
-              onChange={handleFieldChange}
-            />
-          </div>
-          {/* <div>
-            <label htmlFor="email">Email:</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              value={user.email}
               onChange={handleFieldChange}
             />
           </div> */}
