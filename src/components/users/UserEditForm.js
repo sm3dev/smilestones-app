@@ -8,6 +8,9 @@ import {
   ButtonGroup,
   Divider,
   FormControl,
+  FormControlLabel,
+  FormGroup,
+  Switch,
   TextField,
   Typography,
 } from "@mui/material";
@@ -23,7 +26,7 @@ export const UserEditForm = () => {
     firstName: "",
     lastName: "",
     email: "",
-    admin: false,
+    admin: "",
   });
 
   // const [parent, setParent] = useState({
@@ -141,7 +144,7 @@ export const UserEditForm = () => {
           </FormControl>
           <Divider variant="middle" />
           <FormControl fullWidth variant="outlined">
-          <TextField
+            <TextField
               variant="outlined"
               type="date"
               id="DOB"
@@ -150,20 +153,24 @@ export const UserEditForm = () => {
               label="Date of Birth"
               helperText={"Current DOB: " + user.DOB}
               InputLabelProps={{ shrink: true }}
-            >Age ##</TextField>
-</FormControl>
+            />
+          </FormControl>
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Switch
+                  id="admin"
+                  name="admin"
+                  checked="false"
+                  onChange={handleFieldChange}
+                  inputProps={{ "aria-label": "controlled" }}
+                />
+              }
+              label="Admin Account"
+            />
+          </FormGroup>
         </Box>
         <form>
-          {/* <div>
-            <label htmlFor="DOB">Birthdate:</label>
-            <input
-              id="DOB"
-              name="DOB"
-              type="date"
-              value={user.DOB}
-              onChange={handleFieldChange}
-            />
-          </div> */}
           <div className="form-group">
             {user.admin === true ? (
               <>
@@ -178,7 +185,7 @@ export const UserEditForm = () => {
                   onChange={handleFieldChange}
                 />
                 <p>
-                  Your Parent/Account Manager(s):{" "}
+                  Your Parent(s):
                   <small>
                     <em>coming soon</em>
                   </small>
