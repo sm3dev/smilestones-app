@@ -16,7 +16,7 @@ import {
   ListItemIcon,
   Typography,
 } from "@mui/material";
-import { Edit, EmojiEvents } from "@mui/icons-material";
+import { Delete, Edit, EmojiEvents } from "@mui/icons-material";
 
 export const MyUserCard = ({ user, handleDeleteUser }) => {
   const [open, setOpen] = useState(false);
@@ -84,7 +84,11 @@ export const MyUserCard = ({ user, handleDeleteUser }) => {
           >
             Manage Account
           </Button>
-          <Button variant="outlined" onClick={handleClickOpen}>
+          <Button
+            startIcon={<Delete />}
+            variant="outlined"
+            onClick={handleClickOpen}
+          >
             Delete
           </Button>
         </CardActions>
