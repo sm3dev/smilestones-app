@@ -1,4 +1,15 @@
-import { Button } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardHeader,
+  Grid,
+  Typography,
+  TextField,
+  FormControl,
+  ButtonGroup,
+} from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { NavLink } from "react-router-dom";
@@ -41,45 +52,85 @@ export const Login = () => {
   };
 
   return (
-    <main className="container--login">
-      <dialog className="dialog dialog--auth" open={existDialog}>
-        <div>{"User does not exist"}</div>
-        <div>
-          <button
-            className="button--close"
-            onClick={(e) => setExistDialog(false)}
+    <>
+      <Grid>
+        <Grid
+          container
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Card component="form" onSubmit={handleLogin}
+            sx={{
+              p: 4,
+              flexShrink: 0,
+              flexGrow: 1,
+              display: "flex",
+              flexDirection: "column",
+              width: "50ch",
+            }}
           >
-            Close
-          </button>
-        </div>
-      </dialog>
-      <section>
-        <form className="form--login" onSubmit={handleLogin}>
-          <h1>Smilestones</h1>
-          <h2>Please sign-in to get started</h2>
-          <fieldset>
-            <label htmlFor="inputEmail"> Email address </label>
-            <input
-              type="email"
-              id="email"
-              className="form-control"
-              placeholder="Email address"
-              required
-              autoFocus
-              value={loginUser.email}
-              onChange={handleInputChange}
-            />
-          </fieldset>
-          <fieldset>
-            <button type="submit">Sign in</button>
-          </fieldset>
-        </form>
-      </section>
-      <section className="link--register">
-        <NavLink to="/register">
-          <Button variant="outlined">Register for an account</Button>
-        </NavLink>
-      </section>
-    </main>
+            <CardHeader title="Sign In" />
+            <CardContent>
+              <FormControl fullWidth>
+                <TextField
+                  type="email"
+                  id="email"
+                  label="Email Address"
+                  className="form-control"
+                  placeholder="Email address"
+                  autoFocus
+                  value={loginUser.email}
+                  onChange={handleInputChange}
+                ></TextField>
+              </FormControl>
+
+            </CardContent>
+            <CardActions sx={{m: 1}} >
+                {" "}
+                <Button variant="contained" fullWidth>Sign In</Button>
+            </CardActions>
+          </Card>
+          <main className="container--login">
+            <dialog className="dialog dialog--auth" open={existDialog}>
+              <div>{"User does not exist"}</div>
+              <div>
+                <button
+                  className="button--close"
+                  onClick={(e) => setExistDialog(false)}
+                >
+                  Close
+                </button>
+              </div>
+            </dialog>
+            <section>
+              <form className="form--login" onSubmit={handleLogin}>
+                <fieldset>
+                  <label htmlFor="inputEmail"> Email address </label>
+                  <input
+                    type="email"
+                    id="email"
+                    className="form-control"
+                    placeholder="Email address"
+                    required
+                    autoFocus
+                    value={loginUser.email}
+                    onChange={handleInputChange}
+                  />
+                </fieldset>
+                <fieldset>
+                  <button type="submit">Sign in</button>
+                </fieldset>
+              </form>
+            </section>
+            <section className="link--register">
+              <NavLink to="/register">
+                <Button variant="outlined">Register for an account</Button>
+              </NavLink>
+            </section>
+          </main>
+        </Grid>
+      </Grid>
+    </>
   );
 };
