@@ -114,7 +114,7 @@ export const Login = () => {
                   to="/register"
                   component={NavLink}
                 >
-                  Sign up now{" "}
+                  Sign up now
                   {/* <NavLink title="Register for an Account" to="/register">
                     Sign up now
                   </NavLink> */}
