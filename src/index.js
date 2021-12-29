@@ -15,6 +15,15 @@ const smileTheme = createTheme({
       main: "#fee13d",
     },
   },
+  components: {
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          fontWeight: "bold",
+        },
+      },
+    },
+  },
 });
 
 const rootElement = document.getElementById("root");

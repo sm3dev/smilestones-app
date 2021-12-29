@@ -13,10 +13,11 @@ import {
   FormControlLabel,
   Container,
   ThemeProvider,
+  Link,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Home } from "../Home";
 
 const remoteURL = "https://smilestones-app-api.herokuapp.com";
@@ -106,11 +107,17 @@ export const Login = () => {
               <Typography variant="body1">
                 New to Smilestones?{" "}
                 <Link
-                  color="secondary"
+                  color="primary"
+                  variant="inherit"
+                  underline="hover"
                   title="Register for an Account"
                   to="/register"
+                  component={NavLink}
                 >
-                  Sign up now
+                  Sign up now{" "}
+                  {/* <NavLink title="Register for an Account" to="/register">
+                    Sign up now
+                  </NavLink> */}
                 </Link>
                 .
               </Typography>

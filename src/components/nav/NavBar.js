@@ -80,7 +80,7 @@ export const NavBar = () => {
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+        <AppBar position="static" id="navbar" >
           <Toolbar>
             <Typography
               variant="h6"
