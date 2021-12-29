@@ -5,6 +5,7 @@ import { Smilestones } from "./components/Smilestones";
 import { BrowserRouter } from "react-router-dom";
 import ReactDOM from "react-dom";
 import { createTheme, ThemeProvider } from "@mui/material";
+import "./styles/custom.scss";
 
 const smileTheme = createTheme({
   palette: {
@@ -15,11 +16,15 @@ const smileTheme = createTheme({
       main: "#fee13d",
     },
   },
+  typography: {
+    fontSize: 18,
+  },
   components: {
     MuiLink: {
       styleOverrides: {
         root: {
           fontWeight: "bold",
+          fontSize: "4rem",
         },
       },
     },

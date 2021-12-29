@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import "./NavBar.css";
+import "./NavBar.scss";
 import { useNavigate } from "react-router";
 import AppBar from "@mui/material/AppBar";
 import { Box } from "@mui/system";

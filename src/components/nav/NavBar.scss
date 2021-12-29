@@ -1,20 +1,16 @@
-.navbar {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: left;
-}
-
-.navbar__item {
+#navbar {
+  .navbar__item {
     flex-basis: 20%;
     list-style-type: none;
     padding-block: 1rem;
-}
+  }
 
-.MuiBox-root.css-qxh7fn {
+  .MuiBox-root.css-qxh7fn {
     margin-block-start: 56px;
-}
+  }
 
-a:-webkit-any-link {
+  a:-webkit-any-link {
     text-decoration: none;
     color: inherit;
+  }
 }

@@ -1,0 +1,7 @@
+$myColor: red;
+
+@import "../components/nav/NavBar.scss";
+
+a:-webkit-any-link {
+    text-decoration: none;
+  }
