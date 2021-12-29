@@ -9,10 +9,14 @@ import {
   TextField,
   FormControl,
   ButtonGroup,
+  Checkbox,
+  FormControlLabel,
+  Container,
+  ThemeProvider,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Home } from "../Home";
 
 const remoteURL = "https://smilestones-app-api.herokuapp.com";
@@ -60,14 +64,17 @@ export const Login = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <Card component="form" onSubmit={handleLogin}
+          <Card
+            component="form"
+            onSubmit={handleLogin}
             sx={{
-              p: 4,
+              p: 2,
+              marginBlockStart: 4,
               flexShrink: 0,
               flexGrow: 1,
               display: "flex",
               flexDirection: "column",
-              width: "50ch",
+              width: "30ch",
             }}
           >
             <CardHeader title="Sign In" />
@@ -84,14 +91,22 @@ export const Login = () => {
                   onChange={handleInputChange}
                 ></TextField>
               </FormControl>
-
             </CardContent>
-            <CardActions sx={{m: 1}} >
-                {" "}
-                <Button variant="contained" fullWidth>Sign In</Button>
+            <CardActions sx={{ m: 1 }}>
+              {" "}
+              <Button variant="contained" fullWidth>
+                Sign In
+              </Button>
             </CardActions>
+            <Container>
+              <FormControlLabel
+                control={<Checkbox size="small" defaultChecked disabled />}
+                label="Remember me"
+              />
+              <Typography variant="body1">New to Smilestones? <Link color="secondary" title="Register for an Account" to="/register">Sign up now</Link>.</Typography>
+            </Container>
           </Card>
-          <main className="container--login">
+          <main className="continer--login">
             <dialog className="dialog dialog--auth" open={existDialog}>
               <div>{"User does not exist"}</div>
               <div>

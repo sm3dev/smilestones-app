@@ -115,7 +115,7 @@ export const NavBar = () => {
                   onClick={handleLogin}
                 >
                   <Typography fontSize="small" variant="overline">
-                    Sign In To Get Started{" "}
+                    Sign In{" "}
                   </Typography>
                   <Login fontSize="small"></Login>
                 </Button>
