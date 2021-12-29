@@ -103,10 +103,18 @@ export const Login = () => {
                 control={<Checkbox size="small" defaultChecked disabled />}
                 label="Remember me"
               />
-              <Typography variant="body1">New to Smilestones? <Link color="secondary" title="Register for an Account" to="/register">Sign up now</Link>.</Typography>
+              <Typography variant="body1">
+                New to Smilestones?{" "}
+                <Link
+                  color="secondary"
+                  title="Register for an Account"
+                  to="/register"
+                >
+                  Sign up now
+                </Link>
+                .
+              </Typography>
             </Container>
-          </Card>
-          <main className="continer--login">
             <dialog className="dialog dialog--auth" open={existDialog}>
               <div>{"User does not exist"}</div>
               <div>
@@ -118,32 +126,7 @@ export const Login = () => {
                 </button>
               </div>
             </dialog>
-            <section>
-              <form className="form--login" onSubmit={handleLogin}>
-                <fieldset>
-                  <label htmlFor="inputEmail"> Email address </label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="form-control"
-                    placeholder="Email address"
-                    required
-                    autoFocus
-                    value={loginUser.email}
-                    onChange={handleInputChange}
-                  />
-                </fieldset>
-                <fieldset>
-                  <button type="submit">Sign in</button>
-                </fieldset>
-              </form>
-            </section>
-            <section className="link--register">
-              <NavLink to="/register">
-                <Button variant="outlined">Register for an account</Button>
-              </NavLink>
-            </section>
-          </main>
+          </Card>
         </Grid>
       </Grid>
     </>
