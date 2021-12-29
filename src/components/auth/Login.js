@@ -94,7 +94,7 @@ export const Login = () => {
             </CardContent>
             <CardActions sx={{ m: 1 }}>
               {" "}
-              <Button variant="contained" fullWidth>
+              <Button type="submit" variant="contained" fullWidth>
                 Sign In
               </Button>
             </CardActions>
