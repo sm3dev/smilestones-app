@@ -5,7 +5,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
-import "./NavBar.css";
+import "./NavBar.scss";
 import { getUserByID } from "../../modules/APIManager";
 import { EmojiEvents, Home, People, SportsScore } from "@mui/icons-material";
 import { NavLink } from "react-router-dom";

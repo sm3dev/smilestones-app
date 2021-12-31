@@ -16,7 +16,7 @@ import {
   ListItemIcon,
   Typography,
 } from "@mui/material";
-import { EmojiEvents } from "@mui/icons-material";
+import { Delete, Edit, EmojiEvents } from "@mui/icons-material";
 
 export const MyUserCard = ({ user, handleDeleteUser }) => {
   const [open, setOpen] = useState(false);
@@ -67,21 +67,28 @@ export const MyUserCard = ({ user, handleDeleteUser }) => {
             Email&#58; {user.email}
           </Typography>
         </CardContent>
-        <CardActions sx={{ alignItems: "stretch" }} >
+        <CardActions sx={{ alignItems: "stretch" }}>
           <Button
+            startIcon={<EmojiEvents />}
             variant="contained"
             className="userMilestone__link"
             onClick={() => navigate(`/users/${user.id}/achievements`)}
           >
             Achievements
           </Button>
+
           <Button
+            startIcon={<Edit />}
             variant="contained"
             onClick={() => navigate(`/users/${user.id}/edit`)}
           >
             Manage Account
           </Button>
-          <Button variant="outlined" onClick={handleClickOpen}>
+          <Button
+            startIcon={<Delete />}
+            variant="outlined"
+            onClick={handleClickOpen}
+          >
             Delete
           </Button>
         </CardActions>

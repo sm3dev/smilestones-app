@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import "./NavBar.css";
+import "./NavBar.scss";
 import { useNavigate } from "react-router";
 import AppBar from "@mui/material/AppBar";
 import { Box } from "@mui/system";
@@ -80,7 +80,7 @@ export const NavBar = () => {
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+        <AppBar position="static" id="navbar" >
           <Toolbar>
             <Typography
               variant="h6"
@@ -115,7 +115,7 @@ export const NavBar = () => {
                   onClick={handleLogin}
                 >
                   <Typography fontSize="small" variant="overline">
-                    Sign In To Get Started{" "}
+                    Sign In{" "}
                   </Typography>
                   <Login fontSize="small"></Login>
                 </Button>

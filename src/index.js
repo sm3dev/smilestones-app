@@ -4,6 +4,32 @@ import reportWebVitals from "./reportWebVitals";
 import { Smilestones } from "./components/Smilestones";
 import { BrowserRouter } from "react-router-dom";
 import ReactDOM from "react-dom";
+import { createTheme, ThemeProvider } from "@mui/material";
+import "./styles/custom.scss";
+
+const smileTheme = createTheme({
+  palette: {
+    primary: {
+      main: "#3d5afe",
+    },
+    secondary: {
+      main: "#fee13d",
+    },
+  },
+  typography: {
+    fontSize: 18,
+  },
+  components: {
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          fontWeight: "bold",
+          fontSize: "4rem",
+        },
+      },
+    },
+  },
+});
 
 const rootElement = document.getElementById("root");
 
